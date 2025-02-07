@@ -3,7 +3,7 @@
 import useFunnel from '@/hooks/useFunnel';
 import Topic from './page';
 import Method from './method';
-import Create from './create';
+// import Create from './create';
 import Complete from './complete';
 
 export default function Layout() {
@@ -16,7 +16,7 @@ export default function Layout() {
       </Step>
 
       <Step name="기록방식">
-        <Method onNext={() => nextStep('기록완료')} onPrev={() => nextStep('기록주제')} />
+        <Method onNext={() => nextStep('기록완료')} />
       </Step>
 
       {/* <Step name="기록생성">

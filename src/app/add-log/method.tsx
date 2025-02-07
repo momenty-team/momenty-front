@@ -20,7 +20,7 @@ const RECORD_METHODS = [
   },
 ];
 
-function StepMethod({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) {
+function StepMethod({ onNext }: { onNext: () => void }) {
   return (
     <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-[16px] px-[24px]">
       <div>
