@@ -1,10 +1,11 @@
-export default function StepComplete({ onRestart }: { onRestart: () => void }) {
+function StepComplete({ onRestart }: { onRestart: () => void }) {
   return (
     <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-10.5">
-      <div className="mb-6">
-        <p className="text-subtitle-1-b ">이제 물 섭취량을</p>
-        <p className="text-subtitle-1-b">기록할 수 있어요.</p>
-      </div>
+      <h1 className="mb-6 text-subtitle-1-b">
+        이제 물 섭취량을
+        <br />
+        기록할 수 있어요.
+      </h1>
       <button
         onClick={onRestart}
         className={
@@ -16,3 +17,5 @@ export default function StepComplete({ onRestart }: { onRestart: () => void }) {
     </div>
   );
 }
+
+export default StepComplete;

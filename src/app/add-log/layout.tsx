@@ -6,7 +6,7 @@ import Method from './method';
 // import Create from './create';
 import Complete from './complete';
 
-export default function Layout() {
+function Layout() {
   const { Step, nextStep } = useFunnel<'기록주제' | '기록방식' | '기록생성' | '기록완료'>('기록주제');
 
   return (
@@ -29,3 +29,5 @@ export default function Layout() {
     </div>
   );
 }
+
+export default Layout;

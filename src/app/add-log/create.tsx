@@ -1,4 +1,4 @@
-export default function StepCreate({ onNext }: { onNext: () => void }) {
+function StepCreate({ onNext }: { onNext: () => void }) {
   return (
     <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-7">
       <div className="mb-[24px]">
@@ -16,3 +16,5 @@ export default function StepCreate({ onNext }: { onNext: () => void }) {
     </div>
   );
 }
+
+export default StepCreate;
