@@ -42,12 +42,12 @@ function StepMethod({ onNext }: { onNext: () => void }) {
         </div>
         <div>
           <div className="flex flex-col gap-4">
-            {RECORD_METHODS.map((method, index) => (
+            {RECORD_METHODS.map((method) => (
               <button
-                onTouchStart={() => handleClick(index)}
-                key={index}
+                onTouchStart={() => handleClick(method.id)}
+                key={method.id}
                 className={`flex flex-col w-full px-4 py-4 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
-                  ${selectedIndex === index ? 'bg-[#E6E9F0]' : 'bg-white'}`}
+                  ${selectedIndex === method.id ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
                 <div className="flex flex-row items-center justify-between gap-1">
                   <div className="flex w-6.5 h-[27px] bg-[#D9D9D9] rounded-[8px]"></div>
