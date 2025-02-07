@@ -1,17 +1,23 @@
+import { useState } from 'react';
+
 const RECORD_METHODS = [
   {
+    id: 1,
     title: '글로 남기기',
     description: ['물 섭취량을 일기를 쓰듯 글로 작성해서 기록해요.', '기록을 자세하게 하고 싶을 때 유용해요.'],
   },
   {
+    id: 2,
     title: 'O, X',
     description: ['물 섭취량을 O와 X로 구분해서 작성해요.', '기록을 간단하고 빠르게 기록하고 싶을 때 유용해요.'],
   },
   {
+    id: 3,
     title: '옵션 만들기',
     description: ['물 섭취량을 옵션 중 한 가지를 선택하는 방식으로 작성해요.', '원하는 옵션들을 직접 만들 수 있어요.'],
   },
   {
+    id: 4,
     title: '숫자',
     description: [
       '물 섭취량을 숫자와 단위를 이용해서 기록해요.',
@@ -21,8 +27,14 @@ const RECORD_METHODS = [
 ];
 
 function StepMethod({ onNext }: { onNext: () => void }) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handleClick = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-[16px] px-[24px]">
+    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-[16px] px-[24px] pb-[42px]">
       <div>
         <div className="mb-[24px]">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
@@ -32,14 +44,16 @@ function StepMethod({ onNext }: { onNext: () => void }) {
           <div className="flex flex-col gap-[16px]">
             {RECORD_METHODS.map((method, index) => (
               <button
+                onTouchStart={() => handleClick(index)}
                 key={index}
-                className="flex flex-col w-full px-[16px] py-[16px] gap-[4px] hover:bg-[#E6E9F0] bg-white rounded-[20px]"
+                className={`flex flex-col w-full px-[16px] py-[16px] gap-[4px] rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
+                  ${selectedIndex === index ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
                 <div className="flex flex-row items-center justify-between gap-[4px]">
                   <div className="flex w-[26px] h-[27px] bg-[#D9D9D9] rounded-[8px]"></div>
                   <span className="text-body-2-m">{method.title}</span>
                 </div>
-                <div className="flex flex-col text-label-1-r text-[#99A5B4]">
+                <div className="flex flex-col text-label-1-r text-[E6E9F0]">
                   {method.description.map((line, i) => (
                     <div key={i} className="flex text-left">
                       {line}

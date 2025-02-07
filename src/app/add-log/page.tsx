@@ -26,7 +26,7 @@ function StepTopic({ onNext }: { onNext: () => void }) {
 
   return (
     <div
-      className="flex flex-col justify-between bg-[#F4F6F9]"
+      className={`flex flex-col justify-between bg-[#F4F6F9] ${keyboardHeight > 0 ? '' : 'pb-[42px]'}`}
       style={{ height: `${viewportHeight - keyboardHeight}px` }}
     >
       <div className="flex flex-col pt-[16px] gap-[16px]">
