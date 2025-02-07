@@ -9,10 +9,12 @@ const usePreventScrollOnKeyboard = () => {
       position: document.body.style.position,
     };
 
+    // 터치 스크롤 방지
     const preventScroll = (e: Event) => {
       e.preventDefault();
     };
 
+    // 키보드 열림 감지 및 스크롤 차단
     const handleResize = () => {
       if (window.visualViewport) {
         const heightDiff = window.innerHeight - window.visualViewport.height;
@@ -22,13 +24,11 @@ const usePreventScrollOnKeyboard = () => {
           document.body.style.position = "fixed";
           document.body.style.width = "100vw";
           window.addEventListener("touchmove", preventScroll, { passive: false });
-          console.log("🚫 키보드 열림 - 스크롤 방지됨");
         } else {
           // 복구
           document.body.style.overflow = originalStyle.overflow;
           document.body.style.position = originalStyle.position;
           window.removeEventListener("touchmove", preventScroll);
-          console.log("✅ 키보드 닫힘 - 스크롤 복구됨");
         }
       }
     };
