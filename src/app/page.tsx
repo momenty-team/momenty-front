@@ -3,7 +3,7 @@ import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
 function Home() {
   return (
     <div className="flex flex-col pt-[80px] pl-[16px] pr-[16px] bg-[#F4F6F9]">
-      {/* <h1 className="mb-[120px]">Home</h1>
+      <h1 className="mb-[120px]">Home</h1>
       <button className="flex flex-col p-[20px] gap-[20px] rounded-[20px] shadow-4 bg-white">
         <div className="flex flex-row items-center w-full justify-between">
           <div className="flex flex-row items-center justify-center gap-[8px]">
@@ -13,7 +13,7 @@ function Home() {
           <ChevronRightIcon className="flex" />
         </div>
         <span className="text-[#99A5B4] text-body-2-r">나만의 기록을 만들어 보세요.</span>
-      </button> */}
+      </button>
     </div>
   );
 }
