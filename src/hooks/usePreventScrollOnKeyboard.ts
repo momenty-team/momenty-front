@@ -4,7 +4,7 @@ const usePreventScrollOnKeyboard = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let originalStyle = {
+    const originalStyle = {
       overflow: document.body.style.overflow,
       position: document.body.style.position,
     };
