@@ -34,23 +34,23 @@ function StepMethod({ onNext }: { onNext: () => void }) {
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-[16px] px-[24px] pb-[42px]">
+    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-10.5">
       <div>
-        <div className="mb-[24px]">
+        <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
           <p className="text-subtitle-1-b">어떤 방식으로 기록할까요?</p>
         </div>
         <div>
-          <div className="flex flex-col gap-[16px]">
+          <div className="flex flex-col gap-4">
             {RECORD_METHODS.map((method, index) => (
               <button
                 onTouchStart={() => handleClick(index)}
                 key={index}
-                className={`flex flex-col w-full px-[16px] py-[16px] gap-[4px] rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
+                className={`flex flex-col w-full px-4 py-4 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
                   ${selectedIndex === index ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
-                <div className="flex flex-row items-center justify-between gap-[4px]">
-                  <div className="flex w-[26px] h-[27px] bg-[#D9D9D9] rounded-[8px]"></div>
+                <div className="flex flex-row items-center justify-between gap-1">
+                  <div className="flex w-6.5 h-[27px] bg-[#D9D9D9] rounded-[8px]"></div>
                   <span className="text-body-2-m">{method.title}</span>
                 </div>
                 <div className="flex flex-col text-label-1-r text-[E6E9F0]">
@@ -69,7 +69,7 @@ function StepMethod({ onNext }: { onNext: () => void }) {
       <button
         onClick={onNext}
         className={
-          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-[56px] rounded-[8px]'
+          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
       >
         다음으로
