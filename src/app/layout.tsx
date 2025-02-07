@@ -14,8 +14,8 @@ const suitVariable = localFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={suitVariable.variable}>
-      <body>{children}</body>
+    <html lang="ko">
+      <body className={`${suitVariable.variable}`}>{children}</body>
     </html>
   );
 }

@@ -1,10 +1,17 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
 
 function Home() {
+  const router = useRouter();
+  const handleAddButton = () => {
+    router.push('/add-log');
+  };
+
   return (
-    <div className="flex flex-col pt-[80px] pl-[16px] pr-[16px] bg-[#F4F6F9]">
-      <h1 className="mb-[120px]">Home</h1>
-      <button className="flex flex-col p-[20px] gap-[20px] rounded-[20px] shadow-4 bg-white">
+    <div className="flex flex-col pt-[80px] pl-[16px] pr-[16px] bg-[##F4F6F9]">
+      <button onClick={handleAddButton} className="flex flex-col p-[20px] gap-[20px] rounded-[20px] shadow-4 bg-white">
         <div className="flex flex-row items-center w-full justify-between">
           <div className="flex flex-row items-center justify-center gap-[8px]">
             <div className="w-5 h-5 bg-slate-400 rounded-md" />
