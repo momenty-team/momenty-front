@@ -34,7 +34,7 @@ function StepMethod({ onNext }: { onNext: () => void }) {
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-10.5">
+    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[42px]">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
