@@ -89,7 +89,7 @@ function User() {
                     className={`w-full flex items-center justify-between ${activeButtonId === title && 'group-active:scale-[0.96]'} transition-transform duration-200 ease-out origin-center relative`}
                   >
                     <div className="flex items-center gap-4 ">
-                      <div className="w-8 h-8 bg-[#F4F6F9] rounded-[4px] flex items-center justify-center">{icon}</div>
+                      <div className="w-8 h-8 bg-indigo-5 rounded-[4px] flex items-center justify-center">{icon}</div>
                       <div className="text-body-2-sb">{title}</div>
                     </div>
 
