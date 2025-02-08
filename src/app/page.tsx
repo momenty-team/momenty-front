@@ -1,6 +1,13 @@
+'use client';
+
 import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
+import { useRouter } from 'next/navigation';
 
 function Home() {
+  const router = useRouter();
+  const onClickHandler = () => {
+    router.push('/calendar');
+  };
   return (
     <div className="flex flex-col pt-[80px] pl-[16px] pr-[16px] bg-[#F4F6F9]">
       <h1 className="mb-[120px]">Home</h1>
@@ -13,6 +20,12 @@ function Home() {
           <ChevronRightIcon className="flex" />
         </div>
         <span className="text-[#99A5B4] text-body-2-r">나만의 기록을 만들어 보세요.</span>
+      </button>
+      <button
+        onClick={onClickHandler}
+        className="flex flex-col p-[20px] gap-[20px] rounded-[20px] shadow-4 bg-white mt-[20px]"
+      >
+        캘린더가기
       </button>
     </div>
   );
