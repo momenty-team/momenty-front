@@ -1,31 +1,11 @@
 'use client';
 
-import useKeyboardHeight from '@/hooks/useKeyboardHeight';
+import useKeyboardResize from '@/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/hooks/usePreventScrollOnKeyboard';
-import { useEffect, useState } from 'react';
 
 function StepTopic({ onNext }: { onNext: () => void }) {
   usePreventScrollOnKeyboard();
-  const [viewportHeight, setViewportHeight] = useState<number>(window.innerHeight);
-  const [keyboardHeight, setKeyboardHeight] = useState<number | null>(null);
-  usePreventScrollOnKeyboard();
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.visualViewport) {
-        const visualViewportHeight = window.visualViewport?.height;
-        const heightDiff = visualViewportHeight ? window.innerHeight - visualViewportHeight : 0;
-        setKeyboardHeight(heightDiff > 0 ? heightDiff : 0);
-        setViewportHeight(window.innerHeight);
-      }
-    };
-
-    window.visualViewport?.addEventListener('resize', onResize);
-    return () => {
-      window.visualViewport?.removeEventListener('resize', onResize);
-    };
-  }, []);
-
+  const { viewportHeight, keyboardHeight } = useKeyboardResize();
   return (
     <div
       className={`flex flex-col justify-between bg-[#F4F6F9] ${keyboardHeight ? '' : 'pb-[42px]'}`}

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const useKeyboardHeight = () => {
-  const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
+const useKeyboardResize = () => {
   const [viewportHeight, setViewportHeight] = useState<number>(window.innerHeight);
+  const [keyboardHeight, setKeyboardHeight] = useState<number | null>(null);
 
   useEffect(() => {
     const onResize = () => {
       if (window.visualViewport) {
-        const visualViewportHeight = window.visualViewport.height;
+        const visualViewportHeight = window.visualViewport?.height;
         const heightDiff = visualViewportHeight ? window.innerHeight - visualViewportHeight : 0;
         setKeyboardHeight(heightDiff > 0 ? heightDiff : 0);
         setViewportHeight(window.innerHeight);
@@ -20,7 +20,7 @@ const useKeyboardHeight = () => {
     };
   }, []);
 
-  return { keyboardHeight, viewportHeight };
+  return { viewportHeight, keyboardHeight };
 };
 
-export default useKeyboardHeight;
+export default useKeyboardResize;
