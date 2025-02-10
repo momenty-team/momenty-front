@@ -10,7 +10,7 @@ interface DateBoxProps {
   children?: ReactNode;
 }
 
-const DateBox = ({ date, isCurrentMonth, isToday, isSunday, children }: DateBoxProps) => {
+function DateBox({ date, isCurrentMonth, isToday, isSunday, children }: DateBoxProps) {
   return (
     <div className="flex flex-col items-center gap-1">
       <button
@@ -25,8 +25,7 @@ const DateBox = ({ date, isCurrentMonth, isToday, isSunday, children }: DateBoxP
           className={`flex justify-center items-center text-caption-1-sb
             ${isSunday(date) ? 'text-red-500' : 'text-black'} 
             ${!isCurrentMonth(date) ? 'text-transparent' : ''}
-            ${isToday(date) ? 'bg-[#DAECFF]' : 'bg-transparent'} 
-            w-8 rounded-[3px]
+            ${isToday(date) ? 'bg-[#DAECFF]' : 'bg-transparent'}
           `}
         >
           {date.getDate()}
@@ -35,6 +34,6 @@ const DateBox = ({ date, isCurrentMonth, isToday, isSunday, children }: DateBoxP
       </div>
     </div>
   );
-};
+}
 
 export default DateBox;

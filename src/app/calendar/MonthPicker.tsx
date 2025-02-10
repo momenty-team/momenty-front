@@ -26,7 +26,7 @@ function MonthPicker({
   }
 
   return (
-    <div className="relative flex items-center w-[140px] rounded-md cursor-pointer" onClick={handleClick}>
+    <div className="relative flex items-center w-[140px]" onClick={handleClick}>
       <input
         id="month-picker"
         type="month"
@@ -34,7 +34,7 @@ function MonthPicker({
         onChange={handleMonthChange}
         className="w-full bg-transparent text-subtitle-3-b pr-7"
       />
-      <ChevronDownIcon className="absolute right-2 top-1/2 transform -translate-y-1/2" />
+      <ChevronDownIcon className="absolute right-2 top-1/2 -translate-y-1/2" />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import useCalendar from './hooks/useCalendar';
-import CalendarDayBox from './DateBox';
+import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -32,7 +32,7 @@ function Calendar({ children }: CalendarProps) {
       </ul>
       <ul className="px-6 grid grid-cols-7 gap-[20px]">
         {dateList.map((date: Date) => (
-          <CalendarDayBox
+          <DateBox
             key={date.toISOString()}
             date={date}
             isCurrentMonth={isCurrentMonth}
@@ -40,7 +40,7 @@ function Calendar({ children }: CalendarProps) {
             isSunday={isSunday}
           >
             {children && children(date)}
-          </CalendarDayBox>
+          </DateBox>
         ))}
       </ul>
       <button
