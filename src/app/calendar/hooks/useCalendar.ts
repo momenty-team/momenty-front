@@ -67,7 +67,10 @@ const useCalendar = () => {
     isCurrentMonth,
     isToday,
     isSunday,
+    setYear,
+    setMonth,
   };
 };
 
 export default useCalendar;
+
