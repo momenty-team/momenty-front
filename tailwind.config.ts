@@ -17,7 +17,24 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        indigo: {
+          0: '#FFFFFF', 
+          5: '#F4F6F9',
+          25: '#E8EBEF',
+          50: '#D6DAE0',
+          75: '#C3CAD2',
+          100: '#99A5B4',
+          200: '#738293',
+          300: '#5A6B7F',
+          400: '#3A4C61',
+          500: '#25374C',
+          600: '#12243A',
+          700: '#021730',
+          800: '#031224',
+          900: '#020B16',
+        },
       },
+      
       boxShadow: {
         1: '0px 25px 50px -12px rgba(0, 0, 0, 0.20)',
         2: '0px 20px 25px -5px rgba(0, 0, 0, 0.06), 0px 10px 10px 0px rgba(0, 0, 0, 0.04)',
