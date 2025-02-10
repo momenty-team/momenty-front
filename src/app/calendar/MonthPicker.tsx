@@ -26,16 +26,16 @@ function MonthPicker({
   }
 
   return (
-    <button className="relative flex text-center w-[123px] text-subtitle-3-b" onClick={handleClick}>
+    <div className="relative flex items-center w-[140px] rounded-md cursor-pointer" onClick={handleClick}>
       <input
         id="month-picker"
         type="month"
         value={`${year}-${String(month).padStart(2, '0')}`}
         onChange={handleMonthChange}
-        className="bg-transparent cursor-pointer "
+        className="w-full bg-transparent text-subtitle-3-b pr-7"
       />
-      <ChevronDownIcon className="absolute right-0 top-0.5" />
-    </button>
+      <ChevronDownIcon className="absolute right-2 top-1/2 transform -translate-y-1/2" />
+    </div>
   );
 }
 
