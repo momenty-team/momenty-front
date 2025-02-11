@@ -30,9 +30,9 @@ function Calendar() {
           <DateBox
             key={date.toISOString()}
             date={date}
-            isCurrentMonth={isCurrentMonth}
-            isToday={isToday}
-            isSunday={isSunday}
+            isCurrentMonth={isCurrentMonth(date)}
+            isToday={isToday(date)}
+            isSunday={isSunday(date)}
           />
         ))}
       </ul>
