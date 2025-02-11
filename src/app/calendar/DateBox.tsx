@@ -22,7 +22,7 @@ function DateBox({ date, isCurrentMonth, isToday, isSunday, children }: DateBoxP
       />
       <div>
         <span
-          className={`flex justify-center items-center text-caption-1-sb
+          className={`flex justify-center items-center text-caption-1-sb w-8 rounded-[3px]
             ${isSunday(date) ? 'text-red-500' : 'text-black'} 
             ${!isCurrentMonth(date) ? 'text-transparent' : ''}
             ${isToday(date) ? 'bg-[#DAECFF]' : 'bg-transparent'}

@@ -1,37 +1,40 @@
-import ChevronDownIcon from '../../assets/svg/chevron-down.svg';
+import { useRef, useState } from 'react';
+import ChevronDownIcon from '@/assets/svg/chevron-down.svg';
 
 function MonthPicker({
   year,
   month,
-  setYear,
-  setMonth,
+  changeYear,
+  changeMonth,
 }: {
   year: number;
   month: number;
-  setYear: (year: number) => void;
-  setMonth: (month: number) => void;
+  changeYear: (year: number) => void;
+  changeMonth: (month: number) => void;
 }) {
-  function handleMonthChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const [selectedYear, selectedMonth] = event.target.value.split('-').map(Number);
-    setYear(selectedYear);
-    setMonth(selectedMonth);
-  }
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [tempYear, setTempYear] = useState(year);
+  const [tempMonth, setTempMonth] = useState(month);
 
-  function handleClick() {
-    const input = document.getElementById('month-picker') as HTMLInputElement;
-    if (input) {
-      input.showPicker?.();
-      input.click();
-    }
-  }
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [selectedYear, selectedMonth] = e.target.value.split('-').map(Number);
+    setTempYear(selectedYear);
+    setTempMonth(selectedMonth);
+  };
+
+  const handleBlur = () => {
+    changeYear(tempYear);
+    changeMonth(tempMonth);
+  };
 
   return (
-    <div className="relative flex items-center w-[140px]" onClick={handleClick}>
+    <div className="relative flex items-center w-[140px]">
       <input
-        id="month-picker"
+        ref={inputRef}
         type="month"
         value={`${year}-${String(month).padStart(2, '0')}`}
         onChange={handleMonthChange}
+        onBlur={handleBlur}
         className="w-full bg-transparent text-subtitle-3-b pr-7"
       />
       <ChevronDownIcon className="absolute right-2 top-1/2 -translate-y-1/2" />

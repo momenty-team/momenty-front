@@ -7,12 +7,7 @@ import MonthPicker from './MonthPicker';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-interface CalendarProps {
-  children?: (date: Date) => React.ReactNode;
-  closeModal?: VoidFunction;
-}
-
-function Calendar({ children }: CalendarProps) {
+function Calendar() {
   const router = useRouter();
   const { dateList, year, month, setYear, setMonth, isCurrentMonth, isToday, isSunday } = useCalendar();
 
@@ -23,7 +18,7 @@ function Calendar({ children }: CalendarProps) {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex justify-center gap-5">
-        <MonthPicker year={year} month={month} setYear={setYear} setMonth={setMonth} />
+        <MonthPicker year={year} month={month} changeYear={setYear} changeMonth={setMonth} />
       </header>
       <ul className="px-6 grid grid-cols-7 gap-[20px] justify-items-center text-label-1-b">
         {DAYS.map((day) => (
@@ -38,9 +33,7 @@ function Calendar({ children }: CalendarProps) {
             isCurrentMonth={isCurrentMonth}
             isToday={isToday}
             isSunday={isSunday}
-          >
-            {children && children(date)}
-          </DateBox>
+          />
         ))}
       </ul>
       <button
