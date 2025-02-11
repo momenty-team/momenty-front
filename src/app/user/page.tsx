@@ -12,6 +12,7 @@ import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const MENU = [
   {
@@ -41,6 +42,7 @@ const MENU = [
 ];
 
 function User() {
+  const router = useRouter();
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   const activeButton = (id: string) => {
@@ -51,10 +53,16 @@ function User() {
     setActiveButtonId(null);
   };
 
+  const onClickAlarmButton = () => {
+    router.push('/alarm');
+  };
+
   return (
     <div className="w-full">
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
-        <BellIcon />
+        <button onClick={onClickAlarmButton} type="button">
+          <BellIcon />
+        </button>
       </header>
 
       <div className="flex flex-col gap-6 mx-6">
