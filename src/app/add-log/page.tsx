@@ -8,7 +8,7 @@ function StepTopic({ onNext }: { onNext: () => void }) {
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
   return (
     <div
-      className={`flex flex-col justify-between bg-[#F4F6F9] ${keyboardHeight ? '' : 'pb-[42px]'}`}
+      className={`flex flex-col justify-between bg-[#F4F6F9]  ${keyboardHeight ? '' : 'pb-[52px]'}`}
       style={{ height: `${viewportHeight - (keyboardHeight ?? 0)}px` }}
     >
       <div className="flex flex-col pt-4 gap-4">

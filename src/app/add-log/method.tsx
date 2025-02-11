@@ -34,7 +34,7 @@ function StepMethod({ onNext }: { onNext: () => void }) {
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[42px]">
+    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
@@ -46,14 +46,14 @@ function StepMethod({ onNext }: { onNext: () => void }) {
               <button
                 onTouchStart={() => handleClick(method.id)}
                 key={method.id}
-                className={`flex flex-col w-full px-4 py-4 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
+                className={`flex flex-col w-full px-4 py-3 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
                   ${selectedIndex === method.id ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
                 <div className="flex flex-row items-center justify-between gap-1">
-                  <div className="flex w-6.5 h-[27px] bg-[#D9D9D9] rounded-[8px]"></div>
+                  <div className="flex w-[26px] h-[26px] bg-[#D9D9D9] rounded-[8px]" />
                   <span className="text-body-2-m">{method.title}</span>
                 </div>
-                <div className="flex flex-col text-label-1-r text-[E6E9F0]">
+                <div className="flex flex-col text-label-1-r text-[#99A5B4]">
                   {method.description.map((line, i) => (
                     <div key={i} className="flex text-left">
                       {line}
