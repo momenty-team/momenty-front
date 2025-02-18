@@ -2,24 +2,32 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import ChevronLeftIcon from '@/assets/svg/chevron-left.svg';
+import { suitFont } from '@/styles/font';
 
 export default function AlarmLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathName = usePathname();
-  const onClickBack = () => {
-    router.back();
-  };
   const onClickSetting = () => {
-    router.push('/alarm/setting');
+    router.push('alarm/setting');
   };
+
+  const onClickNextBackButton = () => {
+    router.back();
+  }
 
   const isSettingsPage = pathName === '/alarm';
 
+  const onClickBackButton = () => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ route: 'goBack' }));
+    }
+  };
+
   return (
     <html lang="ko">
-      <body className="bg-gray-100">
+      <body>
         <header className="width-full justify-between flex py-3 px-4">
-          <button type="button" onClick={onClickBack}>
+          <button type="button" onClick={isSettingsPage ? onClickBackButton : onClickNextBackButton}>
             <ChevronLeftIcon />
           </button>
           {isSettingsPage && (
@@ -28,7 +36,7 @@ export default function AlarmLayout({ children }: { children: React.ReactNode })
             </button>
           )}
         </header>
-        <main className="p-4">{children}</main>
+        <main className={`p-4 ${suitFont.className}`}>{children}</main>
       </body>
     </html>
   );

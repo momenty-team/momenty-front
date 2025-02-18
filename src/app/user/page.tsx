@@ -11,8 +11,7 @@ import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
 import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const MENU = [
   {
@@ -42,7 +41,6 @@ const MENU = [
 ];
 
 function User() {
-  const router = useRouter();
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   const activeButton = (id: string) => {
@@ -54,7 +52,9 @@ function User() {
   };
 
   const onClickAlarmButton = () => {
-    router.push('/alarm');
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ route: '/alarm' }));
+    }
   };
 
   return (
