@@ -1,4 +1,3 @@
-import { suitFont } from '@/styles/font';
 import '@/styles/globals.css';
 
 export const metadata = {
