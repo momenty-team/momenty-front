@@ -1,7 +1,7 @@
 import ChevronLeftIcon from '@/assets/svg/chevron-left.svg';
 
 interface TopNavigationProps { 
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClickBack: () => void;
   backGroundColor?: string;
 }

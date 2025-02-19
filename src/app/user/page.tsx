@@ -12,6 +12,7 @@ import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const MENU = [
   {
@@ -42,9 +43,11 @@ const MENU = [
 
 function User() {
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
+  const router = useRouter();
 
   const activeButton = (id: string) => {
     setActiveButtonId(id);
+    router.push('/user/open-source');
   };
 
   const removeActiveButton = () => {
