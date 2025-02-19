@@ -51,10 +51,18 @@ function User() {
     setActiveButtonId(null);
   };
 
+  const onClickAlarmButton = () => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ route: '/alarm' }));
+    }
+  };
+
   return (
-    <div className="w-full">
+    <main className="w-full">
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
-        <BellIcon />
+        <button onClick={onClickAlarmButton} type="button">
+          <BellIcon width={26} height={26} />
+        </button>
       </header>
 
       <div className="flex flex-col gap-6 mx-6">
@@ -82,7 +90,7 @@ function User() {
                   onTouchEnd={removeActiveButton}
                 >
                   <div
-                    className={`absolute bg-transparent w-[calc(100%+16px)] h-[calc(100%+12px)] transition-all duration-300 ease-out ${activeButtonId === title && 'group-active:bg-[#ebebeb] group-active:scale-[0.98]'} rounded-[6px]`}
+                    className={`absolute bg-transparent w-[calc(100%+4)] h-[calc(100%+3)] transition-all duration-300 ease-out ${activeButtonId === title && 'group-active:bg-[#ebebeb] group-active:scale-[0.98]'} rounded-[6px]`}
                   ></div>
 
                   <div
@@ -104,7 +112,7 @@ function User() {
           </section>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 
