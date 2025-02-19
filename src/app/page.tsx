@@ -14,7 +14,7 @@ function Home() {
     <div className="w-full bg-indigo-5">
       <header>
         <button onClick={routeCalendar}>5월 14일</button>
-        <BellIcon className="flex" width={26} height={26} />
+        <BellIcon width={26} height={26} />
       </header>
       <button className="flex flex-col p-[20px] gap-[20px] rounded-[20px] shadow-4 bg-white">
         <div className="flex flex-row items-center w-full justify-between">
