@@ -61,7 +61,7 @@ function User() {
     <div className="w-full">
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
         <button onClick={onClickAlarmButton} type="button">
-          <BellIcon />
+          <BellIcon width={26} height={26} />
         </button>
       </header>
 

@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import ChevronLeftIcon from '@/assets/svg/chevron-left.svg';
 import { suitFont } from '@/styles/font';
+import TopNavigation from '@/components/TopNavigation';
 
 export default function AlarmLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -26,17 +26,14 @@ export default function AlarmLayout({ children }: { children: React.ReactNode })
   return (
     <html lang="ko">
       <body>
-        <header className="width-full justify-between flex py-3 px-4">
-          <button type="button" onClick={isSettingsPage ? onClickBackButton : onClickNextBackButton}>
-            <ChevronLeftIcon />
-          </button>
+        <TopNavigation onClickBack={isSettingsPage ? onClickBackButton : onClickNextBackButton}>
           {isSettingsPage && (
             <button type="button" onClick={onClickSetting} className="flex text-black">
               설정
             </button>
           )}
-        </header>
-        <main className={suitFont.className}>{children}</main>
+        </TopNavigation>
+        <main className={`${suitFont.className} pt-12`}>{children}</main>
       </body>
     </html>
   );
