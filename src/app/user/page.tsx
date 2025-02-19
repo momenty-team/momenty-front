@@ -11,7 +11,7 @@ import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
 import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MENU = [
   {
@@ -51,10 +51,18 @@ function User() {
     setActiveButtonId(null);
   };
 
+  const onClickAlarmButton = () => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ route: '/alarm' }));
+    }
+  };
+
   return (
     <div className="w-full">
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
-        <BellIcon />
+        <button onClick={onClickAlarmButton} type="button">
+          <BellIcon />
+        </button>
       </header>
 
       <div className="flex flex-col gap-6 mx-6">
