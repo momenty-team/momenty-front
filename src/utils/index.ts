@@ -1,14 +1,14 @@
-import type { BrigdeData } from "@/types";
+import type { BridgeData } from '@/types';
 
-export const postMessageToWebView = (bridgeData: BrigdeData) => {
+export const postMessageToWebView = (bridgeData: BridgeData) => {
   try {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify(bridgeData));
+      return window.ReactNativeWebView.postMessage(JSON.stringify(bridgeData));
     }
 
     throw new Error('window.ReactNativeWebView가 존재하지 않습니다.');
   } catch (error) {
-    console.error("postMessageToWebView post message failed"); 
-    console.error(error); 
+    console.error('postMessageToWebView post message failed');
+    console.error(error);
   }
 };

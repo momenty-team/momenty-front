@@ -1,5 +1,5 @@
 export type BridgeRoute = string;
 
-export interface BrigdeData {
+export interface BridgeData {
   route?: BridgeRoute;
 }
