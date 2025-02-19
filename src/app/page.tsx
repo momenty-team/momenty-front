@@ -19,6 +19,10 @@ function Home() {
     postMessageToWebView({ route: '/alarm' });
   };
 
+  const routeAddLog = () => {
+    postMessageToWebView({ route: '/add-log' });
+  };
+
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <header className="flex justify-between items-center px-4 py-2">
@@ -33,7 +37,7 @@ function Home() {
       <div className="h-60 bg-indigo-100 mb-10 mx-4 mt-2">고양이</div>
 
       <section className="flex flex-col gap-5 mx-4">
-        <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white">
+        <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" onClick={routeAddLog}>
           <div className="flex flex-row items-center w-full justify-between">
             <div className="flex flex-row items-center justify-center gap-2">
               <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
