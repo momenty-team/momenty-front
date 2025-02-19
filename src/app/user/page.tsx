@@ -90,7 +90,7 @@ function User() {
                   onTouchEnd={removeActiveButton}
                 >
                   <div
-                    className={`absolute bg-transparent w-[calc(100%+4)] h-[calc(100%+3)] transition-all duration-300 ease-out ${activeButtonId === title && 'group-active:bg-[#ebebeb] group-active:scale-[0.98]'} rounded-[6px]`}
+                    className={`absolute bg-transparent w-[calc(100%+16px)] h-[calc(100%+12px)] transition-all duration-300 ease-out ${activeButtonId === title && 'group-active:bg-[#ebebeb] group-active:scale-[0.98]'} rounded-[6px]`}
                   ></div>
 
                   <div
