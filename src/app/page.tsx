@@ -1,12 +1,10 @@
 'use client';
 
 import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
-import { useRouter } from 'next/navigation';
 import BellIcon from '@/assets/svg/bell.svg';
 import { postMessageToWebView } from '@/utils';
 
 function Home() {
-  const router = useRouter();
 
   const routeCalendar = () => {
     postMessageToWebView({ route: '/calendar' });
