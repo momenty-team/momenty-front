@@ -30,7 +30,7 @@ function Home() {
           5월 14일
         </button>
         <button onClick={routeAlarm}>
-          <BellIcon className="flex" width={26} height={26} />
+          <BellIcon width={26} height={26} />
         </button>
       </header>
 
