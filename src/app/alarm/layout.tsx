@@ -36,7 +36,7 @@ export default function AlarmLayout({ children }: { children: React.ReactNode })
             </button>
           )}
         </header>
-        <main className={`p-4 ${suitFont.className}`}>{children}</main>
+        <main className={`${suitFont.className}`}>{children}</main>
       </body>
     </html>
   );
