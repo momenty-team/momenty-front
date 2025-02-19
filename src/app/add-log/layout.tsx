@@ -24,7 +24,7 @@ function Layout() {
       </Step> */}
 
       <Step name="기록완료">
-        <Complete onRestart={() => nextStep('기록주제')} />
+        <Complete />
       </Step>
     </div>
   );
