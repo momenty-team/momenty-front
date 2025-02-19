@@ -1,7 +1,7 @@
 'use client';
 
 import TopNavigation from "@/components/TopNavigation";
-import { useRouter } from "next/navigation";
+import { postMessageToWebView } from "@/utils";
 
   const NOTICE_LIST = [
     {
@@ -62,14 +62,11 @@ import { useRouter } from "next/navigation";
   ];
 
 function NoticePage() {
-  const router = useRouter();
-    const onClickNextBackButton = () => {
-      router.back();
-    };
-  
 
   return (
-      <div className="w-full">
+    <>
+      <TopNavigation onClickBack={() => postMessageToWebView({ route: 'goBack' })} />
+      <main className="w-full mt-16">
         <span className="text-subtitle-2-sb p-4 pt-4 pb-1">공지사항</span>
         <div>
           {NOTICE_LIST.map((notice) => (
@@ -79,7 +76,8 @@ function NoticePage() {
             </div>
           ))}
         </div>
-      </div>
+      </main>
+    </>
   );
 }
 
