@@ -8,6 +8,7 @@ import Complete from './complete';
 import Unit from './unit';
 import Option from './option';
 import TopNavigation from '@/components/TopNavigation';
+import { suitFont } from '@/styles/font';
 
 function Layout() {
   const { Step, nextStep } = useFunnel<'기록주제' | '기록방식' | '옵션선택' | '단위선택' | '기록생성' | '기록완료'>(
@@ -23,7 +24,7 @@ function Layout() {
   return (
     <>
       <TopNavigation onClickBack={onClickNextBackButton} backGroundColor="transparent" />
-      <main className="flex h-[calc(100vh-48px)] mt-12">
+      <main className={`flex h-[calc(100vh-48px)] mt-12 ${suitFont.className}`}>
         <Step name="기록주제">
           <Topic onNext={() => nextStep('기록방식')} />
         </Step>
