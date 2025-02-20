@@ -3,7 +3,11 @@
 import useKeyboardResize from '@/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/hooks/usePreventScrollOnKeyboard';
 
-function StepTopic({ onNext }: { onNext: () => void }) {
+interface StepTopicProps {
+  onNext: () => void;
+}
+
+function StepTopic({ onNext }: StepTopicProps) {
   usePreventScrollOnKeyboard();
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
   return (
