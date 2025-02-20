@@ -29,24 +29,23 @@ const RECORD_METHODS = [
 ];
 
 function StepMethod({ onNext }: { onNext: (value: string) => void }) {
-  // const router = useRouter();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const nextStep = (value: number | null) => { 
+  const nextStep = (value: number | null) => {
     if (value === 3) {
-      return "옵션선택"
-    } else if (value === 4) { 
-      return "단위선택"
+      return '옵션선택';
+    } else if (value === 4) {
+      return '단위선택';
     } else {
-      return "기록완료"
+      return '기록완료';
     }
-  }
+  };
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-full flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
