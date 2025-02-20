@@ -3,7 +3,7 @@
 import useKeyboardResize from '@/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/hooks/usePreventScrollOnKeyboard';
 
-interface StepTopicProps {
+type StepTopicProps = {
   onNext: () => void;
 }
 
