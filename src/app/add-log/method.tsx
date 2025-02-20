@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 const RECORD_METHODS = [
@@ -26,8 +28,18 @@ const RECORD_METHODS = [
   },
 ];
 
-function StepMethod({ onNext }: { onNext: () => void }) {
+function StepMethod({ onNext }: { onNext: (value: string) => void }) {
+  // const router = useRouter();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const nextStep = (value: number | null) => { 
+    if (value === 3) {
+      return "옵션선택"
+    } else if (value === 4) { 
+      return "단위선택"
+    } else {
+      return "기록완료"
+    }
+  }
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
@@ -67,7 +79,7 @@ function StepMethod({ onNext }: { onNext: () => void }) {
       </div>
 
       <button
-        onClick={onNext}
+        onClick={() => onNext(nextStep(selectedIndex))}
         className={
           'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
