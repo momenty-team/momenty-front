@@ -1,12 +1,12 @@
 'use client';
 
 import { suitFont } from '@/styles/font';
-import { postMessageToWebView } from '@/utils';
-import { useRouter } from 'next/navigation';
+// import { postMessageToWebView } from '@/utils';
+// import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 function LogDetail() {
-  const route = useRouter();
+  // const route = useRouter();
   const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [value, setValue] = useState(false);
 
