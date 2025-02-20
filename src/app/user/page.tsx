@@ -31,9 +31,9 @@ const MENU = [
   {
     title: '기타',
     items: [
-      { title: '공지사항', path: '/user/info5', icon: <NoticeIcon /> },
+      { title: '공지사항', path: '/user/notice', icon: <NoticeIcon /> },
       { title: '모먼티 약관 확인', path: '/user/info6', icon: <MomentyIIcon /> },
-      { title: '오픈소스 라이선스', path: '/user/info7', icon: <PaperIcon /> },
+      { title: '오픈소스 라이선스', path: '/user/open-source', icon: <PaperIcon /> },
       { title: '개인정보 처리 방침', path: '/user/info8', icon: <LockerIcon /> },
       { title: '문의하기', path: '/user/info9', icon: <HeadsetIcon /> },
       { title: '버전 관리', path: '/user/info-qq', icon: <UserIcon /> },
