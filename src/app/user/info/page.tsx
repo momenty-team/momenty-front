@@ -10,7 +10,7 @@ function UserInfo() {
   return (
     <>
       <TopNavigation onClickBack={() => postMessageToWebView({ route: 'goBack' })} backGroundColor="transparent">
-        <button onClick={() => route.push('/user/info/edit')} className="text-body-1-r text-body-1-r">
+        <button onClick={() => route.push('/user/info/edit')} className="text-body-1-r">
           수정
         </button>
       </TopNavigation>

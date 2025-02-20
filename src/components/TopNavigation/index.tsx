@@ -6,7 +6,7 @@ interface TopNavigationProps {
   backGroundColor?: string;
 }
 
-function TopNavigation({ children, onClickBack, backGroundColor = 'bg-white' }: TopNavigationProps) {
+function TopNavigation({ children, onClickBack, backGroundColor = 'white' }: TopNavigationProps) {
   return (
     <header
       className={`fixed top-0 left-0 w-full justify-between align-center flex py-3 px-4 z-50 ${backGroundColor && `bg-${backGroundColor}`}`}
