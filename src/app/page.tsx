@@ -34,7 +34,7 @@ function Home() {
         </button>
       </header>
 
-      <div className="h-60 bg-indigo-100 mb-10 mx-4 mt-2">고양이</div>
+      <div className="h-60 bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]"></div>
 
       <section className="flex flex-col gap-5 mx-4">
         <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" onClick={routeAddLog}>
@@ -51,7 +51,12 @@ function Home() {
         </button>
 
         <div className="grid grid-cols-2 gap-5">
-          <button className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5">
+          <button
+            className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
+            onClick={() =>
+              postMessageToWebView({ bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail' } })
+            }
+          >
             <div className="flex items-center w-full justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
