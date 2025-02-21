@@ -5,6 +5,8 @@ import Method from '@/feature/add-log/components/StepMethod';
 // import Create from './create';
 import Complete from '@/feature/add-log/components/StepComplete';
 import Option from '@/feature/add-log/components/StepOption';
+import Unit from '@/feature/add-log/components/StepUnit';
+import CustomUnit from '@/feature/add-log/components/StepCustomUnit';
 import dynamic from 'next/dynamic';
 import { postMessageToWebView } from '@/utils';
 import TopNavigation from '@/common/components/TopNavigation';
@@ -15,9 +17,9 @@ const Topic = dynamic(() => import('@/feature/add-log/components/StepTopic'), {
 });
 
 function AddLogFunnel() {
-  const { Step, nextStep } = useFunnel<'기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택'>(
-    '기록주제'
-  );
+  const { Step, nextStep } = useFunnel<
+    '기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택' | '단위입력'
+  >('기록주제');
   const routeBack = () => {
     postMessageToWebView({ route: 'goBack' });
   };
@@ -50,6 +52,22 @@ function AddLogFunnel() {
 
         <Step name="옵션선택">
           <Option onNext={() => nextStep('기록완료')} />
+        </Step>
+
+        <Step name="단위선택">
+          <Unit
+            onNext={(selectedValue: string) => {
+              if (selectedValue === '단위입력') {
+                nextStep('단위입력');
+              } else {
+                nextStep('기록완료');
+              }
+            }}
+          />
+        </Step>
+
+        <Step name="단위입력">
+          <CustomUnit onNext={() => nextStep('기록완료')} />
         </Step>
 
         <Step name="기록완료">
