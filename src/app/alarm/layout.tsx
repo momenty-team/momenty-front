@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { suitFont } from '@/styles/font';
 import TopNavigation from '@/components/TopNavigation';
 
-export default function AlarmLayout({ children }: { children: React.ReactNode }) {
+function AlarmLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathName = usePathname();
   const onClickSetting = () => {
@@ -38,3 +38,5 @@ export default function AlarmLayout({ children }: { children: React.ReactNode })
     </html>
   );
 }
+
+export default AlarmLayout;
