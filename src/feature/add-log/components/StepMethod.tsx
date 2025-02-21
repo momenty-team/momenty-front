@@ -29,7 +29,7 @@ const RECORD_METHODS = [
 ];
 
 interface StepMethodProps {
-  onNext: React.MouseEventHandler<HTMLButtonElement>;
+  onNext: (value: string) => void;
 }
 
 function StepMethod({ onNext }: StepMethodProps) {
@@ -82,7 +82,7 @@ function StepMethod({ onNext }: StepMethodProps) {
       </div>
 
       <button
-        onClick={onNext}
+        onClick={() => onNext(nextStep(selectedIndex))}
         className={
           'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
