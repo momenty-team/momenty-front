@@ -6,7 +6,7 @@ function StepComplete() {
   };
 
   return (
-    <div className="flex w-full h-full flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <h1 className="mb-6 text-subtitle-1-b">
         이제 물 섭취량을
         <br />

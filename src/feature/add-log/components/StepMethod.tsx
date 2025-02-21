@@ -49,7 +49,7 @@ function StepMethod({ onNext }: StepMethodProps) {
   };
 
   return (
-    <div className="flex w-full h-full flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
