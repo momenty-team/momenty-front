@@ -1,4 +1,8 @@
-function StepCreate({ onNext }: { onNext: () => void }) {
+interface StepCreateProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function StepCreate({ onNext }: StepCreateProps) {
   return (
     <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <div className="mb-[24px]">

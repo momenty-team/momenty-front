@@ -3,7 +3,7 @@
 import useCalendar from './hooks/useCalendar';
 import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
-import TopNavigation from '@/components/TopNavigation';
+import TopNavigation from '@/common/components/TopNavigation';
 import { postMessageToWebView } from '@/utils';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

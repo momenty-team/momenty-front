@@ -1,33 +1,16 @@
-'use client';
+import type { Metadata } from 'next';
+import type { Viewport } from 'next';
 
-import useFunnel from '@/hooks/useFunnel';
-import Topic from './page';
-import Method from './method';
-// import Create from './create';
-import Complete from './complete';
+export const viewport: Viewport = {};
 
-function Layout() {
-  const { Step, nextStep } = useFunnel<'기록주제' | '기록방식' | '기록생성' | '기록완료'>('기록주제');
+export const metadata: Metadata = {};
 
+function AddLogLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Step name="기록주제">
-        <Topic onNext={() => nextStep('기록방식')} />
-      </Step>
-
-      <Step name="기록방식">
-        <Method onNext={() => nextStep('기록완료')} />
-      </Step>
-
-      {/* <Step name="기록생성">
-        <Create onNext={() => nextStep('기록완료')} onPrev={() => nextStep('기록방식')} />
-      </Step> */}
-
-      <Step name="기록완료">
-        <Complete />
-      </Step>
-    </div>
+    <html lang="ko">
+      <body>{children}</body>
+    </html>
   );
 }
 
-export default Layout;
+export default AddLogLayout;
