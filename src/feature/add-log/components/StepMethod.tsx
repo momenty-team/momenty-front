@@ -28,7 +28,11 @@ const RECORD_METHODS = [
   },
 ];
 
-function StepMethod({ onNext }: { onNext: (value: string) => void }) {
+interface StepMethodProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function StepMethod({ onNext }: StepMethodProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const nextStep = (value: number | null) => {
     if (value === 3) {
@@ -78,7 +82,7 @@ function StepMethod({ onNext }: { onNext: (value: string) => void }) {
       </div>
 
       <button
-        onClick={() => onNext(nextStep(selectedIndex))}
+        onClick={onNext}
         className={
           'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
         }

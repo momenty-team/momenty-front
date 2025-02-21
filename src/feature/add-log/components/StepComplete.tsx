@@ -1,4 +1,4 @@
-import { postMessageToWebView } from "@/utils";
+import { postMessageToWebView } from '@/utils';
 
 function StepComplete() {
   const routeHome = () => {
