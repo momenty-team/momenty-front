@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 const RECORD_METHODS = [
@@ -26,7 +28,11 @@ const RECORD_METHODS = [
   },
 ];
 
-function StepMethod({ onNext }: { onNext: () => void }) {
+interface StepMethodProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function StepMethod({ onNext }: StepMethodProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleClick = (index: number) => {

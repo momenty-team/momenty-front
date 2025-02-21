@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from "react";
 
 const useKeyboardResize = () => {
@@ -5,6 +7,8 @@ const useKeyboardResize = () => {
   const [keyboardHeight, setKeyboardHeight] = useState<number | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const onResize = () => {
       if (window.visualViewport) {
         const visualViewportHeight = window.visualViewport?.height;

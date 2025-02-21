@@ -1,15 +1,16 @@
 'use client';
 
-import useKeyboardResize from '@/hooks/useKeyboardResize';
-import usePreventScrollOnKeyboard from '@/hooks/usePreventScrollOnKeyboard';
+import useKeyboardResize from '@/common/hooks/useKeyboardResize';
+import usePreventScrollOnKeyboard from '@/common/hooks/usePreventScrollOnKeyboard';
 
-type StepTopicProps = {
-  onNext: () => void;
-};
+interface StepTopicProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 function StepTopic({ onNext }: StepTopicProps) {
   usePreventScrollOnKeyboard();
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
+
   return (
     <div
       className={`flex flex-col justify-between bg-[#F4F6F9]  ${keyboardHeight ? '' : 'pb-[52px]'}`}

@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { suitFont } from '@/styles/font';
-import TopNavigation from '@/components/TopNavigation';
+import TopNavigation from '@/common/components/TopNavigation';
 
 function AlarmLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -13,7 +13,7 @@ function AlarmLayout({ children }: { children: React.ReactNode }) {
 
   const onClickNextBackButton = () => {
     router.back();
-  }
+  };
 
   const isSettingsPage = pathName === '/alarm';
 

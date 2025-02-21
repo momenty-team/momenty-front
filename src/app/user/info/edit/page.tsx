@@ -1,6 +1,6 @@
 'use client';
 
-import TopNavigation from '@/components/TopNavigation';
+import TopNavigation from '@/common/components/TopNavigation';
 import { suitFont } from '@/styles/font';
 import { useRouter } from 'next/navigation';
 

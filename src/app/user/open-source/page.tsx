@@ -1,67 +1,66 @@
 'use client';
 
-import TopNavigation from "@/components/TopNavigation";
-import { postMessageToWebView } from "@/utils";
+import TopNavigation from '@/common/components/TopNavigation';
+import { postMessageToWebView } from '@/utils';
 
 function OpenSourcePage() {
-
-    const OPEN_SOURCE_LIST = [
-      {
-        id: 1,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 2,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 3,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 4,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 5,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 6,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 7,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 8,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 9,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 10,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-      {
-        id: 11,
-        title: '* Accompanist-pager :',
-        link: 'https://google.github.io/accpmpanist.pager',
-      },
-    ];
+  const OPEN_SOURCE_LIST = [
+    {
+      id: 1,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 2,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 3,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 4,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 5,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 6,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 7,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 8,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 9,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 10,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+    {
+      id: 11,
+      title: '* Accompanist-pager :',
+      link: 'https://google.github.io/accpmpanist.pager',
+    },
+  ];
 
   return (
     <>
