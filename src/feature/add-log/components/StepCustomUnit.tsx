@@ -25,8 +25,9 @@ function StepCustomUnit({ onNext }: StepCreateProps) {
       <button
         onClick={onNext}
         className={
-          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
+          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
+        disabled={!inputValue}
       >
         확인
       </button>

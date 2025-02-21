@@ -1,12 +1,9 @@
 'use client';
 
-// import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import { useState } from 'react';
 import CloseIcon from '@/assets/svg/close.svg';
 
 function Option({ onNext }: { onNext: () => void }) {
-  // const { viewportHeight, keyboardHeight } = useKeyboardResize();
-
   const [inputValue, setInputValue] = useState('');
   const [tag, setTag] = useState<string[]>([]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -63,8 +60,9 @@ function Option({ onNext }: { onNext: () => void }) {
       <button
         onClick={onNext}
         className={
-          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
+          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
+        disabled={!tag.length}
       >
         다음으로
       </button>

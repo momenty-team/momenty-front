@@ -2,14 +2,12 @@
 
 import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/common/hooks/usePreventScrollOnKeyboard';
+import { useState } from 'react';
 
-interface StepTopicProps {
-  onNext: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-function StepTopic({ onNext }: StepTopicProps) {
+function StepTopic({ onNext }: { onNext: () => void }) {
   usePreventScrollOnKeyboard();
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <div
@@ -26,15 +24,20 @@ function StepTopic({ onNext }: StepTopicProps) {
           <p className="text-body-4-sb text-[#99A5B4]">예시로 물 섭취량, 책, 여행 등을 기록할 수 있어요.</p>
         </div>
         <div className="px-6">
-          <input className="flex w-full h-14 border-b-[4px] border-[#5A6B7F] bg-[#F4F6F9] rounded-none" />
+          <input
+            className="flex w-full h-14 border-b-[4px] border-[#5A6B7F] bg-[#F4F6F9] rounded-none"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         </div>
       </div>
       <div className={`${keyboardHeight ? '' : 'px-6'}`}>
         <button
           onClick={onNext}
-          className={`w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 ${
+          className={`w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 disabled:bg-indigo-50 ${
             keyboardHeight ? '' : 'rounded-[8px]'
           }`}
+          disabled={!inputValue}
         >
           다음으로
         </button>
