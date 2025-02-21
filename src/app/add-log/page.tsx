@@ -17,10 +17,10 @@ const Topic = dynamic(() => import('@/feature/add-log/components/StepTopic'), {
   ssr: false,
 });
 
+type Step = '기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택' | '단위입력';
+
 function AddLogFunnel() {
-  const { Step, nextStep } = useFunnel<
-    '기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택' | '단위입력'
-  >('기록주제');
+  const { Step, nextStep } = useFunnel<Step>('기록주제');
 
   const routeBack = () => {
     postMessageToWebView({ route: 'goBack' });
