@@ -6,7 +6,7 @@ function StepComplete() {
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
       <h1 className="mb-6 text-subtitle-1-b">
         이제 물 섭취량을
         <br />
@@ -15,7 +15,7 @@ function StepComplete() {
       <button
         onClick={routeHome}
         className={
-          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
+          'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
       >
         기록하기

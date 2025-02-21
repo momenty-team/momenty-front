@@ -29,18 +29,28 @@ const RECORD_METHODS = [
 ];
 
 interface StepMethodProps {
-  onNext: React.MouseEventHandler<HTMLButtonElement>;
+  onNext: (value: string) => void;
 }
 
 function StepMethod({ onNext }: StepMethodProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const nextStep = (value: number | null) => {
+    if (value === 3) {
+      return '옵션선택';
+    } else if (value === 4) {
+      return '단위선택';
+    } else {
+      return '기록완료';
+    }
+  };
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
   };
 
   return (
-    <div className="flex h-dvh flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b ">물 섭취량을</p>
@@ -59,7 +69,7 @@ function StepMethod({ onNext }: StepMethodProps) {
                   <div className="flex w-[26px] h-[26px] bg-[#D9D9D9] rounded-[8px]" />
                   <span className="text-body-2-m">{method.title}</span>
                 </div>
-                <div className="flex flex-col text-label-1-r text-[#99A5B4]">
+                <div className="flex flex-col text-label-1-r text-indigo-100">
                   {method.description.map((line, i) => (
                     <div key={i} className="flex text-left">
                       {line}
@@ -73,10 +83,11 @@ function StepMethod({ onNext }: StepMethodProps) {
       </div>
 
       <button
-        onClick={onNext}
+        onClick={() => onNext(nextStep(selectedIndex))}
         className={
-          'w-full flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 rounded-[8px]'
+          'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
+        disabled={!selectedIndex}
       >
         다음으로
       </button>
