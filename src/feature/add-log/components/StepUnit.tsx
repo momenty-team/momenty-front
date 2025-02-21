@@ -1,39 +1,41 @@
 import { useState } from 'react';
 
+const UNIT = [
+  { id: 0, name: 'k' },
+  { id: 1, name: 'kg' },
+  { id: 2, name: 'g' },
+  { id: 3, name: 'mg' },
+  { id: 4, name: 'L' },
+  { id: 5, name: 'mL' },
+  { id: 6, name: 'cm' },
+  { id: 7, name: 'mm' },
+  { id: 8, name: '개' },
+  { id: 9, name: '회' },
+  { id: 10, name: '분' },
+  { id: 11, name: '시간' },
+  { id: 12, name: '일' },
+  { id: 13, name: '주' },
+  { id: 14, name: '개월' },
+  { id: 15, name: '년' },
+  { id: 16, name: '회차' },
+  { id: 17, name: '세트' },
+  { id: 18, name: '번' },
+  { id: 19, name: '층' },
+  { id: 20, name: '단계' },
+  { id: 21, name: '기타' },
+];
+
 function StepUnit({ onNext }: { onNext: (value: string) => void }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const handleClick = (index: number) => {
     setSelectedIndex(index);
   };
-  const UNIT = [
-    { id: 0, name: 'k' },
-    { id: 1, name: 'kg' },
-    { id: 2, name: 'g' },
-    { id: 3, name: 'mg' },
-    { id: 4, name: 'L' },
-    { id: 5, name: 'mL' },
-    { id: 6, name: 'cm' },
-    { id: 7, name: 'mm' },
-    { id: 8, name: '개' },
-    { id: 9, name: '회' },
-    { id: 10, name: '분' },
-    { id: 11, name: '시간' },
-    { id: 12, name: '일' },
-    { id: 13, name: '주' },
-    { id: 14, name: '개월' },
-    { id: 15, name: '년' },
-    { id: 16, name: '회차' },
-    { id: 17, name: '세트' },
-    { id: 18, name: '번' },
-    { id: 19, name: '층' },
-    { id: 20, name: '단계' },
-    { id: 21, name: '기타' },
-  ];
 
   const nextStep = (value: string) => {
     if (value === '기타') return '단위입력';
     else return '기록완료';
   };
+
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-[#F4F6F9] pt-4 px-6 pb-[52px]">
       <div className="flex flex-col gap-6">

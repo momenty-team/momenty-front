@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import CloseIcon from '@/assets/svg/close.svg';
 
-function Option({ onNext }: { onNext: () => void }) {
+interface StepOptionProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function Option({ onNext }: StepOptionProps) {
   const [inputValue, setInputValue] = useState('');
   const [tag, setTag] = useState<string[]>([]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

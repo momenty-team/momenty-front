@@ -4,7 +4,11 @@ import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/common/hooks/usePreventScrollOnKeyboard';
 import { useState } from 'react';
 
-function StepTopic({ onNext }: { onNext: () => void }) {
+interface StepTopicProps {
+  onNext: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function StepTopic({ onNext }: StepTopicProps) {
   usePreventScrollOnKeyboard();
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
   const [inputValue, setInputValue] = useState('');

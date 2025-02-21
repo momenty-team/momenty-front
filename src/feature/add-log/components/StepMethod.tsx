@@ -34,6 +34,7 @@ interface StepMethodProps {
 
 function StepMethod({ onNext }: StepMethodProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
   const nextStep = (value: number | null) => {
     if (value === 3) {
       return '옵션선택';
