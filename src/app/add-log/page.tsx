@@ -35,7 +35,7 @@ function AddLogFunnel() {
   return (
     <>
       <TopNavigation onClickBack={routeBack} backGroundColor="transparent" />
-      <main className={`pt-12 ${suitFont.className}`}>
+      <main className={`pt-12 h-full ${suitFont.className}`}>
         <Step name="기록주제">
           <Topic onNext={() => nextStep('기록방식')} />
         </Step>
