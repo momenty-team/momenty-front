@@ -47,7 +47,7 @@ function Option({ onNext }: StepOptionProps) {
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"
         />
         <div className="flex max-h-[400px] gap-4 w-full overflow-y-scroll flex-wrap mb-4">
-          {tag.map((value, index) => (
+          {tag.map((value) => (
             <div
               key={value}
               className="flex gap-1 w-fit items-center justify-center bg-indigo-500 text-white py-2 pl-3 pr-2 text-body-3-sb rounded-[8px]"
