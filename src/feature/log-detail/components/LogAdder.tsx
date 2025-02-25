@@ -35,8 +35,6 @@ function LogAdder({ changeSnapIndex, setIsTextAreaFocus, option }: LogAdderProps
     window.addEventListener('message', getMessageToApp);
   }, []);
 
-  console.log('option', option);
-
   if (option === 'string') {
     return (
       <>
