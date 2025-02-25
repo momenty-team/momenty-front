@@ -36,8 +36,8 @@ function NumberPad() {
             key={code}
             className="flex items-center justify-center text-subtitle-1-b px-[54px] py-4 bg-indigo-5 hover:bg-indigo-5 active:bg-indigo-25 focus:outline-none transition"
             data-code={code}
-            data-val={NumberPadValue}
-            onTouchStart={() => handleKeyPress(NumberPadValue)}
+            data-val={value}
+            onTouchStart={() => handleKeyPress(value)}
           >
             {label}
           </div>
