@@ -18,7 +18,7 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
         indigo: {
-          0: '#FFFFFF', 
+          0: '#FFFFFF',
           5: '#F4F6F9',
           25: '#E8EBEF',
           50: '#D6DAE0',
@@ -34,7 +34,7 @@ export default {
           900: '#020B16',
         },
       },
-      
+
       boxShadow: {
         1: '0px 25px 50px -12px rgba(0, 0, 0, 0.20)',
         2: '0px 20px 25px -5px rgba(0, 0, 0, 0.06), 0px 10px 10px 0px rgba(0, 0, 0, 0.04)',
@@ -190,5 +190,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 } satisfies Config;

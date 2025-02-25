@@ -1,13 +1,11 @@
-'use client';
-
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useKeyboardResize = () => {
   const [viewportHeight, setViewportHeight] = useState<number>(window.innerHeight);
   const [keyboardHeight, setKeyboardHeight] = useState<number | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     const onResize = () => {
       if (window.visualViewport) {
@@ -18,9 +16,9 @@ const useKeyboardResize = () => {
       }
     };
 
-    window.visualViewport?.addEventListener("resize", onResize);
+    window.visualViewport?.addEventListener('resize', onResize);
     return () => {
-      window.visualViewport?.removeEventListener("resize", onResize);
+      window.visualViewport?.removeEventListener('resize', onResize);
     };
   }, []);
 
