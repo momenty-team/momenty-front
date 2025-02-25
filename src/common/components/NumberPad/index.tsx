@@ -16,28 +16,28 @@ const keys = [
   { label: <BackIcon width={32} height={32} />, code: 'Minus', value: '-' },
 ];
 
-function Keyboard() {
-  const [value, setValue] = useState('');
+function NumberPad() {
+  const [NumberPadValue, setNumberPadValue] = useState('');
 
-  const handleKeyPress = (v: string) => {
-    if (v === '-') {
-      setValue((prev) => prev.slice(0, -1));
+  const handleKeyPress = (value: string) => {
+    if (value === '-') {
+      setNumberPadValue((prev) => prev.slice(0, -1));
     } else {
-      setValue((prev) => prev + v);
+      setNumberPadValue((prev) => prev + value);
     }
   };
 
   return (
     <div className="py-10 relative">
-      <div className="flex h-9"> {value || '입력값 표시'}</div>
+      <div className="flex h-9"> {NumberPadValue || '입력값 표시'}</div>
       <div className="grid grid-cols-3">
         {keys.map(({ label, code, value }) => (
           <div
             key={code}
             className="flex items-center justify-center text-subtitle-1-b px-[54px] py-4 bg-indigo-5 hover:bg-indigo-5 active:bg-indigo-25 focus:outline-none transition"
             data-code={code}
-            data-val={value}
-            onTouchStart={() => handleKeyPress(value)}
+            data-val={NumberPadValue}
+            onTouchStart={() => handleKeyPress(NumberPadValue)}
           >
             {label}
           </div>
@@ -50,4 +50,4 @@ function Keyboard() {
   );
 }
 
-export default Keyboard;
+export default NumberPad;
