@@ -3,7 +3,7 @@ import { suitFont } from '@/styles/font';
 import { useEffect, useState } from 'react';
 import LogAdder from './LogAdder';
 import ContentSection from './ContentSection';
-import TodayLogNotFound from './TodayLog/NotFound';
+// import TodayLogNotFound from './TodayLog/NotFound';
 import TodayLog from './TodayLog';
 import CurrentInfoNotFound from './CurrentInfo/NotFound';
 
