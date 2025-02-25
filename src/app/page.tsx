@@ -10,15 +10,12 @@ import SunIcon from '@/assets/svg/sun.svg';
 import { postMessageToWebView } from '@/utils';
 import { suitFont } from '@/styles/font';
 import dynamic from 'next/dynamic';
-import useBooleanState from '@/common/hooks/useBooleanState';
-import Keyboard from '@/common/components/Keyboard';
 
 const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), {
   ssr: false,
 });
 
 function Home() {
-  const { value, setTrue } = useBooleanState(false);
   const routeCalendar = () => {
     postMessageToWebView({ route: '/calendar' });
   };
@@ -29,10 +26,6 @@ function Home() {
 
   const routeAddLog = () => {
     postMessageToWebView({ route: '/add-log' });
-  };
-
-  const openKeyboard = () => {
-    setTrue();
   };
 
   return (
@@ -84,10 +77,7 @@ function Home() {
             </div>
             <div className="text-subtitle-2-sb mb-12">3427 보</div>
           </button>
-          <button
-            onClick={openKeyboard}
-            className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
-          >
+          <button className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5">
             <div className="flex items-center w-full justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
@@ -125,7 +115,6 @@ function Home() {
           </button>
         </div>
       </section>
-      {value && <Keyboard />}
     </main>
   );
 }
