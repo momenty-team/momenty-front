@@ -28,7 +28,7 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
 const CatModelViewer = () => {
   const actionRef = useRef<THREE.AnimationAction | null>(null);
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF('/cat_modeling16.glb');
+  const { scene, animations } = useGLTF('/model/cat_modeling16.glb');
 
   const handleClick = () => {
     if (actionRef.current) {

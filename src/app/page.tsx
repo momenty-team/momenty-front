@@ -62,7 +62,7 @@ function Home() {
             className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
             onClick={() =>
               postMessageToWebView({
-                bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail', snapIndex: 0 },
+                bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail' },
               })
             }
           >
