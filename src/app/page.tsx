@@ -18,7 +18,7 @@ const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), 
 });
 
 function Home() {
-  const { value, setTrue, setFalse } = useBooleanState(false);
+  const { value, setTrue } = useBooleanState(false);
   const routeCalendar = () => {
     postMessageToWebView({ route: '/calendar' });
   };
@@ -33,10 +33,6 @@ function Home() {
 
   const openKeyboard = () => {
     setTrue();
-  };
-
-  const closeKeyboard = () => {
-    setFalse();
   };
 
   return (
