@@ -13,7 +13,7 @@ const keys = [
   { label: '9', code: 'Digit9', value: '9' },
   { label: '.', code: 'Period', value: '.' },
   { label: '0', code: 'Digit0', value: '0' },
-  { label: <BackIcon width={32} hight={32} />, code: 'Minus', value: '-' },
+  { label: <BackIcon width={32} height={32} />, code: 'Minus', value: '-' },
 ];
 
 function Keyboard() {
