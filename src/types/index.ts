@@ -4,7 +4,8 @@ export interface BridgeData {
   route?: BridgeRoute;
   bottomSheet?: {
     name: string;
-    state: 'open' | 'close';
+    state: 'open' | 'close' | 'hold';
     webviewRoute?: string;
+    snapIndex?: number;
   };
 }
