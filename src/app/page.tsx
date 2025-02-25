@@ -9,6 +9,11 @@ import SleepIcon from '@/assets/svg/sleep.svg';
 import SunIcon from '@/assets/svg/sun.svg';
 import { postMessageToWebView } from '@/utils';
 import { suitFont } from '@/styles/font';
+import dynamic from 'next/dynamic';
+
+const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), {
+  ssr: false,
+});
 
 function Home() {
   const routeCalendar = () => {
@@ -27,14 +32,16 @@ function Home() {
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <header className="flex justify-between items-center px-4 py-2">
         <button className="text-subtitle-3-sb" onClick={routeCalendar}>
-          5월 14일
+          5월 15일
         </button>
         <button onClick={routeAlarm}>
           <BellIcon width={26} height={26} />
         </button>
       </header>
 
-      <div className="h-60 bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]"></div>
+      <div className="h-60 bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]">
+        <ModelViewer />
+      </div>
 
       <section className="flex flex-col gap-5 mx-4">
         <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" onClick={routeAddLog}>
@@ -54,7 +61,9 @@ function Home() {
           <button
             className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
             onClick={() =>
-              postMessageToWebView({ bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail' } })
+              postMessageToWebView({
+                bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail', snapIndex: 0 },
+              })
             }
           >
             <div className="flex items-center w-full justify-between">
