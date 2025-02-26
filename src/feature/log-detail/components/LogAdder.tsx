@@ -171,12 +171,10 @@ function LogAdder({ changeSnapIndex, setIsTextAreaFocus, option }: LogAdderProps
               via-[rgba(255,255,255,0.60)_20.5%] via-[rgba(255,255,255,0.90)_66.5%] to-white"
             />
           </div> */}
-          <div className="relative w-full h-[50px] flex items-center px-5 text-display-3-eb whitespace-nowrap">
-            <div className="min-w-full flex items-center overflow-x-scroll">
-              <span>{NumberPadValue}</span>
-            </div>
+          <div className="relative w-[calc(100vw-40px)] h-[50px] flex items-center mx-5 text-display-3-eb whitespace-nowrap">
+            <div className="min-w-full flex items-center overflow-x-scroll justify-end">{NumberPadValue} ML</div>
 
-            <div className="absolute top-0 right-0 w-[120px] h-[45px] origin-top-left from-white to-white" />
+            <div className="absolute top-0 left-0 w-[45px] h-full bg-gradient-to-l from-white/0 to-white" />
           </div>
         </div>
 
