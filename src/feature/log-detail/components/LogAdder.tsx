@@ -1,12 +1,14 @@
 'use client';
 
 import { postMessageToWebView } from '@/utils';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { LogOption } from '.';
 
 import CircleIcon from '@/assets/svg/log-detail/circle.svg';
 import CloseIcon from '@/assets/svg/log-detail/close.svg';
 import PlusCircleIcon from '@/assets/svg/log-detail/plus-circle.svg';
+import useBooleanState from '@/common/hooks/useBooleanState';
+import NumberPad from '@/common/components/NumberPad';
 
 interface LogAdderProps {
   changeSnapIndex: (index: number) => void;
@@ -15,6 +17,8 @@ interface LogAdderProps {
 }
 
 function LogAdder({ changeSnapIndex, setIsTextAreaFocus, option }: LogAdderProps) {
+  const { value, setTrue, setFalse } = useBooleanState(false);
+  const [NumberPadValue, setNumberPadValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const getMessageToApp = (e: MessageEvent) => {
@@ -28,6 +32,16 @@ function LogAdder({ changeSnapIndex, setIsTextAreaFocus, option }: LogAdderProps
     if (bottomSheet?.state === 'hold') {
       changeSnapIndex(bottomSheet.snapIndex);
     }
+  };
+
+  const onClickNumberOption = () => {
+    setTrue();
+    postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
+  };
+
+  const onClickNumberOptionClose = () => {
+    setFalse();
+    postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 0 } });
   };
 
   useEffect(() => {
@@ -142,33 +156,50 @@ function LogAdder({ changeSnapIndex, setIsTextAreaFocus, option }: LogAdderProps
 
   if (option === 'number') {
     return (
-      <>
-        <div className="flex mx-5 gap-[2px] flex-none mt-5">
-          <div className="text-caption-2-sb text-blue-300">12:34</div>
-          <div className="text-caption-2-sb text-indigo-100">에 물 섭취 순간을 남길게요.</div>
+      <div className="flex flex-col h-full justify-between">
+        <div className="flex flex-col">
+          <div className="flex mx-5 gap-[2px] flex-none mt-5">
+            <div className="text-caption-2-sb text-blue-300">12:34</div>
+            <div className="text-caption-2-sb text-indigo-100">에 물 섭취 순간을 남길게요.</div>
+          </div>
+          {/* <div className="relative w-full h-[50px] flex items-center px-5 text-display-3-eb  whitespace-nowrap">
+            <div className="min-w-full flex items-center overflow-x-scroll">
+              <span>{NumberPadValue}</span>
+            </div>
+            <div
+              className="absolute top-0 right-0 w-[120px] h-full bg-gradient-to-r from-transparent
+              via-[rgba(255,255,255,0.60)_20.5%] via-[rgba(255,255,255,0.90)_66.5%] to-white"
+            />
+          </div> */}
+          <div className="relative w-full h-[50px] flex items-center px-5 text-display-3-eb whitespace-nowrap">
+            <div className="min-w-full flex items-center overflow-x-scroll">
+              <span>{NumberPadValue}</span>
+            </div>
+
+            <div className="absolute top-0 right-0 w-[120px] h-[45px] origin-top-left from-white to-white" />
+          </div>
         </div>
 
-        <div
-          className="flex w-full h-full grow gap-2.5 px-5 grow my-3 items-end flex-row-reverse"
-          onFocus={() => {
-            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
-          }}
-          onBlur={() => {
-            setIsTextAreaFocus(false);
-            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 0 } });
-          }}
-        >
-          <div className="text-indigo-500 text-display-3-eb">ML</div>
-          <div className="text-indigo-500 text-display-3-eb">1,000</div>
-        </div>
-
-        <button
-          className="py-[14px] px-6 rounded-[8px] bg-indigo-700 text-indigo-5 text-body-3-b w-[calc(100vw-40px)] mx-5 flex-none my-5"
-          onClick={() => {}}
-        >
-          기록하기
-        </button>
-      </>
+        {value ? (
+          <div
+            className={`fixed bottom-0 left-0 w-full transition-all duration-700 ease-out transform
+            ${value ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
+            <NumberPad
+              NumberPadValue={NumberPadValue}
+              setNumberPadValue={setNumberPadValue}
+              onClickSave={onClickNumberOptionClose}
+            />
+          </div>
+        ) : (
+          <button
+            onTouchEnd={onClickNumberOption}
+            className="py-[14px] px-6 rounded-[8px] bg-indigo-700 text-indigo-5 text-body-3-b w-[calc(100vw-40px)] mx-5 flex-none my-5"
+          >
+            기록하기
+          </button>
+        )}
+      </div>
     );
   }
 
