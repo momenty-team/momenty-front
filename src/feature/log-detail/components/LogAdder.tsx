@@ -37,6 +37,11 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
         setIsTextAreaFocus(false);
         textareaRef.current?.blur();
       }
+
+      if (bottomSheet.snapIndex > 0) {
+        //option number일때만으로 한정해야함.
+        setIsTextAreaFocus(true);
+      }
     }
   };
 

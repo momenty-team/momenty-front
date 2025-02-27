@@ -1,3 +1,5 @@
+'use client';
+
 import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import { suitFont } from '@/styles/font';
 import { useEffect, useState } from 'react';
