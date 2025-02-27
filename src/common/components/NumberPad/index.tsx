@@ -1,4 +1,5 @@
-import { useState } from 'react';
+'use client';
+
 import BackIcon from '@/assets/svg/back.svg';
 
 const keys = [
@@ -16,25 +17,35 @@ const keys = [
   { label: <BackIcon width={32} height={32} />, code: 'Minus', value: '-' },
 ];
 
-function NumberPad() {
-  const [NumberPadValue, setNumberPadValue] = useState('');
+interface NumberPadProps {
+  NumberPadValue: string;
+  setNumberPadValue: React.Dispatch<React.SetStateAction<string>>;
+  onClickSave: () => void;
+}
 
+function NumberPad({ setNumberPadValue, onClickSave }: NumberPadProps) {
   const handleKeyPress = (value: string) => {
-    if (value === '-') {
-      setNumberPadValue((prev) => prev.slice(0, -1));
-    } else {
-      setNumberPadValue((prev) => prev + value);
-    }
+    setNumberPadValue((prev) => {
+      if (value === '-') {
+        const newValue = prev.slice(0, -1);
+        return newValue === '' ? '0' : newValue;
+      }
+
+      if (prev === '0') {
+        return value;
+      }
+
+      return prev + value;
+    });
   };
 
   return (
-    <div className="py-10 relative">
-      <div className="flex h-9"> {NumberPadValue || '입력값 표시'}</div>
-      <div className="grid grid-cols-3">
+    <div>
+      <div className="grid grid-cols-3 h-[300px]">
         {keys.map(({ label, code, value }) => (
           <div
             key={code}
-            className="flex items-center justify-center text-subtitle-1-b px-[54px] py-4 bg-indigo-5 hover:bg-indigo-5 active:bg-indigo-25 focus:outline-none transition"
+            className="flex items-center justify-center text-subtitle-1-b px-[54px] py-4 bg-indigo-5 hover:bg-indigo-5 active:bg-indigo-25 focus:outline-none"
             data-code={code}
             data-val={value}
             onTouchStart={() => handleKeyPress(value)}
@@ -43,7 +54,10 @@ function NumberPad() {
           </div>
         ))}
       </div>
-      <button className="flex items-center justify-center py-[14px] w-full text-white text-body-1-b bg-indigo-700 hover:bg-indigo-800 transition">
+      <button
+        onTouchEnd={onClickSave}
+        className="flex items-center justify-center py-[14px] w-full text-white text-body-1-b bg-indigo-700 hover:bg-indigo-800 transition"
+      >
         저장하기
       </button>
     </div>

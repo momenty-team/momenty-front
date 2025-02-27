@@ -1,3 +1,5 @@
+'use client';
+
 import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import { suitFont } from '@/styles/font';
 import { useEffect, useState } from 'react';
@@ -66,7 +68,9 @@ function LogDetail() {
       <ContentSection snapIndex={snapIndex} isTextAreaFocus={isTextAreaFocus}>
         {selectedNavIndex === 기록_남기기 && (
           <LogAdder
+            snapIndex={snapIndex}
             changeSnapIndex={changeSnapIndex}
+            isTextAreaFocus={isTextAreaFocus}
             setIsTextAreaFocus={setIsTextAreaFocus}
             option={logOption[exampleIndex]}
           />
