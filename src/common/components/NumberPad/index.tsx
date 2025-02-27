@@ -25,16 +25,23 @@ interface NumberPadProps {
 
 function NumberPad({ setNumberPadValue, onClickSave }: NumberPadProps) {
   const handleKeyPress = (value: string) => {
-    if (value === '-') {
-      setNumberPadValue((prev) => prev.slice(0, -1));
-    } else {
-      setNumberPadValue((prev) => prev + value);
-    }
+    setNumberPadValue((prev) => {
+      if (value === '-') {
+        const newValue = prev.slice(0, -1);
+        return newValue === '' ? '0' : newValue;
+      }
+
+      if (prev === '0') {
+        return value;
+      }
+
+      return prev + value;
+    });
   };
 
   return (
     <div>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 h-[300px]">
         {keys.map(({ label, code, value }) => (
           <div
             key={code}
