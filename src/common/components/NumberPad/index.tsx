@@ -31,8 +31,12 @@ function NumberPad({ setNumberPadValue, onClickSave }: NumberPadProps) {
         return newValue === '' ? '0' : newValue;
       }
 
+      if (value === '.' && prev.includes('.')) {
+        return prev;
+      }
+
       if (prev === '0') {
-        return value;
+        return value === '.' ? '0.' : value;
       }
 
       return prev + value;
