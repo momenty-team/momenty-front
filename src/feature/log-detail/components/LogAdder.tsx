@@ -182,10 +182,13 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
               className={`flex w-full h-full items-end justify-end transition-all duration-[0.4s] ease-out
                 ${isTextAreaFocus && 'translate-y-[52px] delay-[0.2s]'}`}
             >
-              <div className="relative w-[calc(100vw-40px)] h-[50px] flex items-center mx-5 text-display-3-eb whitespace-nowrap">
-                <div className="min-w-full flex items-center overflow-x-scroll justify-end">{NumberPadValue} ML</div>
+              <div className="relative w-[calc(100vw-123px)] h-[50px] flex items-center ml-5 mr-2 text-display-3-eb whitespace-nowrap">
+                <div className="min-w-full flex items-center overflow-x-scroll scrollbar-hide justify-end">
+                  {NumberPadValue}
+                </div>
                 <div className="absolute top-0 left-0 w-[45px] h-full bg-gradient-to-l from-white/0 to-white" />
               </div>
+              <div className="flex h-[50px] items-center text-display-3-eb pr-8">ML</div>
             </div>
           </div>
 

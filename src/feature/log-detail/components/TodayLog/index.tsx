@@ -76,9 +76,9 @@ function TodayLog({ option }: TodayLogProps) {
         {[
           { time: '12:35', content: ['10ml'] },
           { time: '12:35', content: ['10ml', '200ml'] },
+          { time: '18:51', content: ['10ml', '20ml', '500ml', '5002ml'] },
           { time: '16:35', content: ['102ml'] },
           { time: '12:00', content: ['1033ml', '300ml'] },
-          { time: '18:51', content: ['10ml', '20ml', '500ml', '5002ml'] },
         ].map(({ time, content }, index) => (
           <button key={index} className="py-2 px-5 bg-indigo-5 flex flex-col">
             <div className="flex items-end w-full gap-3">
