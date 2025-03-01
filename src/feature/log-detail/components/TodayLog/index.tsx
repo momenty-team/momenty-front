@@ -2,12 +2,63 @@ import type { LogOption } from '..';
 
 import CircleIcon from '@/assets/svg/log-detail/circle.svg';
 import CloseIcon from '@/assets/svg/log-detail/close.svg';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 interface TodayLogProps {
   option: LogOption;
 }
 
 function TodayLog({ option }: TodayLogProps) {
+  const optionElementsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [scrollStates, setScrollStates] = useState<boolean[]>([]);
+  const [rightScrollStates, setRightScrollStates] = useState<boolean[]>([]);
+
+  const setOptionElementRef = (optionElement: HTMLDivElement | null, index: number) => {
+    if (optionElement) {
+      optionElementsRef.current[index] = optionElement;
+    }
+  };
+
+  const checkScroll = () => {
+    console.log(optionElementsRef.current);
+    const newScrollStates = optionElementsRef.current.map((optionElement) =>
+      optionElement ? optionElement.scrollWidth > optionElement.clientWidth : false
+    );
+    setScrollStates(newScrollStates);
+
+    const newRightScrollStates = optionElementsRef.current.map((optionElement) => {
+      if (!optionElement) return false;
+
+      return optionElement.scrollLeft + optionElement.clientWidth < optionElement.scrollWidth;
+    });
+    setRightScrollStates(newRightScrollStates);
+  };
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      checkScroll();
+    }, 100);
+  }, []);
+
+  useEffect(() => {
+    optionElementsRef.current.forEach((optionElement) => {
+      if (optionElement) {
+        optionElement.addEventListener('scroll', checkScroll);
+      }
+    });
+
+    window.addEventListener('resize', checkScroll);
+
+    return () => {
+      window.removeEventListener('resize', checkScroll);
+      optionElementsRef.current.forEach((optionElement) => {
+        if (optionElement) {
+          optionElement.removeEventListener('scroll', checkScroll);
+        }
+      });
+    };
+  }, []);
+
   if (option === 'string') {
     return (
       <>
@@ -83,7 +134,19 @@ function TodayLog({ option }: TodayLogProps) {
           <button key={index} className="py-2 px-5 bg-indigo-5 flex flex-col">
             <div className="flex items-end w-full gap-3">
               <div className="text-display-2-el">{time}</div>
-              <div className="ml-auto flex items-center gap-3 overflow-x-scroll scrollbar-hide">
+              <div
+                ref={(el) => setOptionElementRef(el, index)}
+                className="relative ml-auto flex gap-3 overflow-x-scroll scrollbar-hide bg-indigo-5"
+              >
+                <div className="sticky left-0 h-[32px]">
+                  <div
+                    className="absolute left-0 w-[45px] min-h-full bg-gradient-to-l from-indigo-5/0 to-indigo-5"
+                    style={{
+                      visibility: scrollStates[index] ? 'visible' : 'hidden',
+                    }}
+                  />
+                </div>
+
                 {content.map((item, index) => (
                   <div
                     key={index}
@@ -92,6 +155,15 @@ function TodayLog({ option }: TodayLogProps) {
                     {item}
                   </div>
                 ))}
+
+                <div className="sticky right-0 h-[32px]">
+                  <div
+                    className="absolute right-0 w-[45px] min-h-full bg-gradient-to-r from-indigo-5/0 to-indigo-5"
+                    style={{
+                      visibility: rightScrollStates[index] ? 'visible' : 'hidden',
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div className="text-display-4-r mb-1">레이블</div>
