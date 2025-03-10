@@ -19,26 +19,30 @@ interface LogAdderProps {
 
 function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option, snapIndex }: LogAdderProps) {
   const [NumberPadValue, setNumberPadValue] = useState('0');
+  const [isClose, setIsClose] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const getMessageToApp = (e: MessageEvent) => {
     const { bottomSheet } = JSON.parse(e.data);
 
+    // postMessageToWebView({ message: option });
+
     if (bottomSheet?.state === 'close') {
       textareaRef.current?.blur();
       changeSnapIndex(-1);
       setIsTextAreaFocus(false);
+      setIsClose(true);
     }
 
     if (bottomSheet?.state === 'hold') {
       changeSnapIndex(bottomSheet.snapIndex);
-      if (bottomSheet.snapIndex === 0) {
+      if (bottomSheet.snapIndex === 1) {
         setIsTextAreaFocus(false);
         textareaRef.current?.blur();
       }
 
-      if (bottomSheet.snapIndex > 0) {
+      if (bottomSheet.snapIndex > 1 && option === 'number') {
         //option number일때만으로 한정해야함.
         setIsTextAreaFocus(true);
       }
@@ -47,18 +51,25 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
 
   const onClickNumberOption = () => {
     setIsTextAreaFocus(true);
-    postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
+    postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 2 } });
   };
 
   const onClickNumberOptionClose = () => {
     setIsTextAreaFocus(false);
-    postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 0 } });
+    if (!isClose) {
+      postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
+    }
   };
 
   useEffect(() => {
     document.addEventListener('message', getMessageToApp as EventListener);
     window.addEventListener('message', getMessageToApp);
-  }, []);
+
+    return () => {
+      document.removeEventListener('message', getMessageToApp as EventListener);
+      window.removeEventListener('message', getMessageToApp);
+    };
+  }, [option]);
 
   if (option === 'string') {
     return (
@@ -74,11 +85,11 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
           placeholder="오늘의 기록을 적어주세요."
           onFocus={() => {
             setIsTextAreaFocus(true);
-            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
+            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 2 } });
           }}
           onBlur={() => {
             setIsTextAreaFocus(false);
-            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 0 } });
+            postMessageToWebView({ bottomSheet: { name: 'keyboard', state: 'hold', snapIndex: 1 } });
           }}
         />
 
@@ -201,7 +212,7 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
           </button>
 
           <div
-            className={`fixed bottom-0 left-0 w-full transition-all duration-[0.6s] ease-out transform h-[356px] bg-black
+            className={`fixed bottom-0 left-0 w-full transition-all duration-[0.6s] ease-out transform h-[356px]
             ${isTextAreaFocus ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
           >
             <NumberPad

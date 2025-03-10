@@ -1,5 +1,15 @@
 export type BridgeRoute = string;
 
+type HapticType =
+  | 'selection'
+  | 'noticeSuccess'
+  | 'noticeWarning'
+  | 'noticeError'
+  | 'ImpactLight'
+  | 'ImpactMedium'
+  | 'ImpactHeavy'
+  | 'ImpactRigid'
+  | 'ImpactSoft';
 export interface BridgeData {
   route?: BridgeRoute;
   bottomSheet?: {
@@ -8,4 +18,5 @@ export interface BridgeData {
     webviewRoute?: string;
     snapIndex?: number;
   };
+  haptic?: HapticType;
 }

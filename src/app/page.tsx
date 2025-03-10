@@ -62,7 +62,12 @@ function Home() {
             className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
             onClick={() =>
               postMessageToWebView({
-                bottomSheet: { name: 'log-detail', state: 'open', webviewRoute: '/log-detail', snapIndex: 0 },
+                bottomSheet: {
+                  name: 'log-detail',
+                  state: 'open',
+                  webviewRoute: '/log-detail?option=string',
+                  snapIndex: 1,
+                },
               })
             }
           >
@@ -77,7 +82,20 @@ function Home() {
             </div>
             <div className="text-subtitle-2-sb mb-12">3427 보</div>
           </button>
-          <button className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5">
+
+          <button
+            className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
+            onClick={() =>
+              postMessageToWebView({
+                bottomSheet: {
+                  name: 'log-detail',
+                  state: 'open',
+                  webviewRoute: '/log-detail?option=number',
+                  snapIndex: 1,
+                },
+              })
+            }
+          >
             <div className="flex items-center w-full justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
@@ -89,7 +107,20 @@ function Home() {
             </div>
             <div className="text-subtitle-2-sb mb-12">120 RPM</div>
           </button>
-          <button className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5">
+
+          <button
+            className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
+            onClick={() =>
+              postMessageToWebView({
+                bottomSheet: {
+                  name: 'log-detail',
+                  state: 'open',
+                  webviewRoute: '/log-detail?option=boolean',
+                  snapIndex: 1,
+                },
+              })
+            }
+          >
             <div className="flex items-center w-full justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
@@ -101,7 +132,20 @@ function Home() {
             </div>
             <div className="text-subtitle-2-sb mb-12">8시간 30 분</div>
           </button>
-          <button className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5">
+
+          <button
+            className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
+            onClick={() =>
+              postMessageToWebView({
+                bottomSheet: {
+                  name: 'log-detail',
+                  state: 'open',
+                  webviewRoute: '/log-detail?option=option',
+                  snapIndex: 1,
+                },
+              })
+            }
+          >
             <div className="flex items-center w-full justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
