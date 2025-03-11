@@ -20,10 +20,10 @@ function TodayLog({ option }: TodayLogProps) {
   };
 
   const checkScroll = () => {
-    console.log(optionElementsRef.current);
     const newScrollStates = optionElementsRef.current.map((optionElement) =>
       optionElement ? optionElement.scrollWidth > optionElement.clientWidth : false
     );
+
     setScrollStates(newScrollStates);
 
     const newRightScrollStates = optionElementsRef.current.map((optionElement) => {
@@ -31,16 +31,13 @@ function TodayLog({ option }: TodayLogProps) {
 
       return optionElement.scrollLeft + optionElement.clientWidth < optionElement.scrollWidth;
     });
+
     setRightScrollStates(newRightScrollStates);
   };
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      checkScroll();
-    }, 100);
-  }, []);
-
   useEffect(() => {
+    checkScroll();
+
     optionElementsRef.current.forEach((optionElement) => {
       if (optionElement) {
         optionElement.addEventListener('scroll', checkScroll);

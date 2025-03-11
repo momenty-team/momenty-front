@@ -18,8 +18,8 @@ const logOption = ['string', 'boolean', 'option', 'number'] as const;
 export type LogOption = (typeof logOption)[number];
 
 function LogDetail() {
-  const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const { keyboardHeight } = useKeyboardResize();
+  const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [snapIndex, setSnapIndex] = useState(0);
   const [isTextAreaFocus, setIsTextAreaFocus] = useState(false);
   const [exampleIndex, setExampleIndex] = useState(0);
