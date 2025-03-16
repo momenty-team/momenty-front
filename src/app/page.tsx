@@ -10,12 +10,14 @@ import SunIcon from '@/assets/svg/sun.svg';
 import { postMessageToWebView } from '@/utils';
 import { suitFont } from '@/styles/font';
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
 const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), {
   ssr: false,
 });
 
 function Home() {
+  const [ck, setCk] = useState('업써');
   const routeCalendar = () => {
     postMessageToWebView({ route: '/calendar' });
   };
@@ -28,10 +30,16 @@ function Home() {
     postMessageToWebView({ route: '/add-log' });
   };
 
+  const testCk = () => {
+    if (document !== null) {
+      setCk(document.cookie);
+    }
+  };
+
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <header className="flex justify-between items-center px-4 py-2">
-        <button className="text-subtitle-3-sb" onClick={routeCalendar}>
+        <button className="text-subtitle-3-sb" onClick={testCk}>
           5월 15일
         </button>
         <button onClick={routeAlarm}>
@@ -54,7 +62,7 @@ function Home() {
             </div>
             <ChevronRightIcon width={24} height={24} />
           </div>
-          <span className="text-indigo-100 text-body-2-r">나만의 기록을 만들어 보세요.</span>
+          <span className="text-indigo-100 text-body-2-r">나만의 기록을 만들어 보세요. {ck}</span>
         </button>
 
         <div className="grid grid-cols-2 gap-5">
@@ -64,7 +72,7 @@ function Home() {
               postMessageToWebView({
                 bottomSheet: {
                   name: 'log-detail',
-                  state: 'open',
+                  state: 'open', // open
                   webviewRoute: '/log-detail?option=string',
                   snapIndex: 1,
                 },
