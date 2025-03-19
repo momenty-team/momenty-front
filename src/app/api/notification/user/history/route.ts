@@ -7,6 +7,8 @@ interface Response {
     content: string;
     icon_url: string;
     is_read: boolean;
+    created_at: string;
+    updated_at: string;
   }>;
 }
 
