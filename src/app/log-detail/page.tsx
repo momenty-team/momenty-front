@@ -2,12 +2,12 @@
 
 import dynamic from 'next/dynamic';
 
-const LogDetail = dynamic(() => import('@/feature/log-detail/components'), {
+const LogDetailD = dynamic(() => import('@/feature/log-detail/components'), {
   ssr: false,
 });
 
-function AddLogFunnel() {
-  return <LogDetail />;
+function LogDetail() {
+  return <LogDetailD />;
 }
 
-export default AddLogFunnel;
+export default LogDetail;

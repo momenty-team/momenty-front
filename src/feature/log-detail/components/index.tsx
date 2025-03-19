@@ -3,11 +3,11 @@
 import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import { suitFont } from '@/styles/font';
 import { useEffect, useState } from 'react';
-import LogAdder from './LogAdder';
 import ContentSection from './ContentSection';
 // import TodayLogNotFound from './TodayLog/NotFound';
 import TodayLog from './TodayLog';
 import CurrentInfoNotFound from './CurrentInfo/NotFound';
+import LogAdder from '../LogAdder';
 
 const 기록_남기기 = 0;
 const 오늘_기록 = 1;
@@ -22,6 +22,8 @@ function LogDetail() {
   const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [snapIndex, setSnapIndex] = useState(0);
   const [isTextAreaFocus, setIsTextAreaFocus] = useState(false);
+
+  // 나중에 지우기
   const [exampleIndex, setExampleIndex] = useState(0);
 
   const changeSnapIndex = (index: number) => {
@@ -79,7 +81,7 @@ function LogDetail() {
         {selectedNavIndex === 오늘_기록 && (
           <>
             {/* <TodayLogNotFound goToLogAdder={() => setSelectedNavIndex(0)} /> */}
-            <TodayLog option={logOption[exampleIndex]} />
+            <TodayLog option={logOption[exampleIndex]} changeSnapIndex={changeSnapIndex} />
           </>
         )}
 
