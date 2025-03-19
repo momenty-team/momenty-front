@@ -8,8 +8,6 @@ function applySetCookie(req: NextRequest, res: NextResponse): void {
 
   resCookies.getAll().forEach((cookie) => newReqCookies.set(cookie));
 
-  console.log('\nnewReqCookies', newReqCookies);
-
   NextResponse.next({
     request: { headers: newReqHeaders },
   }).headers.forEach((value, key) => {
@@ -28,10 +26,6 @@ export default function middleware(request: NextRequest) {
 
   if (accessToken && refreshToken) {
     const response = NextResponse.next();
-
-
-    console.log('accessToken', accessToken.value);
-    console.log('refreshToken', refreshToken.value);
 
     response.cookies.set('access_token', accessToken.value);
     response.cookies.set('refresh_token', refreshToken.value);
