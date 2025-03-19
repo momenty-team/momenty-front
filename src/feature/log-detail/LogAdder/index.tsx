@@ -8,9 +8,7 @@ import OptionLogAdder from './OptionLogAdder';
 import NumberLogAdder from './NumberLogAdder';
 import WritingLogAdder from './WritingLogAdder';
 
-const logOption = ['string', 'boolean', 'option', 'number'] as const;
-
-export type LogOption = (typeof logOption)[number];
+export type LogOption = ['string', 'boolean', 'option', 'number'][number];
 
 interface LogAdderProps {
   changeSnapIndex: (index: number) => void;

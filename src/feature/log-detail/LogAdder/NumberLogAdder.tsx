@@ -1,5 +1,4 @@
 import NumberPad from '@/common/components/NumberPad';
-import { postMessageToWebView } from '@/utils/webview';
 import { useState } from 'react';
 
 interface NumberLogAdderProps {
