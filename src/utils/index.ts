@@ -1,30 +1,25 @@
-import type { BridgeData } from '@/types';
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+const WEEK = 7 * DAY;
 
-export const postMessageToWebView = (bridgeData: BridgeData) => {
-  try {
-    if (window.ReactNativeWebView) {
-      return window.ReactNativeWebView.postMessage(JSON.stringify(bridgeData));
-    }
-
-    throw new Error('window.ReactNativeWebView가 존재하지 않습니다.');
-  } catch (error) {
-    console.error('postMessageToWebView post message failed');
-    console.error(error);
-  }
+const RELATIVE_TIME_LABELS = {
+  justNow: "방금 전",
+  minutesAgo: (n: number) => `${n}분 전`,
+  hoursAgo: (n: number) => `${n}시간 전`,
+  daysAgo: (n: number) => `${n}일 전`,
+  overAWeek: "하루 넘음",
 };
 
-export function formatRelativeTime(timestamp: string): string {
-  const now = new Date();
-  const targetTime = new Date(timestamp);
-  const diffMs = now.getTime() - targetTime.getTime();
+export function formatRelativeTime(timestamp: string) {
+  const now = new Date().getTime();
+  const targetTime = new Date(timestamp).getTime();
+  const elapsedTime = now - targetTime;
 
-  const diffMinutes = Math.floor(diffMs / (1000 * 60));
-  const diffHours = Math.floor(diffMinutes / 60);
-  const diffDays = Math.floor(diffHours / 24);
-
-  if (diffMinutes < 1) return "방금 전";
-  if (diffMinutes < 60) return `${diffMinutes}분 전`;
-  if (diffHours < 24) return `${diffHours}시간 전`;
-  if (diffDays < 7) return `${diffDays}일 전`;
-  return "하루 넘음";
+  if (elapsedTime < MINUTE) return RELATIVE_TIME_LABELS.justNow;
+  if (elapsedTime < HOUR) return RELATIVE_TIME_LABELS.minutesAgo(Math.floor(elapsedTime / MINUTE));
+  if (elapsedTime < DAY) return RELATIVE_TIME_LABELS.hoursAgo(Math.floor(elapsedTime / HOUR));
+  if (elapsedTime < WEEK) return RELATIVE_TIME_LABELS.daysAgo(Math.floor(elapsedTime / DAY));
+  return RELATIVE_TIME_LABELS.overAWeek;
 }

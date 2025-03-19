@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import BackIcon from '@/assets/svg/back.svg';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 
 const keys = [
   { label: '1', code: 'Digit1', value: '1' },

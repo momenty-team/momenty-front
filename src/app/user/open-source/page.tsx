@@ -1,7 +1,7 @@
 'use client';
 
 import TopNavigation from '@/common/components/TopNavigation';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 
 function OpenSourcePage() {
   const OPEN_SOURCE_LIST = [

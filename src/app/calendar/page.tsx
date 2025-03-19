@@ -4,7 +4,7 @@ import useCalendar from './hooks/useCalendar';
 import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
 import TopNavigation from '@/common/components/TopNavigation';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
