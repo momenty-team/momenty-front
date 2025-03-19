@@ -8,7 +8,7 @@ import CustomUnit from '@/feature/add-log/components/StepCustomUnit';
 import Complete from '@/feature/add-log/components/StepComplete';
 import TopNavigation from '@/common/components/TopNavigation';
 import dynamic from 'next/dynamic';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 import { suitFont } from '@/styles/font';
 
 // import Create from './create';

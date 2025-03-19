@@ -1,31 +1,44 @@
-'use client';
+import { formatRelativeTime } from '@/utils/index';
+import { cookies } from 'next/headers';
 
-import { useEffect, useState } from 'react';
+interface NotificationList {
+  id: number;
+  title: string;
+  content: string;
+  icon_url: string;
+  is_read: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
-function Alarm() {
-  const [alarmList, setAlarmList] = useState();
+async function Alarm() {
+  const cookieHeader = (await cookies()).toString();
+  const response = await fetch('https://api.momenty.co.kr/notification/user/history', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+    cache: 'no-store',
+  });
 
-  useEffect(() => {
-    fetch('/api/notification/user/history', { credentials: 'include' })
-      .then((res) => res.json())
-      .then((data) => setAlarmList(data));
-  }, []);
+  if (!response.ok) {
+    throw new Error('데이터를 가져오지 못했습니다.');
+  }
+
+  const notificationList: NotificationList[] = await response.json().then((data) => data.user_notification_histories);
 
   return (
     <div>
-      {JSON.stringify(alarmList, null, 2)}
-      {/* {alarmList.map((alarm) => (
-        <div key={alarm} className="flex gap-3 px-4 py-3 bg-indigo-5 w-full">
+      {notificationList.map(({ id, title, content, created_at }) => (
+        <div key={id} className="flex gap-3 px-4 py-3 bg-indigo-5 w-full">
           <div className="min-w-4 h-4 bg-indigo-700 rounded-[2px]" />
           <div className="flex flex-col gap-3 w-full">
             <div className="flex flex-1 min-w-full gap-3 items-center justify-between">
-              <span className="flex text-label-1-r">{alarm.title}</span>
-              <div className="flex text-label-1-r">{alarm.time}</div>
+              <span className="flex text-label-1-r">{title}</span>
+              <div className="flex text-label-1-r">{formatRelativeTime(created_at)}</div>
             </div>
-            <div className="flex text-label-1-r">{alarm.content}</div>
+            <div className="flex text-label-1-r">{content}</div>
           </div>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 }

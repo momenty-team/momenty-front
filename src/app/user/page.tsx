@@ -12,7 +12,7 @@ import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
 import { useState } from 'react';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 
 const MENU = [
   {
