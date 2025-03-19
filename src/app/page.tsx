@@ -9,7 +9,7 @@ import WalkIcon from '@/assets/svg/walk.svg';
 import HeartBeatIcon from '@/assets/svg/heart-beat.svg';
 import SleepIcon from '@/assets/svg/sleep.svg';
 import SunIcon from '@/assets/svg/sun.svg';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 import { suitFont } from '@/styles/font';
 import dynamic from 'next/dynamic';
 

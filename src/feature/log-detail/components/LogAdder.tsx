@@ -1,6 +1,6 @@
 'use client';
 
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 import { useEffect, useRef, useState } from 'react';
 import type { LogOption } from '.';
 

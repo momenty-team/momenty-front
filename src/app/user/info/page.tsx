@@ -2,7 +2,7 @@
 
 import TopNavigation from '@/common/components/TopNavigation';
 import { suitFont } from '@/styles/font';
-import { postMessageToWebView } from '@/utils';
+import { postMessageToWebView } from '@/utils/webview';
 import { useRouter } from 'next/navigation';
 
 function UserInfo() {
