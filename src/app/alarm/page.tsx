@@ -11,19 +11,22 @@ interface NotificationList {
   updated_at: string;
 }
 
+interface UserNotificationHistories {
+  user_notification_histories: NotificationList[];
+}
+
 async function Alarm() {
   const cookieHeader = (await cookies()).toString();
   const response = await fetch('https://api.momenty.co.kr/notification/user/history', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-    cache: 'no-store',
   });
 
   if (!response.ok) {
     throw new Error('데이터를 가져오지 못했습니다.');
   }
 
-  const notificationList: NotificationList[] = await response.json().then((data) => data.user_notification_histories);
+  const { user_notification_histories: notificationList }: UserNotificationHistories = await response.json();
 
   return (
     <div>
