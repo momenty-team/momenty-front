@@ -173,7 +173,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
             <button
               type="button"
               onClick={() => handleGenderClick('MALE')}
-              className={`flex-1 py-2 rounded-lg ${
+              className={`flex-1 py-4 rounded-lg ${
                 selectedGender === 'MALE' ? 'bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-600'
               }`}
             >
