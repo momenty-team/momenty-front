@@ -13,6 +13,5 @@ export async function PUT(req: Request) {
     body: JSON.stringify(body),
   });
 
-  const result = await res.json();
-  return new Response(JSON.stringify(result), { status: res.status });
+  return res;
 }

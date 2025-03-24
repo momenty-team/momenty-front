@@ -12,6 +12,5 @@ export async function GET() {
     },
   });
 
-  const result = await res.json();
-  return new Response(JSON.stringify(result), { status: res.status });
+  return res;
 }
