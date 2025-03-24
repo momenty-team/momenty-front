@@ -16,7 +16,7 @@ async function UserInfoEdit() {
 
   return (
     <>
-      <UserInfoTopNavigation />
+      <UserInfoTopNavigation currentPath="edit" />
       <main className={`flex flex-col gap-5 pt-12 ${suitFont.className}`}>
         <UserInfoEditForm userInfo={userInfo} />
       </main>
