@@ -4,8 +4,7 @@ import { cookies } from 'next/headers';
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const nickname = searchParams.get('nickname');
-  const cookieStore = await cookies();
-  const cookie = cookieStore.toString();
+  const cookieHeader = (await cookies()).toString();
 
   if (!nickname) {
     return new Response(JSON.stringify({ message: '닉네임이 필요합니다.' }), { status: 400 });
@@ -15,7 +14,7 @@ export async function GET(req: NextRequest) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': cookie || '',
+        'Cookie': cookieHeader || '',
       },
     });
 

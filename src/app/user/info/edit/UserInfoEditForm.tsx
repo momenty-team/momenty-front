@@ -37,7 +37,6 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
     setValue,
   } = useForm({
@@ -66,7 +65,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
   };
 
   const onSubmit = async (formData: UserInfoEditForm) => {
-    const nickname = getValues('nickname');
+    const { nickname, ...rest } = formData;
     const isNicknameChanged = nickname !== userInfo.nickname;
 
     if (nickname === '') {
@@ -83,7 +82,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
       }
     }
 
-    const formToSend = !isNicknameChanged ? (({ nickname, ...rest }) => rest)(formData) : formData;
+    const formToSend = isNicknameChanged ? formData : rest;
 
     try {
       const response = await fetch('/api/users/me', {
