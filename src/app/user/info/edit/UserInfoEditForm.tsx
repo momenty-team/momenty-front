@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { formatDate } from '@/utils';
-
+import formatDate from './FormatDate';
 interface UsersInfo {
   id: number;
   name: string;
