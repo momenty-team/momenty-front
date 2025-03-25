@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import formatDate from './FormatDate';
 interface UsersInfo {
   id: number;
   name: string;
@@ -51,6 +50,15 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
       profile_image_url: userInfo.profile_image_url,
     },
   });
+  const formatDate = (input: string) => {
+    const sliceNumber = input.replace(/\D/g, '').slice(0, 8);
+
+    if (sliceNumber.length <= 4) return sliceNumber;
+
+    if (sliceNumber.length <= 6) return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4)}`;
+
+    return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4, 6)}-${sliceNumber.slice(6)}`;
+  };
 
   const checkNicknameDuplicate = async (nickname: string) => {
     try {
