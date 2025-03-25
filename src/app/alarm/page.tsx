@@ -22,9 +22,7 @@ async function Alarm() {
     headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
   });
 
-  if (!response.ok) {
-    throw new Error('데이터를 가져오지 못했습니다.');
-  }
+  if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
   const { user_notification_histories: notificationList }: UserNotificationHistories = await response.json();
 
