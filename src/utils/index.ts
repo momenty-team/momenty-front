@@ -23,3 +23,11 @@ export function formatRelativeTime(timestamp: string) {
   if (elapsedTime < WEEK) return RELATIVE_TIME_LABELS.daysAgo(Math.floor(elapsedTime / DAY));
   return RELATIVE_TIME_LABELS.overAWeek;
 }
+
+export function formatDate(input: string): string {
+  const sliceNumber = input.replace(/\D/g, '').slice(0, 8);
+
+  if (sliceNumber.length <= 4) return sliceNumber;
+  if (sliceNumber.length <= 6) return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4)}`;
+  return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4, 6)}-${sliceNumber.slice(6)}`;
+}

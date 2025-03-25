@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { formatDate } from '@/utils';
 
 interface UsersInfo {
   id: number;
@@ -100,16 +101,6 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
     } catch (err) {
       alert('업데이트 중 오류가 발생했습니다 : ' + err);
     }
-  };
-
-  const formatDate = (input: string) => {
-    const sliceNumber = input.replace(/\D/g, '').slice(0, 8);
-
-    if (sliceNumber.length <= 4) return sliceNumber;
-
-    if (sliceNumber.length <= 6) return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4)}`;
-
-    return `${sliceNumber.slice(0, 4)}-${sliceNumber.slice(4, 6)}-${sliceNumber.slice(6)}`;
   };
 
   const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
