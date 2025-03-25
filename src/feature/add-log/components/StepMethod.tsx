@@ -50,10 +50,10 @@ function StepMethod({ onNext }: StepMethodProps) {
   };
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <div>
         <div className="mb-6">
-          <p className="text-subtitle-1-b ">물 섭취량을</p>
+          <p className="text-subtitle-1-b">물 섭취량을</p>
           <p className="text-subtitle-1-b">어떤 방식으로 기록할까요?</p>
         </div>
         <div>

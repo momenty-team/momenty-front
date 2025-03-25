@@ -9,7 +9,7 @@ interface TopNavigationProps {
 function TopNavigation({ children, onClickBack, backGroundColor = 'white' }: TopNavigationProps) {
   return (
     <header
-      className={`fixed top-0 left-0 w-full flex justify-between items-center py-3 px-4 z-50`}
+      className={`fixed top-0 left-0 w-full flex justify-between items-center py-1.5 px-4 z-50`}
       style={{ background: `${backGroundColor}` }}
     >
       <button type="button" onClick={onClickBack}>
