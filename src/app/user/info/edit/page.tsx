@@ -1,44 +1,24 @@
-'use client';
-
-import TopNavigation from '@/common/components/TopNavigation';
+import UserInfoTopNavigation from '@/feature/user/info/UserInfoTopNavigation';
 import { suitFont } from '@/styles/font';
-import { useRouter } from 'next/navigation';
+import { cookies } from 'next/headers';
+import UserInfoEditForm from './UserInfoEditForm';
 
-function UserInfoEdit() {
-  const route = useRouter();
+async function UserInfoEdit() {
+  const cookieHeader = (await cookies()).toString();
+  const response = await fetch('https://api.momenty.co.kr/users/me', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+  });
+
+  if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
+
+  const userInfo = await response.json();
 
   return (
     <>
-      <TopNavigation onClickBack={() => route.back()} backGroundColor="transparent" />
-      <main className={`flex flex-col items-center justify-between gap-5 pt-12 ${suitFont.className}`}>
-        <form className="flex flex-col w-full gap-3">
-          <div className="flex flex-col gap-1 align-center px-[22.5px]">
-            <label className="text-body-3-m text-indigo-300">이름</label>
-            <input className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"></input>
-          </div>
-          <div className="flex flex-col gap-1 align-center px-[22.5px]">
-            <label className="text-body-3-m text-indigo-300">생년월일</label>
-            <input className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"></input>
-          </div>
-          <div className="flex flex-col gap-1 align-center px-[22.5px]">
-            <label className="text-body-3-m text-indigo-300">휴대폰 번호</label>
-            <input
-              className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"
-              value="010-0000-0000"
-              disabled
-            ></input>
-          </div>
-          <div className="flex flex-col gap-1 align-center px-[22.5px]">
-            <label className="text-body-3-m text-indigo-300">이메일</label>
-            <input className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"></input>
-          </div>
-        </form>
-        <button
-          onClick={() => route.back()}
-          className="fixed flex justify-center items-center bg-[#021730] text-[#F4F6F9] py-[14px] text-body-1-b h-14 w-[calc(100%-48px)] rounded-[8px] bottom-14"
-        >
-          수정 완료
-        </button>
+      <UserInfoTopNavigation currentPath="edit" />
+      <main className={`flex flex-col gap-5 pt-12 ${suitFont.className}`}>
+        <UserInfoEditForm userInfo={userInfo} />
       </main>
     </>
   );
