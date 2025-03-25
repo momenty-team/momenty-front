@@ -35,6 +35,7 @@ interface UserInfoEditFormProps {
 
 function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
   const route = useRouter();
+  const [selectedGender, setSelectedGender] = useState(userInfo.gender);
   const {
     register,
     handleSubmit,
@@ -107,8 +108,6 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
     const formatted = formatDate(e.target.value);
     setValue('birth_date', formatted);
   };
-
-  const [selectedGender, setSelectedGender] = useState(userInfo.gender);
 
   const handleGenderClick = (gender: string) => {
     setSelectedGender(gender);
