@@ -3,22 +3,15 @@
 import useCalendar from './hooks/useCalendar';
 import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
-import TopNavigation from '@/common/components/TopNavigation';
-import { postMessageToWebView } from '@/utils/webview';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function Calendar() {
   const { dateList, year, month, setYear, setMonth, isCurrentMonth, isToday, isSunday } = useCalendar();
 
-  const routeBack = () => {
-    postMessageToWebView({ route: 'goBack' });
-  };
-
   return (
     <>
-      <TopNavigation onClickBack={routeBack} backGroundColor="transparent" />
-      <main className="flex flex-col gap-6 pt-12">
+      <main className="flex flex-col gap-6">
         <header className="flex justify-center gap-5">
           <MonthPicker year={year} month={month} changeYear={setYear} changeMonth={setMonth} />
         </header>

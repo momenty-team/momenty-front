@@ -9,6 +9,8 @@ import Complete from '@/feature/add-log/components/StepComplete';
 import dynamic from 'next/dynamic';
 import { suitFont } from '@/styles/font';
 import { useEffect } from 'react';
+import { postMessageToWebView } from '@/utils/webview';
+import useAppMessage from '@/common/hooks/useAppMessage';
 
 // import Create from './create';
 
@@ -33,15 +35,28 @@ function useLockScroll(lock: boolean) {
 }
 
 function AddLogFunnel() {
-  const { Step, nextStep } = useFunnel<Step>('기록주제');
+  const { Step, nextStep, currentStep } = useFunnel<Step>('기록주제');
 
   /* 
   <Step name="기록생성">
     <Create onNext={() => nextStep('기록완료')} onPrev={() => nextStep('기록방식')} />
   </Step>
   */
+  useAppMessage(({ history }) => {
+    const navigateTarget = history?.funnel;
+
+    if (navigateTarget) {
+      nextStep(navigateTarget as Step);
+    }
+  }, []);
 
   useLockScroll(true);
+
+  useEffect(() => {
+    if (currentStep) {
+      postMessageToWebView({ history: { funnel: currentStep } });
+    }
+  }, [currentStep]);
 
   return (
     <main className={`h-full ${suitFont.className}`}>

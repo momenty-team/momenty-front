@@ -1,8 +1,5 @@
 'use client';
 
-import TopNavigation from '@/common/components/TopNavigation';
-import { postMessageToWebView } from '@/utils/webview';
-
 function OpenSourcePage() {
   const OPEN_SOURCE_LIST = [
     {
@@ -64,8 +61,7 @@ function OpenSourcePage() {
 
   return (
     <>
-      <TopNavigation onClickBack={() => postMessageToWebView({ route: 'goBack' })} />
-      <main className="w-full mt-16">
+      <main className="w-full">
         <span className="text-subtitle-2-sb p-4 pt-4 pb-1">오픈소스 라이선스</span>
         <div>
           {OPEN_SOURCE_LIST.map((notice) => (

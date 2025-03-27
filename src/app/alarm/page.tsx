@@ -1,5 +1,6 @@
 import { formatRelativeTime } from '@/utils/index';
 import { cookies } from 'next/headers';
+import BridgeConnection from '@/feature/alarm/BridgeConnection';
 
 interface NotificationList {
   id: number;
@@ -27,7 +28,7 @@ async function Alarm() {
   const { user_notification_histories: notificationList }: UserNotificationHistories = await response.json();
 
   return (
-    <div>
+    <>
       {notificationList.map(({ id, title, content, created_at }) => (
         <div key={id} className="flex gap-3 px-4 py-3 bg-indigo-5 w-full">
           <div className="min-w-4 h-4 bg-indigo-700 rounded-[2px]" />
@@ -40,7 +41,8 @@ async function Alarm() {
           </div>
         </div>
       ))}
-    </div>
+      <BridgeConnection />
+    </>
   );
 }
 
