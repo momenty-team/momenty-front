@@ -12,10 +12,18 @@ import SunIcon from '@/assets/svg/sun.svg';
 import { postMessageToWebView } from '@/utils/webview';
 import { suitFont } from '@/styles/font';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), {
   ssr: false,
 });
+
+export interface RecordItem {
+  id: number;
+  title: string;
+  method: 'option_type' | 'boolean_type' | 'number_type' | 'text_type';
+  is_public: boolean;
+}
 
 function Home() {
   const routeCalendar = () => {
@@ -29,6 +37,28 @@ function Home() {
   const routeAddLog = () => {
     postMessageToWebView({ route: '/add-log' });
   };
+
+  const [record, setRecord] = useState<RecordItem[]>([]);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      const res = await fetch('/api/records');
+      if (!res.ok) throw new Error('Failed to fetch');
+      const data = await res.json();
+      alert('data ui logging ' + JSON.stringify(data, null, 2));
+      setRecord(data);
+    };
+
+    fetchRecords();
+  }, []);
+
+  // const conClick = () => {
+  //   if (record) {
+  //     alert('hi ' + JSON.stringify(record.records[0].title, null, 2));
+  //   } else {
+  //     alert('데이터가 없습니다');
+  //   }
+  // };
 
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>

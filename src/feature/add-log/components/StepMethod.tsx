@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 const RECORD_METHODS = [
   {
@@ -33,6 +34,8 @@ interface StepMethodProps {
 }
 
 function StepMethod({ onNext }: StepMethodProps) {
+  const { setValue } = useFormContext();
+
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const nextStep = (value: number | null) => {
@@ -47,6 +50,16 @@ function StepMethod({ onNext }: StepMethodProps) {
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
+    const selectedMethod = RECORD_METHODS.find((m) => m.id === index);
+    if (selectedMethod) {
+      if (selectedMethod.title === '옵션 만들기') setValue('method', 'option_type');
+
+      if (selectedMethod.title === '숫자') setValue('method', 'number_type');
+
+      if (selectedMethod.title === '글로 남기기') setValue('method', 'text_type');
+
+      if (selectedMethod.title === 'O, X') setValue('method', 'boolean_type');
+    }
   };
 
   return (

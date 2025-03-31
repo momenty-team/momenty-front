@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import CloseIcon from '@/assets/svg/close.svg';
+import { useFormContext } from 'react-hook-form';
 
 interface StepOptionProps {
   onNext: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Option({ onNext }: StepOptionProps) {
+  const { register } = useFormContext();
   const [inputValue, setInputValue] = useState('');
   const [tag, setTag] = useState<string[]>([]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -29,7 +31,7 @@ function Option({ onNext }: StepOptionProps) {
   };
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <span className="text-subtitle-1-b">옵션을 만들어볼까요?</span>
@@ -41,9 +43,8 @@ function Option({ onNext }: StepOptionProps) {
         <input
           type="text"
           placeholder="옵션을 입력해주세요."
-          value={inputValue}
           onKeyDown={handleKeyDown}
-          onChange={(e) => setInputValue(e.target.value)}
+          {...register('option', { required: '옵션을 입력해주세요' })}
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"
         />
         <div className="flex max-h-[400px] gap-4 w-full overflow-y-scroll flex-wrap mb-4">
@@ -66,7 +67,7 @@ function Option({ onNext }: StepOptionProps) {
         className={
           'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
-        disabled={!tag.length}
+        // disabled={!tag.length}
       >
         다음으로
       </button>

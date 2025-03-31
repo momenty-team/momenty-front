@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface StepCreateProps {
   onNext: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function StepCustomUnit({ onNext }: StepCreateProps) {
-  const [inputValue, setInputValue] = useState('');
+  const { register } = useFormContext();
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <span className="text-subtitle-1-b">단위를 정해볼까요?</span>
@@ -17,8 +17,7 @@ function StepCustomUnit({ onNext }: StepCreateProps) {
         <input
           type="text"
           placeholder="단위를 입력해주세요."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          {...register('unit', { required: '단위를 입력해주세요.' })}
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"
         />
       </div>
@@ -27,7 +26,7 @@ function StepCustomUnit({ onNext }: StepCreateProps) {
         className={
           'w-full flex justify-center items-center bg-[#021730] text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
-        disabled={!inputValue}
+        // disabled={!inputValue}
       >
         확인
       </button>

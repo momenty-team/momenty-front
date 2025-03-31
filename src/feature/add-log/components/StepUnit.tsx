@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 const UNIT = [
   { id: 0, name: 'k' },
@@ -27,8 +28,14 @@ const UNIT = [
 
 function StepUnit({ onNext }: { onNext: (value: string) => void }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { setValue } = useFormContext();
   const handleClick = (index: number) => {
     setSelectedIndex(index);
+
+    const selectedUnit = UNIT[index];
+    if (selectedUnit.name !== '기타') {
+      setValue('unit', selectedUnit.name);
+    }
   };
 
   const nextStep = (value: string) => {

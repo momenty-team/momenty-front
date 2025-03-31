@@ -1,8 +1,33 @@
+'use client';
+
 import { postMessageToWebView } from '@/utils/webview';
+import { useFormContext } from 'react-hook-form';
 
 function StepComplete() {
-  const routeHome = () => {
-    postMessageToWebView({ route: '/' });
+  const { getValues } = useFormContext();
+
+  const handleSubmit = async () => {
+    const formData = getValues();
+
+    const recordDataForm = {
+      title: formData.title,
+      is_public: formData.is_public ?? true,
+      method: formData.method,
+      option: formData.option ?? [],
+      unit: formData.unit || '',
+    };
+
+    try {
+      await fetch('/api/records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(recordDataForm),
+      });
+
+      postMessageToWebView({ route: '/' });
+    } catch (error) {
+      console.error('저장 실패:', error);
+    }
   };
 
   return (
@@ -13,7 +38,7 @@ function StepComplete() {
         기록할 수 있어요.
       </h1>
       <button
-        onClick={routeHome}
+        onClick={handleSubmit}
         className={
           'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
