@@ -9,7 +9,7 @@ import Complete from '@/feature/add-log/components/StepComplete';
 import dynamic from 'next/dynamic';
 import { suitFont } from '@/styles/font';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import useAppMessage from '@/common/hooks/useAppMessage';
 

@@ -40,6 +40,8 @@ function Home() {
 
   const [record, setRecord] = useState<RecordItem[]>([]);
 
+  console.log('record', record);
+
   useEffect(() => {
     const fetchRecords = async () => {
       const res = await fetch('/api/records');
