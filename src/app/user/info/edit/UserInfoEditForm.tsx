@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { postMessageToWebView } from '@/utils/webview';
 interface UsersInfo {
   id: number;
   name: string;
@@ -107,6 +108,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
       if (!response.ok) throw new Error('업데이트에 실패했습니다.');
 
       route.push('/user/info');
+      postMessageToWebView({ route: '/user/info' });
     } catch (err) {
       alert('업데이트 중 오류가 발생했습니다 : ' + err);
     }

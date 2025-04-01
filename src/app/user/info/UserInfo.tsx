@@ -1,6 +1,5 @@
 import { suitFont } from '@/styles/font';
 import { cookies } from 'next/headers';
-import UserInfoTopNavigation from '@/feature/user/info/UserInfoTopNavigation';
 
 interface UsersInfo {
   id: number;
@@ -33,7 +32,6 @@ async function UserInfo() {
 
   return (
     <>
-      <UserInfoTopNavigation isEditMode currentPath="info" />
       <main className={`flex flex-col items-center gap-5 mt-12 ${suitFont.className}`}>
         <div className="w-[72px] h-[72px] bg-indigo-50 rounded-[12px] my-[15px]" />
         <section className="flex flex-col w-full">
