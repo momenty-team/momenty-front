@@ -1,8 +1,4 @@
-'use client';
-
-import BellIcon from '@/assets/svg/bell.svg';
 import UserIcon from '@/assets/svg/user/user.svg';
-import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
 import UsersIcon from '@/assets/svg/user/users.svg';
 import PlusUserIcon from '@/assets/svg/user/plus-user.svg';
 import YellowBellIcon from '@/assets/svg/user/yellow-bell.svg';
@@ -11,8 +7,9 @@ import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
 import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
-import { useState } from 'react';
-import { postMessageToWebView } from '@/utils/webview';
+import NavigationMenuButton from '@/common/components/NavigationMenuButton';
+import AlarmButton from '@/feature/user/AlarmButton';
+import { cookies } from 'next/headers';
 
 const MENU = [
   {
@@ -41,44 +38,48 @@ const MENU = [
   },
 ];
 
-function User() {
-  const [activeButtonPath, setActiveButtonPath] = useState<string | null>(null);
+interface UsersMeResponse {
+  id: number;
+  name?: string;
+  nickname: string;
+  birth_date: string;
+  email?: string;
+  profile_image_url: string;
+  gender: string;
+  is_public: boolean;
+  follower_count?: number;
+  following_count?: number;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
+}
 
-  const activeTouchedButtonPath = (path: string) => {
-    setActiveButtonPath(path);
-  };
+async function User() {
+  const cookieHeader = (await cookies()).toString();
+  const response = await fetch('https://api.momenty.co.kr/users/me', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+    cache: 'no-cache',
+  });
 
-  const removeActiveButtonPath = () => {
-    setActiveButtonPath(null);
-  };
+  if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
-  const routeButtonPath = () => {
-    if (activeButtonPath) {
-      postMessageToWebView({ route: activeButtonPath });
-      setActiveButtonPath(null);
-    }
-  };
-
-  const routeAlarm = () => {
-    postMessageToWebView({ route: '/alarm' });
-  };
+  const { nickname, follower_count, following_count }: UsersMeResponse = await response.json();
 
   return (
-    <main className="w-full">
+    <>
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
-        <button onClick={routeAlarm} type="button">
-          <BellIcon width={26} height={26} />
-        </button>
+        <AlarmButton />
       </header>
 
       <div className="flex flex-col gap-6 mx-6">
         <div className="py-3 flex gap-4 items-center">
           <div className="w-16 h-16 bg-[#f3f5f9] rounded-[12px]" />
           <div className="flex flex-col gap-0.5">
-            <div className="text-[#010a15] text-subtitle-3-sb">아무개</div>
+            <div className="text-[#010a15] text-subtitle-3-sb">{nickname}</div>
             <div className="flex items-center gap-3">
-              <div className="text-[#010a15] text-body-3-r">팔로잉 00</div>
-              <div className="text-[#010a15] text-body-3-r">팔로워 00</div>
+              <div className="text-[#010a15] text-body-3-r">팔로잉 {following_count || '00'}</div>
+              <div className="text-[#010a15] text-body-3-r">팔로워 {follower_count || '00'}</div>
             </div>
           </div>
         </div>
@@ -88,37 +89,13 @@ function User() {
             <h3 className="text-body-1-sb">{title}</h3>
             <div className="flex flex-col gap-5">
               {items.map(({ title, icon, path }) => (
-                <button
-                  key={title}
-                  className="relative flex justify-center items-center ease-out origin-center group"
-                  onTouchStart={() => activeTouchedButtonPath(path)}
-                  onTouchMove={removeActiveButtonPath}
-                  onTouchEnd={routeButtonPath}
-                >
-                  <div
-                    className={`absolute bg-transparent w-[calc(100%+16px)] h-[calc(100%+12px)] transition-all duration-300 ease-out ${activeButtonPath === path && 'group-active:bg-[#ebebeb] group-active:scale-[0.98]'} rounded-[6px]`}
-                  ></div>
-
-                  <div
-                    className={`w-full flex items-center justify-between ${activeButtonPath === path && 'group-active:scale-[0.96]'} transition-transform duration-200 ease-out origin-center relative`}
-                  >
-                    <div className="flex items-center gap-4 ">
-                      <div className="w-8 h-8 bg-indigo-5 rounded-[4px] flex items-center justify-center">{icon}</div>
-                      <div className="text-body-2-sb">{title}</div>
-                    </div>
-
-                    <ChevronRightIcon
-                      className="[&>path]:stroke-[#99A5B4] relative"
-                      style={{ width: 16, height: 16 }}
-                    />
-                  </div>
-                </button>
+                <NavigationMenuButton key={title} title={title} icon={icon} path={path} />
               ))}
             </div>
           </section>
         ))}
       </div>
-    </main>
+    </>
   );
 }
 
