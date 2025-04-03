@@ -1,5 +1,5 @@
 import Dot from '@/assets/svg/dot.svg';
-import './ButtonLoadingIndicator.css'; // 아래에 있는 CSS를 여기에 import
+import './ButtonLoadingIndicator.css';
 
 function ButtonLoadingIndicator() {
   return (
