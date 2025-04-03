@@ -1,4 +1,3 @@
-import UserInfoTopNavigation from '@/feature/user/info/UserInfoTopNavigation';
 import { suitFont } from '@/styles/font';
 import { cookies } from 'next/headers';
 import UserInfoEditForm from './UserInfoEditForm';
@@ -16,7 +15,6 @@ async function UserInfoEdit() {
 
   return (
     <>
-      <UserInfoTopNavigation currentPath="edit" />
       <main className={`flex flex-col gap-5 pt-12 ${suitFont.className}`}>
         <UserInfoEditForm userInfo={userInfo} />
       </main>
