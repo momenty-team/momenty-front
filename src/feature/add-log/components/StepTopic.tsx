@@ -1,18 +1,16 @@
 'use client';
-
-import { useState } from 'react';
 import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import usePreventScrollOnKeyboard from '@/common/hooks/usePreventScrollOnKeyboard';
+import { useFormContext } from 'react-hook-form';
 
 interface StepTopicProps {
-  onNext: React.MouseEventHandler<HTMLButtonElement>;
+  onNext: () => void;
 }
 
 function StepTopic({ onNext }: StepTopicProps) {
   usePreventScrollOnKeyboard();
+  const { register } = useFormContext();
   const { viewportHeight, keyboardHeight } = useKeyboardResize();
-  const [inputValue, setInputValue] = useState('');
-
   const containerHeight = viewportHeight - (keyboardHeight ?? 0);
 
   return (
@@ -28,8 +26,7 @@ function StepTopic({ onNext }: StepTopicProps) {
         <div className="px-6">
           <input
             className="flex w-full h-14 border-b-[4px] border-indigo-300 bg-indigo-5 rounded-none"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            {...register('title', { required: '주제를 입력해주세요' })}
           />
         </div>
         <div className="px-6">
@@ -43,7 +40,6 @@ function StepTopic({ onNext }: StepTopicProps) {
           className={`w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 disabled:bg-indigo-50 ${
             keyboardHeight ? '' : 'rounded-[8px]'
           }`}
-          disabled={!inputValue}
         >
           다음으로
         </button>
