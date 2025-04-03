@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 
 function StepComplete() {
   const { getValues } = useFormContext();
+  const formData = getValues();
 
   const handleSubmit = async () => {
     const formData = getValues();
@@ -33,7 +34,7 @@ function StepComplete() {
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <h1 className="mb-6 text-subtitle-1-b">
-        이제 물 섭취량을
+        이제 {formData.title}을(를)
         <br />
         기록할 수 있어요.
       </h1>

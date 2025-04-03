@@ -3,38 +3,47 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const RECORD_METHODS = [
-  {
-    id: 1,
-    title: '글로 남기기',
-    description: ['물 섭취량을 일기를 쓰듯 글로 작성해서 기록해요.', '기록을 자세하게 하고 싶을 때 유용해요.'],
-  },
-  {
-    id: 2,
-    title: 'O, X',
-    description: ['물 섭취량을 O와 X로 구분해서 작성해요.', '기록을 간단하고 빠르게 기록하고 싶을 때 유용해요.'],
-  },
-  {
-    id: 3,
-    title: '옵션 만들기',
-    description: ['물 섭취량을 옵션 중 한 가지를 선택하는 방식으로 작성해요.', '원하는 옵션들을 직접 만들 수 있어요.'],
-  },
-  {
-    id: 4,
-    title: '숫자',
-    description: [
-      '물 섭취량을 숫자와 단위를 이용해서 기록해요.',
-      '모멘티에서 제공하는 숫자 선택 방식에서 고를 수 있어요.',
-    ],
-  },
-];
-
 interface StepMethodProps {
   onNext: (value: string) => void;
 }
 
 function StepMethod({ onNext }: StepMethodProps) {
   const { setValue } = useFormContext();
+  const { getValues } = useFormContext();
+  const formData = getValues();
+
+  const RECORD_METHODS = [
+    {
+      id: 1,
+      title: '글로 남기기',
+      description: [
+        `${formData.title}을 일기를 쓰듯 글로 작성해서 기록해요.', '기록을 자세하게 하고 싶을 때 유용해요.`,
+      ],
+    },
+    {
+      id: 2,
+      title: 'O, X',
+      description: [
+        `${formData.title}을 O와 X로 구분해서 작성해요.', '기록을 간단하고 빠르게 기록하고 싶을 때 유용해요.`,
+      ],
+    },
+    {
+      id: 3,
+      title: '옵션 만들기',
+      description: [
+        `${formData.title}을 옵션 중 한 가지를 선택하는 방식으로 작성해요.`,
+        '원하는 옵션들을 직접 만들 수 있어요.',
+      ],
+    },
+    {
+      id: 4,
+      title: '숫자',
+      description: [
+        `${formData.title}을 숫자와 단위를 이용해서 기록해요.`,
+        '모멘티에서 제공하는 숫자 선택 방식에서 고를 수 있어요.',
+      ],
+    },
+  ];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -66,7 +75,7 @@ function StepMethod({ onNext }: StepMethodProps) {
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <div>
         <div className="mb-6">
-          <p className="text-subtitle-1-b">물 섭취량을</p>
+          <p className="text-subtitle-1-b">{formData.title}을(를)</p>
           <p className="text-subtitle-1-b">어떤 방식으로 기록할까요?</p>
         </div>
         <div>
