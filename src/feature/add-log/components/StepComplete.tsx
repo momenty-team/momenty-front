@@ -1,13 +1,17 @@
 'use client';
 
+import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
 import { postMessageToWebView } from '@/utils/webview';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 function StepComplete() {
   const { getValues } = useFormContext();
   const formData = getValues();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = getValues();
 
     alert('기록:' + JSON.stringify(formData, null, 2));
@@ -28,8 +32,10 @@ function StepComplete() {
       });
 
       postMessageToWebView({ route: '/' });
+      setLoading(false);
     } catch (error) {
       console.error('저장 실패:', error);
+      setLoading(false);
     }
   };
 
@@ -45,8 +51,9 @@ function StepComplete() {
         className={
           'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px]'
         }
+        disabled={loading}
       >
-        기록하기
+        {loading ? <ButtonLoadingIndicator /> : '기록하기'}
       </button>
     </div>
   );
