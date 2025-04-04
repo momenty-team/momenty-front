@@ -17,6 +17,7 @@ function StepCustomUnit({ onNext }: StepCreateProps) {
         </div>
         <input
           type="text"
+          enterKeyHint="done"
           placeholder="단위를 입력해주세요."
           {...register('unit', { required: '단위를 입력해주세요.' })}
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"

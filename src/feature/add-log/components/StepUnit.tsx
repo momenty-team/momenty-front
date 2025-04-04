@@ -26,7 +26,11 @@ const UNIT = [
   { id: 21, name: '기타' },
 ];
 
-function StepUnit({ onNext }: { onNext: (value: string) => void }) {
+interface StepUnitProps {
+  onNext: (value: string) => void;
+}
+
+function StepUnit({ onNext }: StepUnitProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { setValue } = useFormContext();
   const handleClick = (index: number) => {
@@ -39,8 +43,11 @@ function StepUnit({ onNext }: { onNext: (value: string) => void }) {
   };
 
   const nextStep = (value: string) => {
-    if (value === '기타') return '단위입력';
-    else return '기록완료';
+    if (value === '기타') {
+      return '단위입력';
+    }
+
+    return '기록완료';
   };
 
   return (

@@ -13,8 +13,6 @@ import { useEffect } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import useAppMessage from '@/common/hooks/useAppMessage';
 
-// import Create from './create';
-
 const Topic = dynamic(() => import('@/feature/add-log/components/StepTopic'), {
   ssr: false,
 });
@@ -32,13 +30,6 @@ function useLockScroll(lock: boolean) {
 
 function AddLogFunnel() {
   const { Step, nextStep, currentStep } = useFunnel<Step>('기록주제');
-
-  /* 
-  <Step name="기록생성">
-    <Create onNext={() => nextStep('기록완료')} onPrev={() => nextStep('기록방식')} />
-  </Step>
-  */
-
   const methods = useForm({
     defaultValues: {
       title: '',
