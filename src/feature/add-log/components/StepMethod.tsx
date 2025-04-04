@@ -72,7 +72,7 @@ function StepMethod({ onNext }: StepMethodProps) {
   };
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
       <div>
         <div className="mb-6">
           <p className="text-subtitle-1-b">{formData.title}을(를)</p>

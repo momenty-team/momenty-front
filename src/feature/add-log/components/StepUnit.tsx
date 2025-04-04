@@ -51,7 +51,7 @@ function StepUnit({ onNext }: StepUnitProps) {
   };
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <span className="text-subtitle-1-b">단위를 정해볼까요?</span>
