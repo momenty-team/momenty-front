@@ -26,7 +26,11 @@ const UNIT = [
   { id: 21, name: '기타' },
 ];
 
-function StepUnit({ onNext }: { onNext: (value: string) => void }) {
+interface StepUnitProps {
+  onNext: (value: string) => void;
+}
+
+function StepUnit({ onNext }: StepUnitProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { setValue } = useFormContext();
   const handleClick = (index: number) => {
@@ -39,12 +43,15 @@ function StepUnit({ onNext }: { onNext: (value: string) => void }) {
   };
 
   const nextStep = (value: string) => {
-    if (value === '기타') return '단위입력';
-    else return '기록완료';
+    if (value === '기타') {
+      return '단위입력';
+    }
+
+    return '기록완료';
   };
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <span className="text-subtitle-1-b">단위를 정해볼까요?</span>

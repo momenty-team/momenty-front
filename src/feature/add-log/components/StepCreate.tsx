@@ -4,7 +4,7 @@ interface StepCreateProps {
 
 function StepCreate({ onNext }: StepCreateProps) {
   return (
-    <div className="flex h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6 pb-[52px]">
+    <div className="flex h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6 pb-[52px]">
       <div className="mb-[24px]">
         <p className="text-subtitle-1-b ">민재님의 새로운 기록을</p>
         <p className="text-subtitle-1-b">만들고 있어요.</p>
