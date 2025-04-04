@@ -35,6 +35,8 @@ function Option({ onNext }: StepOptionProps) {
     setValue('option', newTags);
   };
 
+  // react hook form watch써서 다음으로 넘어갔다가 다시 옵션 페이지로 들어왔을떄 값 안사라지게 할 수 있을듯
+
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
       <div className="flex flex-col gap-6">

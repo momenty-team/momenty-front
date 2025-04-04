@@ -1,11 +1,12 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 interface StepCreateProps {
   onNext: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function StepCustomUnit({ onNext }: StepCreateProps) {
-  const { register } = useFormContext();
+  const { register, control } = useFormContext();
+  const unit = useWatch({ control, name: 'unit' });
 
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-4 px-6">
@@ -26,7 +27,7 @@ function StepCustomUnit({ onNext }: StepCreateProps) {
         className={
           'w-full flex justify-center items-center bg-[#021730] text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
-        // disabled={!inputValue}
+        disabled={!unit}
       >
         확인
       </button>

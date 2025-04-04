@@ -10,7 +10,9 @@ interface CommonModalProps {
 
 function CommonModal({ children, onClose, onDelete }: CommonModalProps) {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   return (

@@ -66,8 +66,8 @@ function AddLogFunnel() {
   }, [currentStep]);
 
   return (
-    <FormProvider {...methods}>
-      <main className={`h-full ${suitFont.className}`}>
+    <main className={`h-full ${suitFont.className}`}>
+      <FormProvider {...methods}>
         <Step name="기록주제">
           <Topic onNext={() => nextStep('기록방식')} />
         </Step>
@@ -109,8 +109,8 @@ function AddLogFunnel() {
         <Step name="기록완료">
           <Complete />
         </Step>
-      </main>
-    </FormProvider>
+      </FormProvider>
+    </main>
   );
 }
 

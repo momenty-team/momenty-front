@@ -10,6 +10,8 @@ function StepComplete() {
   const handleSubmit = async () => {
     const formData = getValues();
 
+    alert('기록:' + JSON.stringify(formData, null, 2));
+
     const recordDataForm = {
       title: formData.title,
       is_public: formData.is_public ?? true,
