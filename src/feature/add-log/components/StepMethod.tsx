@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import TextIcon from '@/assets/svg/text.svg';
+import BooleanIcon from '@/assets/svg/boolean.svg';
+import OptionIcon from '@/assets/svg/option.svg';
+import NumberIcon from '@/assets/svg/number.svg';
 
 interface StepMethodProps {
   onNext: (value: string) => void;
@@ -17,14 +21,16 @@ function StepMethod({ onNext }: StepMethodProps) {
       id: 1,
       title: '글로 남기기',
       description: [
-        `${formData.title}을 일기를 쓰듯 글로 작성해서 기록해요.', '기록을 자세하게 하고 싶을 때 유용해요.`,
+        `${formData.title}을 일기를 쓰듯 글로 작성해서 기록해요.`,
+        '기록을 자세하게 하고 싶을 때 유용해요.',
       ],
     },
     {
       id: 2,
       title: 'O, X',
       description: [
-        `${formData.title}을 O와 X로 구분해서 작성해요.', '기록을 간단하고 빠르게 기록하고 싶을 때 유용해요.`,
+        `${formData.title}을 O와 X로 구분해서 작성해요.`,
+        '기록을 간단하고 빠르게 기록하고 싶을 때 유용해요.',
       ],
     },
     {
@@ -80,19 +86,24 @@ function StepMethod({ onNext }: StepMethodProps) {
         </div>
         <div>
           <div className="flex flex-col gap-4">
-            {RECORD_METHODS.map((method) => (
+            {RECORD_METHODS.map(({ id, title, description }) => (
               <button
-                onTouchStart={() => handleClick(method.id)}
-                key={method.id}
+                onTouchStart={() => handleClick(id)}
+                key={id}
                 className={`flex flex-col w-full px-4 py-3 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
-                  ${selectedIndex === method.id ? 'bg-[#E6E9F0]' : 'bg-white'}`}
+                  ${selectedIndex === id ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
                 <div className="flex flex-row items-center justify-between gap-1">
-                  <div className="flex w-[26px] h-[26px] bg-[#D9D9D9] rounded-[8px]" />
-                  <span className="text-body-2-m">{method.title}</span>
+                  <div className="flex w-[26px] h-[26px] bg-indigo-5 rounded-[8px] items-center justify-center">
+                    {title === '글로 남기기' && <TextIcon />}
+                    {title === 'O, X' && <BooleanIcon />}
+                    {title === '옵션 만들기' && <OptionIcon />}
+                    {title === '숫자' && <NumberIcon />}
+                  </div>
+                  <span className="text-body-2-m">{title}</span>
                 </div>
                 <div className="flex flex-col text-label-1-r text-indigo-100">
-                  {method.description.map((line, i) => (
+                  {description.map((line, i) => (
                     <div key={i} className="flex text-left">
                       {line}
                     </div>

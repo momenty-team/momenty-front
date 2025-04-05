@@ -2,6 +2,7 @@
 
 import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
 import { postMessageToWebView } from '@/utils/webview';
+import { revalidatePath } from 'next/cache';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 

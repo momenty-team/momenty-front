@@ -8,6 +8,8 @@ import ContentSection from './ContentSection';
 import TodayLog from './TodayLog';
 import CurrentInfoNotFound from './CurrentInfo/NotFound';
 import LogAdder from '../LogAdder';
+import { useSearchParams } from 'next/navigation';
+import { postMessageToWebView } from '@/utils/webview';
 
 const 기록_남기기 = 0;
 const 오늘_기록 = 1;
@@ -22,29 +24,48 @@ function LogDetail() {
   const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [snapIndex, setSnapIndex] = useState(0);
   const [isTextAreaFocus, setIsTextAreaFocus] = useState(false);
+  const params = useSearchParams();
+  const [recordTitle, setRecordTitle] = useState<string>('');
 
   // 나중에 지우기
-  const [exampleIndex, setExampleIndex] = useState(0);
+  const [exampleIndex, setExampleIndex] = useState(2);
 
   const changeSnapIndex = (index: number) => {
     setSnapIndex(index);
+  };
+
+  const moveTodayLog = () => {
+    setSelectedNavIndex(1);
+  };
+
+  const goToLogSetting = () => {
+    // ~~~~
+    postMessageToWebView({ route: `/log-setting/${params.get('id')}` });
   };
 
   useEffect(() => {
     setTimeout(() => window.scrollTo(0, 0), 0);
   }, [keyboardHeight]);
 
+  useEffect(() => {
+    if (params) {
+      const fetchRecords = async () => {
+        const res = await fetch(`/api/records/${params.get('id')}/details`);
+        if (!res.ok) throw new Error('데이터를 가져오는 데 실패했습니다.');
+        const data = await res.json();
+        setRecordTitle(data.title);
+      };
+
+      fetchRecords();
+    }
+  }, [params]);
+
   return (
     <main className={`w-full flex h-full flex-col items-center gap-5 ${suitFont.className} scroll-smooth`}>
       <header className="fixed w-full flex flex-col items-center pb-5 bg-white top-0">
-        <div className="text-indigo-700 text-body-3-sb">물 섭취</div>
+        <div className="text-indigo-700 text-body-3-sb">{recordTitle}</div>
         <div className="text-indigo-100 text-caption-3-sb">오늘 남긴 기록이 아직 없어요.</div>
-        <button
-          className="absolute top-0 right-4 text-indigo-300 text-body-2-sb"
-          onClick={() => {
-            setExampleIndex((p) => (p + 1) % 4);
-          }}
-        >
+        <button className="absolute top-0 right-4 text-indigo-300 text-body-2-sb" onClick={goToLogSetting}>
           설정
         </button>
       </header>
@@ -75,6 +96,7 @@ function LogDetail() {
             isTextAreaFocus={isTextAreaFocus}
             setIsTextAreaFocus={setIsTextAreaFocus}
             option={logOption[exampleIndex]}
+            moveTodayLog={moveTodayLog}
           />
         )}
 

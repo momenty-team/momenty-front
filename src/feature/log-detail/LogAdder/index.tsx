@@ -16,9 +16,17 @@ interface LogAdderProps {
   isTextAreaFocus: boolean;
   option: LogOption;
   snapIndex: number;
+  moveTodayLog: VoidFunction;
 }
 
-function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option, snapIndex }: LogAdderProps) {
+function LogAdder({
+  changeSnapIndex,
+  isTextAreaFocus,
+  setIsTextAreaFocus,
+  option,
+  snapIndex,
+  moveTodayLog,
+}: LogAdderProps) {
   const [isClose, setIsClose] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -75,6 +83,7 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
         ref={textareaRef}
         handleTextAreaFocus={handleKeyBoardAreaFocus}
         handleTextAreaBlur={handleKeyBoardAreaBlur}
+        moveTodayLog={moveTodayLog}
       />
     );
   }
@@ -86,12 +95,13 @@ function LogAdder({ changeSnapIndex, isTextAreaFocus, setIsTextAreaFocus, option
         isTextAreaFocus={isTextAreaFocus}
         handleNumberPadFocus={handleKeyBoardAreaFocus}
         handleNumberPadBlur={handleKeyBoardAreaBlur}
+        moveTodayLog={moveTodayLog}
       />
     );
   }
 
   if (option === 'boolean') {
-    return <BooleanLogAdder />;
+    return <BooleanLogAdder moveTodayLog={moveTodayLog} />;
   }
 
   if (option === 'option') {

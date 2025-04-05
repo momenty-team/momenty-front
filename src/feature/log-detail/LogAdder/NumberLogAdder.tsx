@@ -1,4 +1,6 @@
 import NumberPad from '@/common/components/NumberPad';
+import { postMessageToWebView } from '@/utils/webview';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 interface NumberLogAdderProps {
@@ -6,6 +8,7 @@ interface NumberLogAdderProps {
   snapIndex: number;
   handleNumberPadFocus: VoidFunction;
   handleNumberPadBlur: VoidFunction;
+  moveTodayLog: VoidFunction;
 }
 
 function NumberLogAdder({
@@ -13,8 +16,34 @@ function NumberLogAdder({
   snapIndex,
   handleNumberPadFocus,
   handleNumberPadBlur,
+  moveTodayLog,
 }: NumberLogAdderProps) {
   const [NumberPadValue, setNumberPadValue] = useState('0');
+  const [loading, setLoading] = useState(false);
+  const params = useSearchParams();
+  const handleAddLog = async () => {
+    try {
+      setLoading(true);
+      await fetch(`/api/records/${params.get('id')}/details`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: NumberPadValue,
+          option_id: null,
+          is_public: true,
+        }),
+      });
+
+      setNumberPadValue('0');
+      handleNumberPadBlur();
+      postMessageToWebView({ toast: { type: 'success', message: '기록이 저장되었어요!' } });
+      moveTodayLog();
+    } catch (error) {
+      console.error('Error adding log:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -38,7 +67,8 @@ function NumberLogAdder({
               </div>
               <div className="absolute top-0 left-0 w-[45px] h-full bg-gradient-to-l from-white/0 to-white" />
             </div>
-            <div className="flex h-[50px] items-center text-display-3-eb pr-8">ML</div>
+            {/* <div className="flex h-[50px] items-center text-display-3-eb pr-8"></div> */}
+            {/* 이 위의 유닛은 다희가 마저 null 안뜨게 해야지 고칠 수 있다. */}
           </div>
         </div>
 
@@ -46,6 +76,7 @@ function NumberLogAdder({
           onTouchEnd={handleNumberPadFocus}
           className={`py-[14px] px-6 rounded-[8px] bg-indigo-700 text-indigo-5 text-body-3-b w-[calc(100vw-40px)] mx-5 flex-none my-5 transition-all duration-[0.6s] delay-[0.2s] ease-out
               ${!isTextAreaFocus ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[180%] invisible'}`}
+          disabled={loading || NumberPadValue === '0'}
         >
           기록하기
         </button>
@@ -54,11 +85,7 @@ function NumberLogAdder({
           className={`fixed bottom-0 left-0 w-full transition-all duration-[0.6s] ease-out transform h-[356px]
             ${isTextAreaFocus ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
         >
-          <NumberPad
-            NumberPadValue={NumberPadValue}
-            setNumberPadValue={setNumberPadValue}
-            onClickSave={handleNumberPadBlur}
-          />
+          <NumberPad NumberPadValue={NumberPadValue} setNumberPadValue={setNumberPadValue} onClickSave={handleAddLog} />
         </div>
       </div>
     </>

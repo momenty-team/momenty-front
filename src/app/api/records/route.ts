@@ -1,3 +1,4 @@
+import {  revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
@@ -19,6 +20,7 @@ export async function POST(req: Request) {
     }),
   });
 
+  revalidateTag('records');
   return res;
 }
 
@@ -30,6 +32,10 @@ export async function GET() {
       'Content-Type': 'application/json',
       'Cookie': cookieHeader || '',
     },
+    next: {
+      tags: ['records'],
+    },
+    cache: 'no-store',
   });
 
   return res;

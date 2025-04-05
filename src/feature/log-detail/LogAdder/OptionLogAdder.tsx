@@ -1,6 +1,40 @@
 import PlusCircleIcon from '@/assets/svg/log-detail/plus-circle.svg';
+import { postMessageToWebView } from '@/utils/webview';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+
+interface OptionLogAdderProps {
+  moveTodayLog: VoidFunction;
+}
 
 function OptionLogAdder() {
+  // const [loading, setLoading] = useState(false);
+  // const params = useSearchParams();
+  // const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+
+  //   try {
+  //     setLoading(true);
+  //     await fetch(`/api/records/${params.get('id')}/details`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         // content: value,
+  //         option_id: null,
+  //         is_public: true,
+  //       }),
+  //     });
+
+  //     postMessageToWebView({ toast: { type: 'success', message: '기록이 저장되었어요!' } });
+  //     // moveTodayLog();
+  //   } catch (error) {
+  //     console.error('Error adding log:', error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   return (
     <>
       <div className="flex mx-5 gap-[2px] flex-none mt-5">
