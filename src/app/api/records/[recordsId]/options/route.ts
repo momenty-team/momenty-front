@@ -33,7 +33,7 @@ export async function POST(req: Request, { params }: { params: { recordsId: stri
       'Cookie': cookieHeader || '',
     },
     body: JSON.stringify({
-      option: body.option,
+      options: body.options,
     }),
   });
 

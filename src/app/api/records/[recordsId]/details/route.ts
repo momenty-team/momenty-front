@@ -34,7 +34,7 @@ export async function POST(req: Request, { params }: { params: { recordsId: stri
     },
     body: JSON.stringify({
       content: body.content,
-      option_id: body.option_id,
+      option_ids: body.option_ids,
       is_public: body.is_public,
     }),
   });

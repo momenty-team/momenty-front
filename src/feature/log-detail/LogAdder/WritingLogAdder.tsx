@@ -1,6 +1,7 @@
 import { forwardRef, useState } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import { getCurrentTimeHHMM } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 interface WritingLogAdderProps {
   id: string;
@@ -14,6 +15,7 @@ function WritingLogAdder(
   { id, title, handleTextAreaFocus, handleTextAreaBlur, moveTodayLog }: WritingLogAdderProps,
   ref: React.Ref<HTMLTextAreaElement>
 ) {
+  const router = useRouter();
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -27,10 +29,12 @@ function WritingLogAdder(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: value,
-          option_id: null,
+          option_ids: null,
           is_public: true,
         }),
       });
+
+      router.refresh();
 
       setValue('');
       postMessageToWebView({ toast: { type: 'success', message: '기록이 저장되었어요!' } });

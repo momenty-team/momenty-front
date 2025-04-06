@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import NumberPad from '@/common/components/NumberPad';
 import { getCurrentTimeHHMM } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 interface NumberLogAdderProps {
   id: string;
@@ -24,6 +25,7 @@ function NumberLogAdder({
   handleNumberPadBlur,
   moveTodayLog,
 }: NumberLogAdderProps) {
+  const router = useRouter();
   const [NumberPadValue, setNumberPadValue] = useState('0');
   const [loading, setLoading] = useState(false);
   const handleAddLog = async () => {
@@ -34,10 +36,12 @@ function NumberLogAdder({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: NumberPadValue,
-          option_id: null,
+          option_ids: null,
           is_public: true,
         }),
       });
+
+      router.refresh();
 
       setNumberPadValue('0');
       handleNumberPadBlur();

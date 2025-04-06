@@ -2,7 +2,7 @@ import CircleIcon from '@/assets/svg/log-detail/circle.svg';
 import CloseIcon from '@/assets/svg/log-detail/close.svg';
 import { getCurrentTimeHHMM } from '@/utils';
 import { postMessageToWebView } from '@/utils/webview';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 interface BooleanLogAdderProps {
@@ -12,6 +12,7 @@ interface BooleanLogAdderProps {
 }
 
 function BooleanLogAdder({ id, title, moveTodayLog }: BooleanLogAdderProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleBooleanClick = async (value: 'O' | 'X') => {
@@ -22,10 +23,12 @@ function BooleanLogAdder({ id, title, moveTodayLog }: BooleanLogAdderProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: value,
-          option_id: null,
+          option_ids: null,
           is_public: true,
         }),
       });
+
+      router.refresh();
 
       postMessageToWebView({ toast: { type: 'success', message: '기록이 저장되었어요!' } });
       moveTodayLog();

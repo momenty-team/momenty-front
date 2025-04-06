@@ -1,11 +1,10 @@
 import type { RecordDetail } from '@/types/apis/records';
 
 interface NumberLogProps {
-  unit: string;
   logDetailList: RecordDetail[];
 }
 
-function NumberLog({ unit, logDetailList }: NumberLogProps) {
+function NumberLog({ logDetailList }: NumberLogProps) {
   return (
     <div className="flex flex-col gap-[1px]">
       {logDetailList.map(({ id, content, created_at }) => (
@@ -13,8 +12,7 @@ function NumberLog({ unit, logDetailList }: NumberLogProps) {
           <div className="flex items-end w-full gap-3">
             <div className="text-display-2-el">{created_at.slice(11, 16)}</div>
             <div className="ml-auto flex items-center justify-center gap-1.5">
-              <span className="text-subtitle-2-r text-indigo-400">{content}</span>{' '}
-              <span className="text-subtitle-2-r text-indigo-400">{unit}</span>
+              <span className="text-subtitle-2-r text-indigo-400">{content}</span>
             </div>
           </div>
           <div className="text-display-4-r mb-1">레이블</div>

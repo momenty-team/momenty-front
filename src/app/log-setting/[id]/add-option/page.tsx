@@ -30,7 +30,7 @@ function AddOption() {
       await fetch(`/api/records/${id}/options`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ option: options }),
+        body: JSON.stringify({ options: ['12'] }),
       });
 
       setLoading(false);

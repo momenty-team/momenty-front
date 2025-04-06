@@ -2,6 +2,8 @@ import { getCurrentTimeHHMM } from '@/utils';
 import { postMessageToWebView } from '@/utils/webview';
 import { useState } from 'react';
 import type { Option } from '@/types/apis/records';
+import { useRouter } from 'next/navigation';
+
 interface OptionLogAdderProps {
   id: string;
   title: string;
@@ -10,21 +12,27 @@ interface OptionLogAdderProps {
 }
 
 function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [checkedOptionList, setCheckedOptionList] = useState<string[]>([]);
+  const [checkedOptionIdList, setCheckedOptionIdList] = useState<string[]>([]);
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     try {
       setLoading(true);
-      await fetch(`/api/records/${id}/options`, {
+
+      await fetch(`/api/records/${id}/details`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          options: checkedOptionList,
+          content: '',
+          option_ids: checkedOptionIdList,
+          is_public: true,
         }),
       });
+
+      router.refresh();
 
       postMessageToWebView({ toast: { type: 'success', message: '기록이 저장되었어요!' } });
       moveTodayLog();
@@ -36,12 +44,12 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
   };
 
   const handleCheckedLog: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value, checked } = e.target;
+    const { checked, id } = e.target;
 
     if (checked) {
-      setCheckedOptionList((prev) => [...prev, value]);
+      setCheckedOptionIdList((prev) => [...prev, id]);
     } else {
-      setCheckedOptionList((prev) => prev.filter((option) => option !== value));
+      setCheckedOptionIdList((prev) => prev.filter((optionId) => optionId !== id));
     }
   };
 
@@ -62,7 +70,7 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
             htmlFor={String(id)}
             key={id}
             className={`flex py-1.5 px-3 rounded-[8px] bg-indigo-100 text-body-2-sb text-indigo-5 w-fit h-fit ${
-              checkedOptionList.includes(option) ? 'bg-indigo-700 text-indigo-5' : 'text-indigo-100'
+              checkedOptionIdList.includes(String(id)) ? 'bg-indigo-700 text-indigo-5' : 'text-indigo-100'
             }`}
           >
             <input
@@ -70,7 +78,7 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
               type="checkbox"
               className="peer hidden"
               value={option}
-              checked={checkedOptionList.includes(option)}
+              checked={checkedOptionIdList.includes(String(id))}
               onChange={handleCheckedLog}
             />
             <span>{option}</span>
@@ -81,7 +89,7 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
       <button
         className="py-[14px] px-6 rounded-[8px] bg-indigo-700 text-indigo-5 text-body-3-b w-[calc(100vw-40px)] mx-5 flex-none my-5"
         onClick={handleAddLog}
-        disabled={loading || checkedOptionList.length === 0}
+        disabled={loading || checkedOptionIdList.length === 0}
       >
         기록하기
       </button>
