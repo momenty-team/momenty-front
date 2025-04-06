@@ -20,7 +20,7 @@ function LogSetting({ title, method, isPublic, unit }: LogSettingProps) {
   const { id } = useParams();
   const [recordTitle, setRecordTitle] = useState<string>(title);
   const [currentUnit, setCurrentUnit] = useState(unit);
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(isPublic);
   const [loading, setLoading] = useState(false);
 
   const handleToggle = (value: boolean) => {
@@ -57,7 +57,7 @@ function LogSetting({ title, method, isPublic, unit }: LogSettingProps) {
         await fetch(`/api/records/${id}/unit`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ unit }),
+          body: JSON.stringify({ unit: currentUnit }),
         });
       }
 
@@ -117,6 +117,7 @@ function LogSetting({ title, method, isPublic, unit }: LogSettingProps) {
               <span className="text-body-3-m ">기록 삭제하기</span>
               <span className="text-label-1-r text-indigo-300">기록을 영구적으로 삭제해요.</span>
             </div>
+            {/* 모달 추가 */}
             <button
               className="flex px-3 py-2 rounded-[8px] bg-indigo-700 text-white text-body-3-sb items-center"
               onClick={handleDelete}

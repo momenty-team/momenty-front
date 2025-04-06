@@ -44,8 +44,6 @@ async function LogDetailPage({ params }: { params: Promise<{ id: string }> }) {
       headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
     });
 
-    console.log('optionResponse', optionResponse);
-
     if (!optionResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
     const { options }: RecordOptionsResponse = await optionResponse.json();
