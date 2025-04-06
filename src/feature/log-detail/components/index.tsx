@@ -8,6 +8,8 @@ import ContentSection from './ContentSection';
 import CurrentInfoNotFound from './CurrentInfo/NotFound';
 import TodayLog from './TodayLog';
 import LogAdder from '../LogAdder';
+import useAppMessage from '@/common/hooks/useAppMessage';
+import { useRouter } from 'next/navigation';
 
 const 기록_남기기 = 0;
 const 오늘_기록 = 1;
@@ -22,6 +24,7 @@ interface LogDetailProps {
 }
 
 function LogDetail({ id, logOption, title, logDetailList, unit, options }: LogDetailProps) {
+  const router = useRouter();
   const { keyboardHeight } = useKeyboardResize();
   const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [snapIndex, setSnapIndex] = useState(0);
@@ -42,6 +45,12 @@ function LogDetail({ id, logOption, title, logDetailList, unit, options }: LogDe
   useEffect(() => {
     setTimeout(() => window.scrollTo(0, 0), 0);
   }, [keyboardHeight]);
+
+  useAppMessage(({ viewState }) => {
+    if (viewState === 'focus') {
+      router.refresh();
+    }
+  }, []);
 
   return (
     <>
