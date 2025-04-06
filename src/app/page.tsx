@@ -63,14 +63,6 @@ function Home() {
     }
   }, []);
 
-  // const conClick = () => {
-  //   if (record) {
-  //     alert('hi ' + JSON.stringify(record.records[0].title, null, 2));
-  //   } else {
-  //     alert('데이터가 없습니다');
-  //   }
-  // };
-
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <header className="flex justify-between items-center px-4 py-2">
@@ -111,7 +103,7 @@ function Home() {
                   bottomSheet: {
                     name: 'log-detail',
                     state: 'open',
-                    webviewRoute: `/log-detail?id=${id}`,
+                    webviewRoute: `/log-detail/${id}`,
                     snapIndex: 1,
                   },
                 })

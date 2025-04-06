@@ -6,8 +6,8 @@ const LogDetailD = dynamic(() => import('@/feature/log-detail/components'), {
   ssr: false,
 });
 
-function LogDetail() {
-  return <LogDetailD />;
+function LogDetail({ params }: { params: { id: string } }) {
+  return <LogDetailD params={params} />;
 }
 
 export default LogDetail;

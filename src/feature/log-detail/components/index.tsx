@@ -19,12 +19,11 @@ const logOption = ['string', 'boolean', 'option', 'number'] as const;
 
 export type LogOption = (typeof logOption)[number];
 
-function LogDetail() {
+function LogDetail({ params }: { params: { id: string } }) {
   const { keyboardHeight } = useKeyboardResize();
   const [selectedNavIndex, setSelectedNavIndex] = useState(0);
   const [snapIndex, setSnapIndex] = useState(0);
   const [isTextAreaFocus, setIsTextAreaFocus] = useState(false);
-  const params = useSearchParams();
   const [recordTitle, setRecordTitle] = useState<string>('');
 
   // 나중에 지우기
@@ -39,8 +38,7 @@ function LogDetail() {
   };
 
   const goToLogSetting = () => {
-    // ~~~~
-    postMessageToWebView({ route: `/log-setting/${params.get('id')}` });
+    postMessageToWebView({ route: `/log-setting/${params.id}` });
   };
 
   useEffect(() => {
@@ -50,7 +48,7 @@ function LogDetail() {
   useEffect(() => {
     if (params) {
       const fetchRecords = async () => {
-        const res = await fetch(`/api/records/${params.get('id')}/details`);
+        const res = await fetch(`/api/records/${params.id}/details`);
         if (!res.ok) throw new Error('데이터를 가져오는 데 실패했습니다.');
         const data = await res.json();
         setRecordTitle(data.title);
