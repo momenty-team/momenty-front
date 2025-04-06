@@ -23,3 +23,10 @@ export function formatRelativeTime(timestamp: string) {
   if (elapsedTime < WEEK) return RELATIVE_TIME_LABELS.daysAgo(Math.floor(elapsedTime / DAY));
   return RELATIVE_TIME_LABELS.overAWeek;
 }
+
+export const getCurrentTimeHHMM = () => {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');  // '00' 형태로
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+};

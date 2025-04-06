@@ -1,9 +1,12 @@
-import NumberPad from '@/common/components/NumberPad';
+import { useEffect, useState } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
-import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import NumberPad from '@/common/components/NumberPad';
+import { getCurrentTimeHHMM } from '@/utils';
 
 interface NumberLogAdderProps {
+  id: string;
+  unit: string;
+  title: string;
   isTextAreaFocus: boolean;
   snapIndex: number;
   handleNumberPadFocus: VoidFunction;
@@ -12,6 +15,9 @@ interface NumberLogAdderProps {
 }
 
 function NumberLogAdder({
+  id,
+  unit,
+  title,
   isTextAreaFocus,
   snapIndex,
   handleNumberPadFocus,
@@ -20,11 +26,10 @@ function NumberLogAdder({
 }: NumberLogAdderProps) {
   const [NumberPadValue, setNumberPadValue] = useState('0');
   const [loading, setLoading] = useState(false);
-  const params = useSearchParams();
   const handleAddLog = async () => {
     try {
       setLoading(true);
-      await fetch(`/api/records/${params.get('id')}/details`, {
+      await fetch(`/api/records/${id}/details`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -53,22 +58,21 @@ function NumberLogAdder({
       >
         <div className="flex flex-col h-full">
           <div className="flex mx-5 gap-[2px] flex-none mt-5">
-            <div className="text-caption-2-sb text-blue-300">12:34</div>
-            <div className="text-caption-2-sb text-indigo-100">에 물 섭취 순간을 남길게요.</div>
+            <div className="text-caption-2-sb text-blue-300">{getCurrentTimeHHMM()}</div>
+            <div className="text-caption-2-sb text-indigo-100">에 {title} 순간을 남길게요.</div>
           </div>
 
           <div
             className={`flex w-full h-full items-end justify-end transition-all duration-[0.4s] ease-out
                 ${isTextAreaFocus && 'translate-y-[52px] delay-[0.2s]'}`}
           >
-            <div className="relative w-[calc(100vw-123px)] h-[50px] flex items-center ml-5 mr-2 text-display-3-eb whitespace-nowrap">
+            <div className="relative w-full max-w-[calc(100%-123px)]  h-[50px] flex items-center ml-5 mr-2 text-display-3-eb whitespace-nowrap">
               <div className="min-w-full flex items-center overflow-x-scroll scrollbar-hide justify-end">
                 {NumberPadValue}
               </div>
               <div className="absolute top-0 left-0 w-[45px] h-full bg-gradient-to-l from-white/0 to-white" />
             </div>
-            {/* <div className="flex h-[50px] items-center text-display-3-eb pr-8"></div> */}
-            {/* 이 위의 유닛은 다희가 마저 null 안뜨게 해야지 고칠 수 있다. */}
+            <div className="flex h-[50px] items-center text-display-3-eb pr-8 w-fit whitespace-nowrap">{unit}</div>
           </div>
         </div>
 

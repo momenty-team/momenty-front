@@ -1,28 +1,28 @@
-import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
-import { postMessageToWebView } from '@/utils/webview';
-import { useSearchParams } from 'next/navigation';
 import { forwardRef, useState } from 'react';
+import { postMessageToWebView } from '@/utils/webview';
+import { getCurrentTimeHHMM } from '@/utils';
 
 interface WritingLogAdderProps {
+  id: string;
+  title: string;
   handleTextAreaFocus: VoidFunction;
   handleTextAreaBlur: VoidFunction;
   moveTodayLog: VoidFunction;
 }
 
 function WritingLogAdder(
-  { handleTextAreaFocus, handleTextAreaBlur, moveTodayLog }: WritingLogAdderProps,
+  { id, title, handleTextAreaFocus, handleTextAreaBlur, moveTodayLog }: WritingLogAdderProps,
   ref: React.Ref<HTMLTextAreaElement>
 ) {
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
-  const params = useSearchParams();
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     try {
       setLoading(true);
-      await fetch(`/api/records/${params.get('id')}/details`, {
+      await fetch(`/api/records/${id}/details`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -45,8 +45,8 @@ function WritingLogAdder(
   return (
     <>
       <div className="flex mx-5 gap-[2px] flex-none mb-2 mt-5">
-        <div className="text-caption-2-sb text-blue-300">12:34</div>
-        <div className="text-caption-2-sb text-indigo-100">에 물 섭취 순간을 남길게요.</div>
+        <div className="text-caption-2-sb text-blue-300">{getCurrentTimeHHMM()}</div>
+        <div className="text-caption-2-sb text-indigo-100">에 {title} 순간을 남길게요.</div>
       </div>
 
       <textarea

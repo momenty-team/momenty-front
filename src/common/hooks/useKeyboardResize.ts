@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
 const useKeyboardResize = () => {
-  const [viewportHeight, setViewportHeight] = useState<number>(window.innerHeight);
+  const [viewportHeight, setViewportHeight] = useState<number>(0);
   const [keyboardHeight, setKeyboardHeight] = useState<number | null>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !window.visualViewport) return;
+
 
     const onResize = () => {
       if (window.visualViewport) {
@@ -16,6 +17,7 @@ const useKeyboardResize = () => {
       }
     };
 
+    onResize();
     window.visualViewport?.addEventListener('resize', onResize);
     return () => {
       window.visualViewport?.removeEventListener('resize', onResize);

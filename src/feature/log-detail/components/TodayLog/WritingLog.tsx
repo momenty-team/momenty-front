@@ -1,34 +1,13 @@
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import type { RecordDetail } from '@/types/apis/records';
 
-interface RecordDetail {
-  id: number;
-  content: string[];
-  is_public: boolean;
-  created_at: string;
-  updated_at: string;
+interface WritingLogProps {
+  logDetailList: RecordDetail[];
 }
 
-function WritingLog() {
-  const params = useSearchParams();
-  const [recordDetails, setRecordDetails] = useState<RecordDetail[]>([]);
-
-  useEffect(() => {
-    if (params) {
-      const fetchRecords = async () => {
-        const res = await fetch(`/api/records/${params.get('id')}/details`);
-        if (!res.ok) throw new Error('데이터를 가져오는 데 실패했습니다.');
-        const data = await res.json();
-        setRecordDetails(data.records);
-      };
-
-      fetchRecords();
-    }
-  }, [params]);
-
+function WritingLog({ logDetailList }: WritingLogProps) {
   return (
     <>
-      {recordDetails?.map(({ id, content, created_at }) => (
+      {logDetailList.map(({ id, content, created_at }) => (
         <button key={id} className="py-2 px-5 bg-indigo-5 flex flex-col">
           <div className="flex items-end w-full gap-3">
             <div className="text-display-2-el">{created_at.slice(11, 16)}</div>

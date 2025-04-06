@@ -1,27 +1,24 @@
+import { getCurrentTimeHHMM } from '@/utils';
 import { postMessageToWebView } from '@/utils/webview';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-type Option = {
-  id: number;
-  option: string;
-};
+import { useState } from 'react';
+import type { Option } from '@/types/apis/records';
 interface OptionLogAdderProps {
+  id: string;
+  title: string;
+  options: Option[];
   moveTodayLog: VoidFunction;
 }
 
-function OptionLogAdder({ moveTodayLog }: OptionLogAdderProps) {
+function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProps) {
   const [loading, setLoading] = useState(false);
-  const [optionList, setOptionList] = useState<Option[]>([]);
   const [checkedOptionList, setCheckedOptionList] = useState<string[]>([]);
-  const params = useSearchParams();
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     try {
       setLoading(true);
-      await fetch(`/api/records/${params.get('id')}/options`, {
+      await fetch(`/api/records/${id}/options`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -48,24 +45,11 @@ function OptionLogAdder({ moveTodayLog }: OptionLogAdderProps) {
     }
   };
 
-  useEffect(() => {
-    if (params) {
-      const fetchRecordOptions = async () => {
-        const res = await fetch(`/api/records/${params.get('id')}/options`);
-        if (!res.ok) throw new Error('데이터를 가져오는 데 실패했습니다.');
-        const data = await res.json();
-        setOptionList(data.options);
-      };
-
-      fetchRecordOptions();
-    }
-  }, [params]);
-
   return (
     <>
       <div className="flex mx-5 gap-[2px] flex-none mt-5">
-        <div className="text-caption-2-sb text-blue-300">12:34</div>
-        <div className="text-caption-2-sb text-indigo-100">에 물 섭취 순간을 남길게요.</div>
+        <div className="text-caption-2-sb text-blue-300">{getCurrentTimeHHMM()}</div>
+        <div className="text-caption-2-sb text-indigo-100">에 {title} 순간을 남길게요.</div>
       </div>
 
       <div className="mx-5 mt-1.5 flex-none text-caption-3-sb text-indigo-100">
@@ -73,7 +57,7 @@ function OptionLogAdder({ moveTodayLog }: OptionLogAdderProps) {
       </div>
 
       <div className="flex gap-3 grow mx-5 mt-5 flex-wrap content-start">
-        {optionList.map(({ id, option }) => (
+        {options.map(({ id, option }) => (
           <label
             htmlFor={String(id)}
             key={id}

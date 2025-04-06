@@ -1,25 +1,33 @@
 'use client';
 
 import { postMessageToWebView } from '@/utils/webview';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import BooleanLogAdder from './BooleanLogAdder';
 import OptionLogAdder from './OptionLogAdder';
 import NumberLogAdder from './NumberLogAdder';
 import WritingLogAdder from './WritingLogAdder';
-
-export type LogOption = ['string', 'boolean', 'option', 'number'][number];
+import type { LogRecord, Option } from '@/types/apis/records';
+import useAppMessage from '@/common/hooks/useAppMessage';
 
 interface LogAdderProps {
+  id: string;
+  title: string;
+  unit?: string;
+  options?: Option[];
   changeSnapIndex: (index: number) => void;
   setIsTextAreaFocus: (isFocus: boolean) => void;
   isTextAreaFocus: boolean;
-  option: LogOption;
+  option: LogRecord['method'];
   snapIndex: number;
   moveTodayLog: VoidFunction;
 }
 
 function LogAdder({
+  id,
+  title,
+  unit,
+  options,
   changeSnapIndex,
   isTextAreaFocus,
   setIsTextAreaFocus,
@@ -30,30 +38,6 @@ function LogAdder({
   const [isClose, setIsClose] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const getMessageToApp = (e: MessageEvent) => {
-    const { bottomSheet } = JSON.parse(e.data);
-
-    if (bottomSheet?.state === 'close') {
-      textareaRef.current?.blur();
-      changeSnapIndex(-1);
-      setIsTextAreaFocus(false);
-      setIsClose(true);
-    }
-
-    if (bottomSheet?.state === 'hold') {
-      changeSnapIndex(bottomSheet.snapIndex);
-      if (bottomSheet.snapIndex === 1) {
-        setIsTextAreaFocus(false);
-        textareaRef.current?.blur();
-      }
-
-      if (bottomSheet.snapIndex > 1 && option === 'number') {
-        //option number일때만으로 한정해야함.
-        setIsTextAreaFocus(true);
-      }
-    }
-  };
 
   const handleKeyBoardAreaFocus = () => {
     setIsTextAreaFocus(true);
@@ -67,19 +51,37 @@ function LogAdder({
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('message', getMessageToApp as EventListener);
-    window.addEventListener('message', getMessageToApp);
+  useAppMessage(
+    ({ bottomSheet }) => {
+      if (!bottomSheet) return;
 
-    return () => {
-      document.removeEventListener('message', getMessageToApp as EventListener);
-      window.removeEventListener('message', getMessageToApp);
-    };
-  }, [option]);
+      if (bottomSheet?.state === 'close') {
+        textareaRef.current?.blur();
+        changeSnapIndex(-1);
+        setIsTextAreaFocus(false);
+        setIsClose(true);
+      }
 
-  if (option === 'string') {
+      if (bottomSheet?.state === 'hold' && bottomSheet.snapIndex) {
+        changeSnapIndex(bottomSheet.snapIndex);
+        if (bottomSheet.snapIndex === 1) {
+          setIsTextAreaFocus(false);
+          textareaRef.current?.blur();
+        }
+
+        if (bottomSheet.snapIndex > 1 && option === 'NUMBER_TYPE') {
+          setIsTextAreaFocus(true);
+        }
+      }
+    },
+    [option]
+  );
+
+  if (option === 'TEXT_TYPE') {
     return (
       <WritingLogAdder
+        id={id}
+        title={title}
         ref={textareaRef}
         handleTextAreaFocus={handleKeyBoardAreaFocus}
         handleTextAreaBlur={handleKeyBoardAreaBlur}
@@ -88,9 +90,12 @@ function LogAdder({
     );
   }
 
-  if (option === 'number') {
+  if (option === 'NUMBER_TYPE') {
     return (
       <NumberLogAdder
+        id={id}
+        unit={unit!}
+        title={title}
         snapIndex={snapIndex}
         isTextAreaFocus={isTextAreaFocus}
         handleNumberPadFocus={handleKeyBoardAreaFocus}
@@ -100,12 +105,12 @@ function LogAdder({
     );
   }
 
-  if (option === 'boolean') {
-    return <BooleanLogAdder moveTodayLog={moveTodayLog} />;
+  if (option === 'BOOLEAN_TYPE') {
+    return <BooleanLogAdder id={id} title={title} moveTodayLog={moveTodayLog} />;
   }
 
-  if (option === 'option') {
-    return <OptionLogAdder moveTodayLog={moveTodayLog} />;
+  if (option === 'OPTION_TYPE') {
+    return <OptionLogAdder id={id} options={options!} title={title} moveTodayLog={moveTodayLog} />;
   }
 
   return <div>잘못된 접근입니다.</div>;
