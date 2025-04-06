@@ -1,45 +1,93 @@
 'use client';
 
-import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import CloseIcon from '@/assets/svg/close.svg';
-import { useFormContext } from 'react-hook-form';
 import CommonModal from '@/common/components/Modal';
+import { postMessageToWebView } from '@/utils/webview';
 
-interface StepOptionProps {
-  onNext: React.MouseEventHandler<HTMLButtonElement>;
-}
+type OptionItem = {
+  id: number;
+  option: string;
+};
 
-function Option({ onNext }: StepOptionProps) {
-  const { setValue, getValues } = useFormContext();
+function AddOption() {
+  const route = useRouter();
+  const params = useParams();
+  const id = params.id as string;
+  const [loading, setLoading] = useState(false);
+
+  const [options, setOptions] = useState<OptionItem[]>([]);
+
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [tagToDelete, setTagToDelete] = useState<string | null>(null);
   const [isComposing, setComposing] = useState(false);
 
+  const onSubmit = async () => {
+    try {
+      setLoading(true);
+      await fetch(`/api/records/${id}/options`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ option: options }),
+      });
+
+      setLoading(false);
+      route.push(`/log-setting/${id}`);
+      postMessageToWebView({ toast: { type: 'success', message: '옵션 변경을 완료했어요.' } });
+    } catch (error) {
+      console.error('저장 실패:', error);
+      setLoading(false);
+    }
+  };
+
   const addTag = (value: string) => {
-    if (value && !getValues('option').includes(value)) {
-      setValue('option', [...getValues('option'), value]);
+    if (value && options.length !== 0) {
+      setOptions((prevOptions) => {
+        const newId = prevOptions.length > 0 ? Math.max(...prevOptions.map((opt) => opt.id)) + 1 : 1;
+
+        const newOption: OptionItem = {
+          id: newId,
+          option: value,
+        };
+
+        return [...prevOptions, newOption];
+      });
     }
 
     setInputValue('');
   };
 
   const removeTag = (value: string) => {
-    const prevTags: string[] = getValues('option');
-    const newTags = prevTags.filter((tagText) => tagText !== value);
-    setValue('option', newTags);
+    setOptions((prevOptions) => prevOptions.filter((opt) => opt.option !== value));
   };
 
-  // react hook form control써서 다음으로 넘어갔다가 다시 옵션 페이지로 들어왔을떄 값 안사라지게 할 수 있을듯
+  useEffect(() => {
+    if (id) {
+      const fetchOptions = async () => {
+        try {
+          const res = await fetch(`/api/records/${id}/options`);
+          if (!res.ok) throw new Error('데이터를 가져오는 데 실패했습니다.');
+          const data = await res.json();
+          setOptions(data.options);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      fetchOptions();
+    }
+  }, [id]);
 
   return (
-    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
+    <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between pt-2 px-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
-          <span className="text-subtitle-1-b">옵션을 만들어볼까요?</span>
+          <span className="text-subtitle-1-b">옵션을 추가해주세요!</span>
           <span className="text-label-1-r text-indigo-100">
             추가하고 싶은 옵션을 입력해주세요. <p />
-            옵션 만들기 이후에 수정하거나 추가할 수 있습니다.
+            옵션을 삭제하면 해당 옵션과 관련된 데이터가 삭제됩니다.
           </span>
         </div>
         <input
@@ -59,16 +107,16 @@ function Option({ onNext }: StepOptionProps) {
         />
 
         <div className="flex max-h-[400px] gap-4 w-full overflow-y-scroll flex-wrap mb-4">
-          {(getValues('option') as string[]).map((value) => (
+          {options.map(({ id, option }) => (
             <div
-              key={value}
+              key={id}
               className="flex gap-1 w-fit items-center justify-center bg-indigo-500 text-white py-2 pl-3 pr-2 text-body-3-sb rounded-[8px]"
             >
-              <span className="flex text-body-3-sb">{value}</span>
+              <span className="flex text-body-3-sb">{option}</span>
               <button
                 className="flex w-4 h-4 items-center justify-center"
                 onClick={() => {
-                  setTagToDelete(value);
+                  setTagToDelete(option);
                   setIsOpen(true);
                 }}
               >
@@ -106,17 +154,17 @@ function Option({ onNext }: StepOptionProps) {
           추가하기
         </button>
         <button
-          onClick={onNext}
+          onClick={onSubmit}
           className={
             'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
           }
-          disabled={getValues('option').length === 0}
+          disabled={loading}
         >
-          다음으로
+          완료하기
         </button>
       </div>
     </div>
   );
 }
 
-export default Option;
+export default AddOption;
