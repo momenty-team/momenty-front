@@ -15,7 +15,7 @@ interface TodayLogProps {
   logDetailList: RecordDetail[];
 }
 
-function TodayLog({ option, changeSnapIndex, title, moveLogAdder, logDetailList, unit }: TodayLogProps) {
+function TodayLog({ option, changeSnapIndex, title, moveLogAdder, logDetailList }: TodayLogProps) {
   useAppMessage(
     ({ bottomSheet }) => {
       if (!bottomSheet) return;
@@ -48,7 +48,7 @@ function TodayLog({ option, changeSnapIndex, title, moveLogAdder, logDetailList,
   }
 
   if (option === 'NUMBER_TYPE') {
-    return <NumberLog logDetailList={logDetailList} unit={unit!} />;
+    return <NumberLog logDetailList={logDetailList} />;
   }
 
   return <div>올바르지 않은 옵션이에요.</div>;

@@ -1,6 +1,6 @@
 import OptionList from './OptionList';
 
-import type { Option, RecordDetail } from '@/types/apis/records';
+import type { RecordDetail } from '@/types/apis/records';
 
 interface OptionLogProps {
   logDetailList: RecordDetail[];

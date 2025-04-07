@@ -20,9 +20,9 @@ async function User() {
       </header>
 
       <div className="flex flex-col gap-1 mx-6 mt-5">
-        {MENU.map(({ title, text, path, icon }) => (
-          <section className="flex flex-col gap-3">
-            <NavigationMenuButton key={title} title={title} text={text} icon={icon} path={path} />
+        {MENU.map(({ title, path, icon }) => (
+          <section className="flex flex-col gap-3" key={title}>
+            <NavigationMenuButton key={title} title={title} icon={icon} path={path} />
           </section>
         ))}
       </div>
