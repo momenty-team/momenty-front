@@ -23,4 +23,9 @@ export interface BridgeData {
     route?: string;
     funnel?: string;
   };
+  viewState?: 'focus' | 'focusOut';
+  toast?: {
+    type: 'success' | 'error' | 'info';
+    message: string;
+  }
 }

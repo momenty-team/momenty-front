@@ -50,7 +50,7 @@ function OptionList({ options }: OptionListProps) {
       {options.map((item, index) => (
         <div
           key={index}
-          className="flex gap-1.5 py-1 px-3 rounded-[99px] bg-[#3C8EE7] text-body-2-sb text-indigo-5 w-fit h-fit"
+          className="flex py-1 px-3 w-fit text-nowrap rounded-[12px] bg-indigo-500 text-body-2-sb text-indigo-5"
         >
           {item}
         </div>

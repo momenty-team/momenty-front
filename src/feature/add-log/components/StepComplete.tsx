@@ -18,8 +18,8 @@ function StepComplete() {
       title: formData.title,
       is_public: formData.is_public ?? true,
       method: formData.method,
-      option: formData.option ?? [],
-      unit: formData.unit || '',
+      option: formData?.option || [],
+      unit: formData?.unit || '',
     };
 
     try {

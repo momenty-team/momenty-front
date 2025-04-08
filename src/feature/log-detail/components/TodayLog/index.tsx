@@ -1,57 +1,57 @@
-import type { LogOption } from '..';
-
 import WritingLog from './WritingLog';
 import BooleanLog from './BooleanLog';
 import NumberLog from './NumberLog';
 import OptionLog from './OptionLog';
 import NotFound from './NotFound';
-import { useEffect } from 'react';
+import useAppMessage from '@/common/hooks/useAppMessage';
+import type { LogRecord, RecordDetail } from '@/types/apis/records';
 
 interface TodayLogProps {
-  option: LogOption;
+  option: LogRecord['method'];
+  title: LogRecord['title'];
+  unit?: string;
   changeSnapIndex: (index: number) => void;
+  moveLogAdder: VoidFunction;
+  logDetailList: RecordDetail[];
 }
 
-function TodayLog({ option, changeSnapIndex }: TodayLogProps) {
-  const getMessageToApp = (e: MessageEvent) => {
-    const { bottomSheet } = JSON.parse(e.data);
+function TodayLog({ option, changeSnapIndex, title, moveLogAdder, logDetailList }: TodayLogProps) {
+  useAppMessage(
+    ({ bottomSheet }) => {
+      if (!bottomSheet) return;
 
-    if (bottomSheet?.state === 'close') {
-      changeSnapIndex(-1);
-    }
+      if (bottomSheet?.state === 'close') {
+        changeSnapIndex(-1);
+      }
 
-    if (bottomSheet?.state === 'hold') {
-      changeSnapIndex(bottomSheet.snapIndex);
-    }
-  };
+      if (bottomSheet?.state === 'hold' && bottomSheet.snapIndex) {
+        changeSnapIndex(bottomSheet.snapIndex);
+      }
+    },
+    [option]
+  );
 
-  useEffect(() => {
-    document.addEventListener('message', getMessageToApp as EventListener);
-    window.addEventListener('message', getMessageToApp);
-
-    return () => {
-      document.removeEventListener('message', getMessageToApp as EventListener);
-      window.removeEventListener('message', getMessageToApp);
-    };
-  }, [option]);
-
-  if (option === 'string') {
-    return <WritingLog />;
+  if (logDetailList.length === 0) {
+    return <NotFound title={title} moveLogAdder={moveLogAdder} />;
   }
 
-  if (option === 'boolean') {
-    return <BooleanLog />;
+  if (option === 'TEXT_TYPE') {
+    return <WritingLog logDetailList={logDetailList} />;
   }
 
-  if (option === 'option') {
-    return <OptionLog />;
+  if (option === 'BOOLEAN_TYPE') {
+    return <BooleanLog logDetailList={logDetailList} />;
   }
 
-  if (option === 'number') {
-    return <NumberLog />;
+  if (option === 'OPTION_TYPE') {
+    return <OptionLog logDetailList={logDetailList} />;
   }
 
-  return <NotFound goToLogAdder={() => {}} />;
+  if (option === 'NUMBER_TYPE') {
+    return <NumberLog logDetailList={logDetailList} />;
+  }
+
+  return <div>올바르지 않은 옵션이에요.</div>;
 }
 
 export default TodayLog;

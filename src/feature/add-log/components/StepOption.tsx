@@ -10,28 +10,23 @@ interface StepOptionProps {
 }
 
 function Option({ onNext }: StepOptionProps) {
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext();
   const [inputValue, setInputValue] = useState('');
-  const [tag, setTag] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [tagToDelete, setTagToDelete] = useState<string | null>(null);
-
-  const handleAddClick = () => {
-    addTag(inputValue);
-  };
+  const [isComposing, setComposing] = useState(false);
 
   const addTag = (value: string) => {
-    if (value && !tag.includes(value)) {
-      const newTags = [...tag, value];
-      setTag(newTags);
-      setValue('option', newTags);
+    if (value && !getValues('option').includes(value)) {
+      setValue('option', [...getValues('option'), value]);
     }
+
     setInputValue('');
   };
 
   const removeTag = (value: string) => {
-    const newTags = tag.filter((tagText) => tagText !== value);
-    setTag(newTags);
+    const prevTags: string[] = getValues('option');
+    const newTags = prevTags.filter((tagText) => tagText !== value);
     setValue('option', newTags);
   };
 
@@ -51,18 +46,20 @@ function Option({ onNext }: StepOptionProps) {
           placeholder="옵션을 입력해주세요."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+          onKeyUp={(e) => {
+            if (e.key === 'Enter' && !isComposing) {
               e.preventDefault();
               addTag(inputValue.trim());
             }
           }}
+          onCompositionStart={() => setComposing(true)}
+          onCompositionEnd={() => setComposing(false)}
           enterKeyHint="done"
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"
         />
 
         <div className="flex max-h-[400px] gap-4 w-full overflow-y-scroll flex-wrap mb-4">
-          {tag.map((value) => (
+          {(getValues('option') as string[]).map((value) => (
             <div
               key={value}
               className="flex gap-1 w-fit items-center justify-center bg-indigo-500 text-white py-2 pl-3 pr-2 text-body-3-sb rounded-[8px]"
@@ -75,7 +72,7 @@ function Option({ onNext }: StepOptionProps) {
                   setIsOpen(true);
                 }}
               >
-                <CloseIcon width={20} height={20} className="flex [&>path]:stroke-white " />
+                <CloseIcon width={20} height={20} className="flex [&>path]:stroke-white" />
               </button>
             </div>
           ))}
@@ -100,7 +97,7 @@ function Option({ onNext }: StepOptionProps) {
 
       <div className="flex gap-3">
         <button
-          onClick={handleAddClick}
+          onClick={() => addTag(inputValue.trim())}
           className={
             'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
           }
@@ -113,7 +110,7 @@ function Option({ onNext }: StepOptionProps) {
           className={
             'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
           }
-          disabled={setTag.length === 0}
+          disabled={getValues('option').length === 0}
         >
           다음으로
         </button>
