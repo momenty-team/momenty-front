@@ -1,6 +1,6 @@
 import LogSettingDetail from '@/feature/log-setting/detail';
 import { suitFont } from '@/styles/font';
-import { RecordDetail, RecordDetailResponse } from '@/types/apis/records';
+import type { RecordDetail } from '@/types/apis/records';
 import { cookies } from 'next/headers';
 
 interface LogSettingPageProps {

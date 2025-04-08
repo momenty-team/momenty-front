@@ -39,6 +39,7 @@ function LogSettingDetail({ id, detailId, type, recordDetail }: LogSettingDetail
       });
       postMessageToWebView({ toast: { type: 'success', message: '기록을 삭제했어요.' }, route: 'goBack' });
     } catch (error) {
+      console.error(error);
       postMessageToWebView({ toast: { type: 'error', message: '기록을 삭제하지 못했어요.' } });
     } finally {
       setLoading(false);
