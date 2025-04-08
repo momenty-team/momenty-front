@@ -1,12 +1,15 @@
 import CircleIcon from '@/assets/svg/log-detail/circle.svg';
 import CloseIcon from '@/assets/svg/log-detail/close.svg';
 import type { RecordDetail } from '@/types/apis/records';
+import { postMessageToWebView } from '@/utils/webview';
+import { useParams } from 'next/navigation';
 
 interface BooleanLogProps {
   logDetailList: RecordDetail[];
 }
 
 function BooleanLog({ logDetailList }: BooleanLogProps) {
+  const { id: recordId } = useParams();
   const isContentTrue = (content: string[]) => {
     if (content[0] === 'O') {
       return true;
@@ -15,10 +18,14 @@ function BooleanLog({ logDetailList }: BooleanLogProps) {
     return false;
   };
 
+  const onClickLog = (id: number) => {
+    postMessageToWebView({ route: `/log-setting/${recordId}/detail/${id}/boolean` });
+  };
+
   return (
     <div className="flex flex-col gap-[1px]">
       {logDetailList.map(({ id, content, created_at }) => (
-        <button key={id} className="py-2 px-5 bg-indigo-5 flex flex-col">
+        <button key={id} onClick={() => onClickLog(id)} className="py-2 px-5 bg-indigo-5 flex flex-col">
           <div className="flex items-end w-full gap-3">
             <div className="text-display-2-el">{created_at.slice(11, 16)}</div>
             <div

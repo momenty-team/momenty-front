@@ -127,9 +127,10 @@ function LogSetting({ title, method, isPublic, unit }: LogSettingProps) {
           </div>
         </div>
       </div>
-
       <button
-        className="py-[14px] rounded-[8px] bg-indigo-700 text-indigo-5 text-body-3-b w-[calc(100vw-40px)] flex-none"
+        className={
+          'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 disabled:bg-indigo-50 rounded-[8px]'
+        }
         onClick={handleSubmit}
         disabled={loading}
       >

@@ -12,21 +12,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import useAppMessage from '@/common/hooks/useAppMessage';
+import useLockScroll from '@/common/hooks/useLockScroll';
 
 const Topic = dynamic(() => import('@/feature/add-log/components/StepTopic'), {
   ssr: false,
 });
 
 type Step = '기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택' | '단위입력';
-
-function useLockScroll(lock: boolean) {
-  useEffect(() => {
-    document.body.style.overflow = lock ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [lock]);
-}
 
 function AddLogFunnel() {
   const { Step, nextStep, currentStep } = useFunnel<Step>('기록주제');

@@ -9,6 +9,8 @@ export interface RecordsResponse {
   records: LogRecord[];
 }
 
+export type RecordDetailResponse = RecordDetail;
+
 export interface RecordDetail {
   id: number;
   content: string[];
@@ -26,10 +28,11 @@ export interface RecordUnitResponse {
 }
 
 export interface Option {
-    id: number;
-    option: string;
+  id: number;
+  option: string;
 }
 
 export interface RecordOptionsResponse {
   options: Array<Option>;
 }
+
