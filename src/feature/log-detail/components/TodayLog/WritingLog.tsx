@@ -1,14 +1,24 @@
+'use client';
+
 import type { RecordDetail } from '@/types/apis/records';
+import { postMessageToWebView } from '@/utils/webview';
+import { useParams } from 'next/navigation';
 
 interface WritingLogProps {
   logDetailList: RecordDetail[];
 }
 
 function WritingLog({ logDetailList }: WritingLogProps) {
+  const { id: recordId } = useParams();
+
+  const onClickLog = (id: number) => {
+    postMessageToWebView({ route: `/log-setting/${recordId}/detail/${id}/text` });
+  };
+
   return (
     <>
       {logDetailList.map(({ id, content, created_at }) => (
-        <button key={id} className="py-2 px-5 bg-indigo-5 flex flex-col">
+        <button key={id} onClick={() => onClickLog(id)} className="py-2 px-5 bg-indigo-5 flex flex-col">
           <div className="flex items-end w-full gap-3">
             <div className="text-display-2-el">{created_at.slice(11, 16)}</div>
             <div className="flex align-center w-full bg-indigo-25 h-[52px] rounded-[8px] px-4 py-3 text-caption-3-sb text-indigo-300">
