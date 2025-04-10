@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import { KeenSliderOptions, TrackDetails, useKeenSlider } from 'keen-slider/react';
+import { postMessageToWebView } from '@/utils/webview';
 
 export default function Wheel(props: {
   initIdx?: number;
@@ -42,7 +43,14 @@ export default function Wheel(props: {
       size.current = s.size;
     },
     detailsChanged: (s) => {
-      setSliderState(s.track.details);
+      setSliderState((p) => {
+        if (p?.rel !== s.track.details?.rel) {
+          postMessageToWebView({ haptic: 'selection' });
+        }
+
+        return s.track.details;
+      });
+
       props.onChange?.(s.track.details?.rel);
     },
     rubberband: !props.loop,
