@@ -26,7 +26,7 @@ function OptionInfo({ MOCK_DATA }: OptionInfoProps) {
         </header>
 
         {MOCK_DATA.data.map((data) => (
-          <div className="flex items-center justify-between w-full gap-4">
+          <div className="flex items-center justify-between w-full gap-4" key={data.date}>
             <div key={data.date} className="flex items-center justify-between w-full gap-4">
               <span className="min-w-[28px] text-indigo-700 text-center text-body-3-m">{data.week}</span>
               <span className="min-w-[56px] text-indigo-700 text-center text-body-3-m">{data.count}회</span>

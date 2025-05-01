@@ -7,7 +7,6 @@ import OptionInfo from './OptionInfo';
 
 interface TodayLogProps {
   option: LogRecord['method'];
-  moveLogAdder: VoidFunction;
   changeSnapIndex: (index: number) => void;
 }
 
@@ -55,7 +54,7 @@ const OPTION_MOCK_DATA = {
   ],
 };
 
-function CurrentInfo({ moveLogAdder, changeSnapIndex, option }: TodayLogProps) {
+function CurrentInfo({ changeSnapIndex, option }: TodayLogProps) {
   useAppMessage(
     ({ bottomSheet }) => {
       if (!bottomSheet) return;

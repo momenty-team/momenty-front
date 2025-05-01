@@ -99,9 +99,7 @@ function LogDetail({ id, logOption, title, logDetailList, unit, options }: LogDe
           />
         )}
 
-        {selectedNavIndex === 최근_동향 && (
-          <CurrentInfo moveLogAdder={moveLogAdder} option={logOption} changeSnapIndex={changeSnapIndex} />
-        )}
+        {selectedNavIndex === 최근_동향 && <CurrentInfo option={logOption} changeSnapIndex={changeSnapIndex} />}
       </ContentSection>
     </>
   );

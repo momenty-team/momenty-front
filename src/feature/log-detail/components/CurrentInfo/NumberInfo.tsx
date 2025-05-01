@@ -30,6 +30,7 @@ function NumberInfo({ MOCK_DATA }: NumberLogProps) {
           <div className="flex flex-1 items-end justify-around w-full h-full">
             {MOCK_DATA.data.map((data) => (
               <div
+                key={data.date}
                 className="flex w-5 bg-blue-400 rounded-t-[4px]"
                 style={{
                   height: `${changeIndexHeight(data.value, MOCK_DATA.maxValue)}%`,
