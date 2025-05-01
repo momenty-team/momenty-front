@@ -5,11 +5,11 @@ import useKeyboardResize from '@/common/hooks/useKeyboardResize';
 import type { LogRecord, Option, RecordDetail } from '@/types/apis/records';
 
 import ContentSection from './ContentSection';
-import CurrentInfoNotFound from './CurrentInfo/NotFound';
 import TodayLog from './TodayLog';
 import LogAdder from '../LogAdder';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { useRouter } from 'next/navigation';
+import CurrentInfo from './CurrentInfo';
 
 const 기록_남기기 = 0;
 const 오늘_기록 = 1;
@@ -99,7 +99,9 @@ function LogDetail({ id, logOption, title, logDetailList, unit, options }: LogDe
           />
         )}
 
-        {selectedNavIndex === 최근_동향 && <CurrentInfoNotFound moveLogAdder={moveLogAdder} />}
+        {selectedNavIndex === 최근_동향 && (
+          <CurrentInfo moveLogAdder={moveLogAdder} option={logOption} changeSnapIndex={changeSnapIndex} />
+        )}
       </ContentSection>
     </>
   );
