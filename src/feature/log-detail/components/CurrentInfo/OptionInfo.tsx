@@ -2,7 +2,6 @@ interface OptionInfoProps {
   MOCK_DATA: {
     startDate: string;
     endDate: string;
-    count: number;
     data: {
       date: string;
       week: string;
@@ -12,14 +11,7 @@ interface OptionInfoProps {
   };
 }
 
-const WEEK_DAYS = ['일', '월', '화', '수', '목', '금', '토'];
-
 function OptionInfo({ MOCK_DATA }: OptionInfoProps) {
-  const changeIndexHeight = (value: number, maxValue: number) => {
-    const height = (value / maxValue) * 100;
-    return height;
-  };
-
   return (
     <div className="flex flex-col gap-4 px-5 py-4 h-full">
       <div className="text-label-1-r text-indigo-300">
@@ -32,7 +24,7 @@ function OptionInfo({ MOCK_DATA }: OptionInfoProps) {
           <span className="min-w-[56px] text-indigo-700 text-center text-body-3-m">기록횟수</span>
           <span className="w-full text-indigo-700 text-body-3-m">선택 옵션</span>
         </header>
-        {/* <div className="flex items-center justify-between w-full gap-4"> */}
+
         {MOCK_DATA.data.map((data) => (
           <div className="flex items-center justify-between w-full gap-4">
             <div key={data.date} className="flex items-center justify-between w-full gap-4">
