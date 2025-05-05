@@ -15,8 +15,8 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (actions && actions['xyrotation']) {
-      actionRef.current = actions['xyrotation'];
+    if (actions && actions['base']) {
+      actionRef.current = actions['base'];
       actionRef.current.setLoop(THREE.LoopOnce, 1);
       actionRef.current.clampWhenFinished = true;
     }
@@ -28,7 +28,7 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
 const CatModelViewer = () => {
   const actionRef = useRef<THREE.AnimationAction | null>(null);
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF('/model/cat_modeling16.glb');
+  const { scene, animations } = useGLTF('/model/cat2_test04.glb');
 
   const handleClick = () => {
     if (actionRef.current) {

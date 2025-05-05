@@ -4,13 +4,11 @@ import ChevronDownIcon from '@/assets/svg/chevron-down.svg';
 function MonthPicker({
   year,
   month,
-  changeYear,
-  changeMonth,
+  setDate,
 }: {
   year: number;
   month: number;
-  changeYear: (year: number) => void;
-  changeMonth: (month: number) => void;
+  setDate: (year?: number, month?: number) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [tempYear, setTempYear] = useState(year);
@@ -23,8 +21,7 @@ function MonthPicker({
   };
 
   const handleBlur = () => {
-    changeYear(tempYear);
-    changeMonth(tempMonth);
+    setDate(tempYear, tempMonth);
   };
 
   return (

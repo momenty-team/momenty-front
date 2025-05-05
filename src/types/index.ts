@@ -28,4 +28,9 @@ export interface BridgeData {
     type: 'success' | 'error' | 'info';
     message: string;
   }
+  date?: {
+    year?: number;
+    month?: number;
+    day?: number;
+  }
 }
