@@ -1,10 +1,10 @@
 'use client';
 
-import useCalendar from './hooks/useCalendar';
 import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
 import { useSearchParams } from 'next/navigation';
 import { postMessageToWebView } from '@/utils/webview';
+import { calendarUtils } from '@/utils/calendar';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -14,7 +14,7 @@ function Calendar() {
   const month = searchParams.get('month') || new Date().getMonth() + 1;
   const day = searchParams.get('day') || new Date().getDate();
 
-  const { isCurrentMonth, isSelectedDay, isSunday, getMonthDateList } = useCalendar(
+  const { isCurrentMonth, isSelectedDay, isSunday, getMonthDateList, isFuture } = calendarUtils(
     Number(year),
     Number(month),
     Number(day)
@@ -33,7 +33,7 @@ function Calendar() {
     });
   };
 
-  const dateList = getMonthDateList(Number(year), Number(month));
+  const dateList = getMonthDateList();
 
   const setDate = (year?: number, month?: number) => {
     const selectedYear = year || Number(year);
@@ -65,6 +65,7 @@ function Calendar() {
               isToday={isSelectedDay(date)}
               isSunday={isSunday(date)}
               onClick={() => handleDateClick(date)}
+              isFuture={() => isFuture(date)}
             />
           ))}
         </ul>

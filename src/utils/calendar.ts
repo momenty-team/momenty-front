@@ -1,13 +1,21 @@
-const useCalendar = (year: number, month: number, day: number) => {
+export const calendarUtils = (year: number, month: number, day: number) => {
   const isCurrentMonth = (date: Date) =>
     date.getFullYear() === year && date.getMonth() + 1 === month;
 
   const isSelectedDay = (date: Date) =>
-    date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
+    date.getFullYear() === year &&
+    date.getMonth() + 1 === month &&
+    date.getDate() === day;
 
   const isSunday = (date: Date) => date.getDay() === 0;
 
-  const getMonthDateList = (year: number, month: number): Date[] => {
+  const isFuture = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date > today;
+  };
+
+  const getMonthDateList = (): Date[] => {
     const currentMonth = month - 1;
     const currentMonthFirstDay = new Date(year, currentMonth, 1).getDay();
     const currentMonthLastDate = new Date(year, month, 0).getDate();
@@ -30,13 +38,11 @@ const useCalendar = (year: number, month: number, day: number) => {
     return [...prevMonthDateList, ...currentMonthDateList, ...nextMonthDateList];
   };
 
-
   return {
     isCurrentMonth,
     isSelectedDay,
     isSunday,
-    getMonthDateList
+    isFuture,
+    getMonthDateList,
   };
 };
-
-export default useCalendar;

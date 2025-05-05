@@ -6,9 +6,10 @@ interface DateBoxProps {
   isToday: boolean;
   isSunday: boolean;
   onClick: (date: Date) => void;
+  isFuture: (date: Date) => boolean;
 }
 
-function DateBox({ date, isCurrentMonth, isToday, isSunday, onClick }: DateBoxProps) {
+function DateBox({ date, isCurrentMonth, isToday, isSunday, onClick, isFuture }: DateBoxProps) {
   return (
     <div className="flex flex-col items-center gap-1">
       <button
@@ -18,6 +19,7 @@ function DateBox({ date, isCurrentMonth, isToday, isSunday, onClick }: DateBoxPr
           active:scale-[0.85] transition-all
           ${isCurrentMonth ? 'bg-[#D9D9D9]' : 'bg-transparent'}
           ${isSunday ? 'text-red-500' : 'text-black'}`}
+        disabled={isFuture(date)}
       />
       <div>
         <span
