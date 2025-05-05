@@ -3,7 +3,16 @@ import LogDetail from '@/feature/log-detail/components';
 import LogSettingButton from '@/feature/log-detail/components/LogSettingButton';
 import type { RecordDetailsResponse, RecordOptionsResponse, RecordUnitResponse } from '@/types/apis/records';
 
-async function LogDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: any }) {
+interface LogDetailPageProps {
+  params: Promise<{ id: string }>;
+  searchParams: {
+    year: string;
+    month: string;
+    day: string;
+  };
+}
+
+async function LogDetailPage({ params, searchParams }: LogDetailPageProps) {
   const routeParams = await params;
   const { year, month, day } = searchParams;
   const cookieHeader = (await cookies()).toString();
