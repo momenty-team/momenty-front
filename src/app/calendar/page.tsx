@@ -4,7 +4,7 @@ import DateBox from './DateBox';
 import MonthPicker from './MonthPicker';
 import { useSearchParams } from 'next/navigation';
 import { postMessageToWebView } from '@/utils/webview';
-import { calendarUtils } from '@/utils/calendar';
+import { dateUtils } from '@/utils/calendar';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -14,7 +14,7 @@ function Calendar() {
   const month = searchParams.get('month') || new Date().getMonth() + 1;
   const day = searchParams.get('day') || new Date().getDate();
 
-  const { isCurrentMonth, isSelectedDay, isSunday, getMonthDateList, isFuture } = calendarUtils(
+  const { isCurrentMonth, isSelectedDay, isSunday, getMonthDateList, isFuture } = dateUtils(
     Number(year),
     Number(month),
     Number(day)

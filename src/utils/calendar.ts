@@ -1,4 +1,4 @@
-export const calendarUtils = (year: number, month: number, day: number) => {
+export const dateUtils = (year: number, month: number, day: number) => {
   const isCurrentMonth = (date: Date) =>
     date.getFullYear() === year && date.getMonth() + 1 === month;
 
