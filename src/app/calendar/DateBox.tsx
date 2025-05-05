@@ -5,13 +5,15 @@ interface DateBoxProps {
   isCurrentMonth: boolean;
   isToday: boolean;
   isSunday: boolean;
+  onClick: (date: Date) => void;
 }
 
-function DateBox({ date, isCurrentMonth, isToday, isSunday }: DateBoxProps) {
+function DateBox({ date, isCurrentMonth, isToday, isSunday, onClick }: DateBoxProps) {
   return (
     <div className="flex flex-col items-center gap-1">
       <button
         type="button"
+        onClick={() => onClick(date)}
         className={`flex justify-center items-center w-8 h-8 rounded-[3px]
           active:scale-[0.85] transition-all
           ${isCurrentMonth ? 'bg-[#D9D9D9]' : 'bg-transparent'}
