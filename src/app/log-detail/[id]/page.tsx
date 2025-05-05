@@ -3,23 +3,30 @@ import LogDetail from '@/feature/log-detail/components';
 import LogSettingButton from '@/feature/log-detail/components/LogSettingButton';
 import type { RecordDetailsResponse, RecordOptionsResponse, RecordUnitResponse } from '@/types/apis/records';
 
-async function LogDetailPage({ params }: { params: Promise<{ id: string }> }) {
+async function LogDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: any }) {
   const routeParams = await params;
+  const { year, month, day } = searchParams;
   const cookieHeader = (await cookies()).toString();
-  const detailsResponse = await fetch(`https://api.momenty.co.kr/records/${routeParams.id}/details`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-  });
+  const detailsResponse = await fetch(
+    `https://api.momenty.co.kr/records/${routeParams.id}/details?year=${year}&month=${month}&day=${day}`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+    }
+  );
 
   if (!detailsResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
   const { title, method, records }: RecordDetailsResponse = await detailsResponse.json();
 
   if (method === 'NUMBER_TYPE') {
-    const unitResponse = await fetch(`https://api.momenty.co.kr/records/${routeParams.id}/unit`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-    });
+    const unitResponse = await fetch(
+      `https://api.momenty.co.kr/records/${routeParams.id}/unit?year=${year}&month=${month}&day=${day}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+      }
+    );
 
     if (!unitResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
@@ -39,10 +46,13 @@ async function LogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   }
 
   if (method === 'OPTION_TYPE') {
-    const optionResponse = await fetch(`https://api.momenty.co.kr/records/${routeParams.id}/options`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-    });
+    const optionResponse = await fetch(
+      `https://api.momenty.co.kr/records/${routeParams.id}/options?year=${year}&month=${month}&day=${day}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+      }
+    );
 
     if (!optionResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
