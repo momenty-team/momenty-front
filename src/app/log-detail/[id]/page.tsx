@@ -14,7 +14,7 @@ interface LogDetailPageProps {
 
 async function LogDetailPage({ params, searchParams }: LogDetailPageProps) {
   const routeParams = await params;
-  const { year, month, day } = searchParams;
+  const { year, month, day } = await searchParams;
   const cookieHeader = (await cookies()).toString();
   const detailsResponse = await fetch(
     `https://api.momenty.co.kr/records/${routeParams.id}/details?year=${year}&month=${month}&day=${day}`,

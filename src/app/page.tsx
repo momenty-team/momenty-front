@@ -26,6 +26,11 @@ export interface RecordItem {
 }
 
 function Home() {
+  const searchParams = useSearchParams();
+
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
+
   const [record, setRecord] = useState<RecordItem[]>([]);
 
   const routeCalendar = () => {
@@ -63,11 +68,6 @@ function Home() {
       fetchRecords();
     }
   }, []);
-
-  const searchParams = useSearchParams();
-
-  const month = searchParams.get('month');
-  const day = searchParams.get('day');
 
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
