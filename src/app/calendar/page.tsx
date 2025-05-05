@@ -35,15 +35,12 @@ function Calendar() {
 
   const dateList = getMonthDateList(Number(year), Number(month));
 
-  const setYear = (year: number) => {
-    postMessageToWebView({
-      date: { year, month: Number(month), day: Number(day) },
-    });
-  };
+  const setDate = (year?: number, month?: number) => {
+    const selectedYear = year || Number(year);
+    const selectedMonth = month || Number(month);
 
-  const setMonth = (month: number) => {
     postMessageToWebView({
-      date: { year: Number(year), month, day: Number(day) },
+      date: { year: selectedYear, month: selectedMonth, day: Number(day) },
     });
   };
 
@@ -51,7 +48,7 @@ function Calendar() {
     <>
       <main className="flex flex-col gap-6">
         <header className="flex justify-center gap-5">
-          <MonthPicker year={Number(year)} month={Number(month)} changeYear={setYear} changeMonth={setMonth} />
+          <MonthPicker year={Number(year)} month={Number(month)} setDate={setDate} />
         </header>
         <ul className="px-6 grid grid-cols-7 gap-[20px] justify-items-center text-label-1-b">
           {DAYS.map((day) => (
