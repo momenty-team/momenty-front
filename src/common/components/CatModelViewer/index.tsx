@@ -1,9 +1,10 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei';
+import { useAnimations, useGLTF } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import CustomControls from './customControl';
 
 interface AnimationProps {
   animations: THREE.AnimationClip[];
@@ -28,7 +29,9 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
 const CatModelViewer = () => {
   const actionRef = useRef<THREE.AnimationAction | null>(null);
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF('/model/cat2_test04.glb');
+  const { scene, animations } = useGLTF('/model/cat.glb');
+
+  scene.position.set(0, 0, 0);
 
   const handleClick = () => {
     if (actionRef.current) {
@@ -39,16 +42,17 @@ const CatModelViewer = () => {
   return (
     <div style={{ width: '100%', height: '240px' }}>
       <Canvas
-        camera={{ position: [0, 2, 5], fov: 50 }}
-        onCreated={({ gl }) => {
+        onCreated={({ gl, camera }) => {
           gl.domElement.addEventListener('webglcontextlost', (event) => {
             console.warn('WebGL context lost:', event);
           });
+
+          camera.lookAt(0, 1, 0);
         }}
       >
         <ambientLight intensity={1.5} />
         <directionalLight position={[0.19, 7.39, 3.3]} />
-        <OrbitControls />
+        <CustomControls />
         <group ref={group}>
           <primitive object={scene} />
         </group>
