@@ -6,6 +6,8 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CustomControls from './customControl';
 
+const CAT_STATE = ['Health', 'stress', 'soso', 'base'];
+
 interface AnimationProps {
   animations: THREE.AnimationClip[];
   group: React.RefObject<THREE.Group<THREE.Object3DEventMap>>;
@@ -16,8 +18,9 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (actions && actions['base']) {
-      actionRef.current = actions['base'];
+    // alert(`${Object.keys(actions)}`);
+    if (actions && actions['Health']) {
+      actionRef.current = actions['Health'];
       actionRef.current.setLoop(THREE.LoopOnce, 1);
       actionRef.current.clampWhenFinished = true;
     }
