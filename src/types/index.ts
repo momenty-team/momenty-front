@@ -33,4 +33,15 @@ export interface BridgeData {
     month?: number;
     day?: number;
   }
+  healthKitData?: {
+    activeEnergyBurned: any;
+    distanceWalkingRunning: any;
+    stepCount: any;
+    heartRateSamples: any;
+    heartRateVariabilitySamples: any;
+    restingHeartRateSamples: any;
+    sleepSamples: any;
+    environmentalAudioExposure: any;
+    headphoneAudioExposure: any;
+  }
 }
