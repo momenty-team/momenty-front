@@ -1,6 +1,6 @@
 import ChevronRightIcon from '@/assets/svg/chevron-right.svg';
 
-interface SummaryButtonProps {
+interface SummaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: React.ReactNode;
   title: string;
   items: {
@@ -11,9 +11,9 @@ interface SummaryButtonProps {
   }[];
 }
 
-function HealthKitSummaryButton({ icon, title, items }: SummaryButtonProps) {
+function HealthKitSummaryButton({ icon, title, items, ...props }: SummaryButtonProps) {
   return (
-    <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white">
+    <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" {...props}>
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex flex-row items-center justify-center gap-2">
           <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">{icon}</div>

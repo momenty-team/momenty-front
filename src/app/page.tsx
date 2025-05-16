@@ -113,6 +113,16 @@ function Home() {
             { label: '이동거리', value: healthKitData?.distanceWalkingRunning, unit: 'm' },
             { label: '걸음수', value: healthKitData?.stepCount, unit: '걸음', fixed: 0 },
           ]}
+          onClick={() =>
+            postMessageToWebView({
+              bottomSheet: {
+                name: 'healthkit-detail',
+                state: 'open',
+                webviewRoute: `/healthkit-detail/activity`,
+                snapIndex: 1,
+              },
+            })
+          }
         />
         <HealthKitSummaryButton
           icon={<HeartBeatIcon width={26} height={26} />}

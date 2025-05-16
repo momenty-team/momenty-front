@@ -1,5 +1,15 @@
 {
-  "cSpell.words": ["drei", "GLTF", "momenty", "svgr", "tanstack", "webglcontextlost", "webp", "zustand"],
+  "cSpell.words": [
+    "drei",
+    "GLTF",
+    "healthkit",
+    "momenty",
+    "svgr",
+    "tanstack",
+    "webglcontextlost",
+    "webp",
+    "zustand"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.prettier": "explicit"

@@ -44,11 +44,10 @@ export const options = {
   maintainAspectRatio: false, // 컨테이너 크기에 맞게 차트 크기 조정
   plugins: {
     legend: {
-      position: 'top' as const,
+      display: false,
     },
     title: {
-      display: true,
-      text: '범위 데이터 차트 (최소-최대)',
+      display: false,
     },
     tooltip: {
       callbacks: {
@@ -68,12 +67,8 @@ export const options = {
   scales: {
     y: {
       beginAtZero: true,
-      max: 1000,
-      ticks: {
-        stepSize: 100, // 100 단위로 눈금 설정
-        count: 11, // 0부터 1000까지 100 단위로 11개의 눈금 표시
-      },
       grid: {
+        borderDash: [4, 4], // 점선 스타일
         drawOnChartArea: true, // 차트 영역에 그리드 선 표시
         color: 'rgba(0, 0, 0, 0.1)', // 그리드 선 색상 설정
       },
@@ -181,29 +176,19 @@ export const lineData = {
 //   },
 // };
 
-function ChartEx() {
-  return (
-    <>
-      <div style={{ height: '400px' }} className="bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]">
-        <Bar options={options} data={data} />
-      </div>
-      <div style={{ height: '400px' }} className="bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]">
-        <Line
-          options={{
-            ...options,
-            plugins: {
-              ...options.plugins,
-              title: {
-                ...options.plugins.title,
-                text: '일반 선 그래프 차트',
-              },
-            },
-          }}
-          data={lineData}
-        />
-      </div>
-    </>
-  );
+interface BarChartProps {
+  data: {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[][] | number[];
+      backgroundColor: string;
+      borderColor: string;
+      borderWidth: number;
+    }[];
+  };
 }
 
-export default ChartEx;
+export function BarChart({ data }: BarChartProps) {
+  return <Bar options={options} data={data} />;
+}

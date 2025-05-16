@@ -1,5 +1,11 @@
 export type BridgeRoute = string;
 
+export interface CustomHealthValue {
+  startDate: string;
+  endDate: string;
+  value: number;
+}
+
 type HapticType =
   | 'selection'
   | 'noticeSuccess'
@@ -27,21 +33,21 @@ export interface BridgeData {
   toast?: {
     type: 'success' | 'error' | 'info';
     message: string;
-  }
+  };
   date?: {
     year?: number;
     month?: number;
     day?: number;
-  }
+  };
   healthKitData?: {
-    activeEnergyBurned: any;
-    distanceWalkingRunning: any;
-    stepCount: any;
-    heartRateSamples: any;
-    heartRateVariabilitySamples: any;
-    restingHeartRateSamples: any;
-    sleepSamples: any;
-    environmentalAudioExposure: any;
-    headphoneAudioExposure: any;
-  }
+    activeEnergyBurned?: CustomHealthValue[];
+    distanceWalkingRunning?: CustomHealthValue[];
+    stepCount?: CustomHealthValue[];
+    heartRateSamples?: CustomHealthValue[];
+    heartRateVariabilitySamples?: CustomHealthValue[];
+    restingHeartRateSamples?: CustomHealthValue[];
+    sleepSamples?: CustomHealthValue[];
+    environmentalAudioExposure?: CustomHealthValue[];
+    headphoneAudioExposure?: CustomHealthValue[];
+  };
 }
