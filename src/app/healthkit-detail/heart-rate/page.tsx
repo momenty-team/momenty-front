@@ -82,7 +82,7 @@ function HealthKitHeartRateDetailPage() {
       </header>
 
       <section
-        className="fixed top-[40px] w-full flex flex-col align-center overflow-y-scroll transition-[height] duration-300 gap-6"
+        className="fixed top-[48px] w-full flex flex-col align-center overflow-y-scroll transition-[height] duration-300 gap-12"
         style={{
           height: snapIndex > 1 ? `calc(100vh - 60px)` : 'calc(100vh / 9 * 5 - 72px)',
         }}
