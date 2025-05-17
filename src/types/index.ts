@@ -4,6 +4,8 @@ export interface CustomHealthValue {
   startDate: string;
   endDate: string;
   value: number;
+  min?: number;
+  max?: number;
 }
 
 type HapticType =
