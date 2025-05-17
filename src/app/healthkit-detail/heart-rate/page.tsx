@@ -3,6 +3,7 @@
 import { BarChart, LineChart } from '@/common/components/Chart';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { BridgeData } from '@/types';
+import { calculateAverageValue, formatKoreanDate, getMinMaxValue } from '@/utils/healthKit';
 import { useState } from 'react';
 
 function getWeekdayFromISOString(isoString: string): string {
@@ -17,6 +18,10 @@ function getWeekdayFromISOString(isoString: string): string {
 function HealthKitHeartRateDetailPage() {
   const [data, setData] = useState<BridgeData['healthKitData'] | null>(null);
   const [snapIndex, setSnapIndex] = useState(0);
+
+  const startDates = data?.heartRateSamples;
+  const startDay = startDates?.[0].startDate ?? null;
+  const endDay = startDates?.[startDates.length - 1].startDate ?? null;
 
   const commonDatasetOptions = {
     backgroundColor: '#69B1FF',
@@ -79,16 +84,59 @@ function HealthKitHeartRateDetailPage() {
           height: snapIndex > 1 ? `calc(100vh - 100px)` : 'calc(100vh / 9 * 5 - 100px)',
         }}
       >
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: heartRateLabels, datasets: heartRateDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">범위</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {getMinMaxValue(data?.heartRateSamples ?? [])?.min.toFixed(0)} ~{' '}
+                {getMinMaxValue(data?.heartRateSamples ?? [])?.max.toFixed(0)}{' '}
+              </strong>
+              BPM
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart data={{ labels: heartRateLabels, datasets: heartRateDatasets }} />
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <LineChart data={{ labels: heartRateVariabilityLabels, datasets: heartRateVariabilityDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">평균</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {calculateAverageValue(data?.heartRateSamples ?? [])?.toFixed(1)}{' '}
+              </strong>
+              밀리초
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <LineChart data={{ labels: heartRateVariabilityLabels, datasets: heartRateVariabilityDatasets }} />
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <LineChart data={{ labels: restingHeartRateLabels, datasets: restingHeartRateDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">평균</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {calculateAverageValue(data?.restingHeartRateSamples ?? [])?.toFixed(1)}{' '}
+              </strong>
+              BPM
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <LineChart data={{ labels: restingHeartRateLabels, datasets: restingHeartRateDatasets }} />
+          </div>
         </div>
       </section>
     </>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BridgeData } from '@/types';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { BarChart } from '@/common/components/Chart';
+import { formatKoreanDate, getMinMaxValue } from '@/utils/healthKit';
 
 function getWeekdayFromISOString(isoString: string): string {
   const date = new Date(isoString);
@@ -15,6 +16,9 @@ function getWeekdayFromISOString(isoString: string): string {
 function HealthKitNoiseDetailPage() {
   const [data, setData] = useState<BridgeData['healthKitData'] | null>(null);
   const [snapIndex, setSnapIndex] = useState(0);
+  const startDates = data?.environmentalAudioExposure;
+  const startDay = startDates?.[0].startDate ?? null;
+  const endDay = startDates?.[startDates.length - 1].startDate ?? null;
 
   const commonDatasetOptions = {
     backgroundColor: '#69B1FF',
@@ -68,12 +72,44 @@ function HealthKitNoiseDetailPage() {
           height: snapIndex > 1 ? `calc(100vh - 100px)` : 'calc(100vh / 9 * 5 - 100px)',
         }}
       >
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: environmentalAudioExposureLabels, datasets: environmentalAudioExposureDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">범위</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {getMinMaxValue(data?.environmentalAudioExposure ?? [])?.min.toFixed(0)} ~{' '}
+                {getMinMaxValue(data?.environmentalAudioExposure ?? [])?.max.toFixed(0)}{' '}
+              </strong>
+              dB
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart
+              data={{ labels: environmentalAudioExposureLabels, datasets: environmentalAudioExposureDatasets }}
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: headphoneAudioExposureLabels, datasets: headphoneAudioExposureDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">범위</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {getMinMaxValue(data?.headphoneAudioExposure ?? [])?.min.toFixed(0)} ~{' '}
+                {getMinMaxValue(data?.headphoneAudioExposure ?? [])?.max.toFixed(0)}{' '}
+              </strong>
+              dB
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart data={{ labels: headphoneAudioExposureLabels, datasets: headphoneAudioExposureDatasets }} />
+          </div>
         </div>
       </section>
     </>
