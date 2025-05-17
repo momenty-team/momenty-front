@@ -4,6 +4,7 @@ import { BarChart } from '@/common/components/Chart';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { BridgeData } from '@/types';
 import { useState } from 'react';
+import { formatKoreanDate, calculateAverageValue } from '@/utils/healthKit';
 
 function getWeekdayFromISOString(isoString: string): string {
   const date = new Date(isoString);
@@ -17,6 +18,9 @@ function getWeekdayFromISOString(isoString: string): string {
 function HealthKitActivityDetailPage() {
   const [data, setData] = useState<BridgeData['healthKitData'] | null>(null);
   const [snapIndex, setSnapIndex] = useState(0);
+  const startDates = data?.distanceWalkingRunning;
+  const startDay = startDates?.[0].startDate ?? null;
+  const endDay = startDates?.[startDates.length - 1].startDate ?? null;
 
   const commonDatasetOptions = {
     backgroundColor: '#69B1FF',
@@ -79,16 +83,58 @@ function HealthKitActivityDetailPage() {
           height: snapIndex > 1 ? `calc(100vh - 100px)` : 'calc(100vh / 9 * 5 - 100px)',
         }}
       >
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: distanceWalkingRunningLabels, datasets: distanceWalkingRunningDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">평균</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {calculateAverageValue(data?.activeEnergyBurned ?? [])?.toFixed(1)}{' '}
+              </strong>
+              kcal
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart data={{ labels: activeEnergyBurnedLabels, datasets: activeEnergyBurnedDatasets }} />
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: activeEnergyBurnedLabels, datasets: activeEnergyBurnedDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">평균</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {calculateAverageValue(data?.distanceWalkingRunning ?? [])?.toFixed(1)}{' '}
+              </strong>
+              m
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart data={{ labels: distanceWalkingRunningLabels, datasets: distanceWalkingRunningDatasets }} />
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-          <BarChart data={{ labels: stepCountLabels, datasets: stepCountDatasets }} />
+        <div>
+          <div className="flex flex-col px-5 pb-2">
+            <span className="text-label-1-m text-indigo-300">평균</span>
+            <span className="text-body-4-sb">
+              <strong className="text-subtitle-2-sb">
+                {calculateAverageValue(data?.stepCount ?? [])?.toFixed(0)}{' '}
+              </strong>
+              걸음
+            </span>
+            <span className="text-body-4-m text-indigo-300">
+              {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
+            <BarChart data={{ labels: stepCountLabels, datasets: stepCountDatasets }} />
+          </div>
         </div>
       </section>
     </>

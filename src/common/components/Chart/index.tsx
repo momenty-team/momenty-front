@@ -14,31 +14,6 @@ import { Bar, Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
-// // 범위 데이터를 파싱하는 함수
-// const rangeDataParser = {
-//   id: 'rangeData',
-//   beforeLayout: function (chart: any) {
-//     const dataset = chart.data.datasets[0];
-//     if (!dataset._originalData) {
-//       dataset._originalData = [...dataset.data];
-
-//       // 실제 차트에 표시할 데이터를 평균값으로 변환
-//       dataset.data = dataset._originalData.map((range: number[]) => {
-//         // 최소값과 최대값의 평균을 표시
-//         return (range[0] + range[1]) / 2;
-//       });
-//     }
-//   },
-//   beforeDatasetsDraw: function (chart: any) {
-//     // 원본 데이터를 복원
-//     const dataset = chart.data.datasets[0];
-//     if (dataset._originalData) {
-//       chart._oldData = dataset.data;
-//       dataset.originalData = dataset._originalData;
-//     }
-//   },
-// };
-
 export const options = {
   responsive: true,
   maintainAspectRatio: false, // 컨테이너 크기에 맞게 차트 크기 조정
@@ -134,48 +109,6 @@ export const lineData = {
   ],
 };
 
-// 범위 데이터를 표시하기 위한 플러그인
-// const rangeBarPlugin = {
-//   id: 'rangeBar',
-//   afterDatasetsDraw(chart: any) {
-//     const { ctx, data, chartArea, scales } = chart;
-//     const dataset = data.datasets[0]; // 단일 데이터셋만 사용
-//     const meta = chart.getDatasetMeta(0);
-
-//     // 데이터셋의 각 항목에 대해 범위 표시
-//     for (let i = 0; i < dataset.data.length; i++) {
-//       if (!meta.data[i] || meta.hidden) continue;
-
-//       const range = dataset.data[i];
-//       const minValue = range[0];
-//       const maxValue = range[1];
-
-//       // 막대의 위치와 너비 가져오기
-//       const barWidth = meta.data[i].width;
-//       const barX = meta.data[i].x;
-
-//       // 최소값과 최대값의 위치 계산
-//       const minYPos = scales.y.getPixelForValue(minValue);
-//       const maxYPos = scales.y.getPixelForValue(maxValue);
-
-//       // 범위 표시를 위한 선 그리기
-//       ctx.beginPath();
-//       ctx.moveTo(barX, minYPos);
-//       ctx.lineTo(barX, maxYPos);
-//       ctx.lineWidth = 2;
-//       ctx.strokeStyle = dataset.borderColor;
-//       ctx.stroke();
-
-//       // 최소값과 최대값 위치에 점 표시
-//       ctx.beginPath();
-//       ctx.arc(barX, minYPos, 4, 0, 2 * Math.PI);
-//       ctx.arc(barX, maxYPos, 4, 0, 2 * Math.PI);
-//       ctx.fillStyle = dataset.borderColor;
-//       ctx.fill();
-//     }
-//   },
-// };
-
 interface BarChartProps {
   data: {
     labels: string[];
@@ -191,4 +124,8 @@ interface BarChartProps {
 
 export function BarChart({ data }: BarChartProps) {
   return <Bar options={options} data={data} />;
+}
+
+export function LineChart({ data }: BarChartProps) {
+  return <Line options={options} data={data} />;
 }

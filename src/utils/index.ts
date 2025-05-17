@@ -5,11 +5,11 @@ const DAY = 24 * HOUR;
 const WEEK = 7 * DAY;
 
 const RELATIVE_TIME_LABELS = {
-  justNow: "방금 전",
+  justNow: '방금 전',
   minutesAgo: (n: number) => `${n}분 전`,
   hoursAgo: (n: number) => `${n}시간 전`,
   daysAgo: (n: number) => `${n}일 전`,
-  overAWeek: "하루 넘음",
+  overAWeek: '하루 넘음',
 };
 
 export function formatRelativeTime(timestamp: string) {
@@ -26,7 +26,7 @@ export function formatRelativeTime(timestamp: string) {
 
 export const getCurrentTimeHHMM = () => {
   const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');  // '00' 형태로
+  const hours = now.getHours().toString().padStart(2, '0'); // '00' 형태로
   const minutes = now.getMinutes().toString().padStart(2, '0');
   return `${hours}:${minutes}`;
 };
