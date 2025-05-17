@@ -16,7 +16,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointEleme
 
 export const options = {
   responsive: true,
-  maintainAspectRatio: false, // 컨테이너 크기에 맞게 차트 크기 조정
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,

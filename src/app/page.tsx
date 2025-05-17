@@ -76,11 +76,6 @@ function Home() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!healthKitData) return;
-  //   alert('잠' + JSON.stringify(healthKitData.sleepSamples));
-  // }, [healthKitData]);
-
   return (
     <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <header className="flex justify-between items-center px-4 py-2">
@@ -170,16 +165,6 @@ function Home() {
           icon={<SleepIcon width={26} height={26} />}
           title="수면"
           items={[{ label: '수면 분석', value: healthKitData?.sleepSamples, unit: 'ms' }]}
-          // onClick={() =>
-          //   postMessageToWebView({
-          //     bottomSheet: {
-          //       name: 'healthkit-detail',
-          //       state: 'open',
-          //       webviewRoute: `/healthkit-detail/sleep`,
-          //       snapIndex: 1,r
-          //     },
-          //   })
-          // }
         />
         <div className="grid grid-cols-1 gap-5">
           {record?.map(({ id, title, method }) => (

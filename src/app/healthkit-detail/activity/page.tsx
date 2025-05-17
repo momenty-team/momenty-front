@@ -9,7 +9,6 @@ import { formatKoreanDate, calculateAverageValue } from '@/utils/healthKit';
 function getWeekdayFromISOString(isoString: string): string {
   const date = new Date(isoString);
 
-  // 요일 배열 (일요일부터 시작)
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
   return weekdays[date.getDay()];
