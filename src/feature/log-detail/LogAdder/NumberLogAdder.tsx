@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import NumberPad from '@/common/components/NumberPad';
 import { getCurrentTimeHHMM } from '@/utils';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface NumberLogAdderProps {
   id: string;
@@ -28,10 +28,15 @@ function NumberLogAdder({
   const router = useRouter();
   const [NumberPadValue, setNumberPadValue] = useState('0');
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
+
   const handleAddLog = async () => {
     try {
       setLoading(true);
-      await fetch(`/api/records/${id}/details`, {
+      await fetch(`/api/records/${id}/details?year=${year}&month=${month}&day=${day}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
 import { postMessageToWebView } from '@/utils/webview';
 import { getCurrentTimeHHMM } from '@/utils';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface WritingLogAdderProps {
   id: string;
@@ -16,6 +16,10 @@ function WritingLogAdder(
   ref: React.Ref<HTMLTextAreaElement>
 ) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -24,7 +28,7 @@ function WritingLogAdder(
 
     try {
       setLoading(true);
-      await fetch(`/api/records/${id}/details`, {
+      await fetch(`/api/records/${id}/details?year=${year}&month=${month}&day=${day}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
