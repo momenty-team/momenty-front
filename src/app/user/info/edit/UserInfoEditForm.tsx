@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { postMessageToWebView } from '@/utils/webview';
@@ -43,6 +43,7 @@ function formatDate(input: string) {
 }
 
 function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const route = useRouter();
   const [selectedGender, setSelectedGender] = useState(userInfo.gender);
   const {
@@ -50,6 +51,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm({
     defaultValues: {
       name: userInfo.name,
@@ -124,9 +126,51 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
     setValue('gender', gender);
   };
 
+  const handleProfileImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('업로드 실패');
+
+      const { url } = await response.json();
+      setValue('profile_image_url', url);
+    } catch (err) {
+      alert('이미지 업로드 중 오류 발생: ' + err);
+    }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <>
       <form className="flex flex-col w-full gap-3" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-1 px-[22.5px] w-full justify-center items-center">
+          <img
+            src={watch('profile_image_url') || '/default-profile.png'}
+            alt="프로필 사진 미리보기"
+            className="w-16 h-16 rounded-[16px] object-cover bg-gray-200"
+            onClick={handleImageClick}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfileImageChange}
+            ref={fileInputRef}
+            className="hidden"
+          />
+        </div>
+
         <div className="flex flex-col gap-1 align-center px-[22.5px]">
           <label className="text-body-3-m text-indigo-300">이름</label>
           <input

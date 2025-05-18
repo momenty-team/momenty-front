@@ -19,8 +19,6 @@ const MENU = [
   {
     title: '일반',
     items: [
-      { title: '친구 추가', path: '/user/info1', icon: <UsersIcon /> },
-      { title: '친구 관리', path: '/user/info2', icon: <PlusUserIcon /> },
       { title: '알람 설정', path: '/user/info3', icon: <YellowBellIcon /> },
       { title: '계정 공개 범위', path: '/user/info4', icon: <UserIcon /> },
     ],
@@ -31,8 +29,13 @@ const MENU = [
       { title: '공지사항', path: '/user/notice', icon: <NoticeIcon /> },
       { title: '모먼티 약관 확인', path: '/user/info6', icon: <MomentyIIcon /> },
       { title: '오픈소스 라이선스', path: '/user/open-source', icon: <PaperIcon /> },
-      { title: '개인정보 처리 방침', path: '/user/info8', icon: <LockerIcon /> },
-      { title: '문의하기', path: '/user/info9', icon: <HeadsetIcon /> },
+      { title: '개인정보 처리 방침', path: '/user/privacy', icon: <LockerIcon /> },
+      {
+        title: '문의하기',
+        path: 'https://docs.google.com/forms/d/1i0nvT-L6BGuIFERNbHu-lqVqxTBdNnWs9E4__CIakAU/edit?hl=ko',
+        icon: <HeadsetIcon />,
+        isExternal: true,
+      },
       { title: '버전 관리', path: '/user/info-qq', icon: <UserIcon /> },
     ],
   },
@@ -88,8 +91,8 @@ async function User() {
           <section key={title} className="flex flex-col gap-3">
             <h3 className="text-body-1-sb">{title}</h3>
             <div className="flex flex-col gap-5">
-              {items.map(({ title, icon, path }) => (
-                <NavigationMenuButton key={title} title={title} icon={icon} path={path} />
+              {items.map(({ title, icon, path, isExternal }) => (
+                <NavigationMenuButton key={title} title={title} icon={icon} path={path} isExternal={isExternal} />
               ))}
             </div>
           </section>

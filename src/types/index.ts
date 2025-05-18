@@ -39,6 +39,9 @@ export interface BridgeData {
     month?: number;
     day?: number;
   };
+  externalLink?: {
+    url: string;
+  }
   healthKitData?: {
     activeEnergyBurned?: CustomHealthValue[];
     distanceWalkingRunning?: CustomHealthValue[];
