@@ -19,16 +19,15 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingDots, setLoadingDots] = useState('');
 
-  // 로딩 애니메이션을 위한 점(.) 효과
   useEffect(() => {
     let dotsCount = 0;
     let intervalId: NodeJS.Timeout;
 
     if (isLoading) {
       intervalId = setInterval(() => {
-        dotsCount = (dotsCount + 1) % 4; // 0, 1, 2, 3으로 순환
-        setLoadingDots('.'.repeat(dotsCount === 0 ? 3 : dotsCount)); // 0일 때는 3개의 점으로 표시
-      }, 300); // 0.3초 간격
+        dotsCount = (dotsCount + 1) % 4;
+        setLoadingDots('.'.repeat(dotsCount === 0 ? 3 : dotsCount));
+      }, 300);
     }
 
     return () => {
@@ -40,7 +39,7 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
     try {
       setIsLoading(true);
       const response = await fetch(`/api/records/feedback?year=${year}&month=${month}&day=${day}`, {
-        method: 'GET',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           health_kit: '',
@@ -57,22 +56,18 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
   };
   ``;
 
-  // useEffect(() => {
-  //   getFeedback();
-  // }, [year, month, day]);
-
   return (
     <div className="flex flex-col gap-4 px-6 py-6 h-[100vh] items-center justify-between pb-[42px]">
       <div className="flex flex-col justify-center items-center w-full">
         <h1 className="text-subtitle-1-b w-full">미래 조언/피드백 받기</h1>
-        <div className="w-[210px] h-[280px] bg-blue-400 my-[80px]" />
-        <div className="text-body-2-m text-indigo-300">
+        <div className="w-[200px] h-[220px] bg-blue-400 my-[32px] rounded-md" />
+        <div className="text-body-2-m text-indigo-300 px-1">
           {feedbackData ? (
-            <>
-              <h2 className="text-body-1-b">{feedbackData.title}</h2>
-              <p className="text-body-2-m">{feedbackData.level}</p>
-              <p className="text-body-2-m">{feedbackData.feedback}</p>
-            </>
+            <div className="flex flex-col gap-2">
+              <h2 className="text-subtitle-3-sb">{feedbackData.title}</h2>
+              {/* <p className="text-body-2-m">{feedbackData.level}</p> */}
+              <p className="text-body-2-r">{feedbackData.feedback}</p>
+            </div>
           ) : (
             <span>피드백 데이터를 받아보세요~</span>
           )}

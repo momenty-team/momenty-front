@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest)  {
+export async function POST(req: NextRequest)  {
   const searchParams = req.nextUrl.searchParams;
   const cookieHeader = (await cookies()).toString();
   const body = await req.json();
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest)  {
   }
 
   const res = await fetch(`https://api.momenty.co.kr/records/feedback?year=${year}&month=${month}&day=${day}`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Cookie': cookieHeader || '',
