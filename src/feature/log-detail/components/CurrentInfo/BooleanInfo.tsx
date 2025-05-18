@@ -75,6 +75,18 @@ function BooleanInfo({ recordsId }: BooleanInfoProps) {
     return height;
   };
 
+  if (!booleanTrends) {
+    return <div />;
+  }
+
+  if (booleanTrends && booleanTrends.total_counts.o_count === 0 && booleanTrends.total_counts.x_count === 0) {
+    return (
+      <div className="flex flex-col gap-4 px-5 py-4 h-full items-center justify-center">
+        <span className="text-label-1-r text-indigo-300">최근 7일 동안 기록이 없어요.😭</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4 px-5 py-4 h-full">
       <div className="text-label-1-r text-indigo-300">

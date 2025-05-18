@@ -1,0 +1,315 @@
+{
+  "@eslint-community/eslint-utils@4.4.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/eslint-community/eslint-utils",
+    "publisher": "Toru Nagashima",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint-community/eslint-utils",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint-community/eslint-utils/LICENSE"
+  },
+  "@eslint-community/regexpp@4.12.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/eslint-community/regexpp",
+    "publisher": "Toru Nagashima",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint-community/regexpp",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint-community/regexpp/LICENSE"
+  },
+  "@eslint/config-array@0.19.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/eslint/rewrite",
+    "publisher": "Nicholas C. Zakas",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/config-array",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/config-array/LICENSE"
+  },
+  "@eslint/core@0.9.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/eslint/rewrite",
+    "publisher": "Nicholas C. Zakas",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/core",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/core/LICENSE"
+  },
+  "@eslint/eslintrc@3.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/eslint/eslintrc",
+    "publisher": "Nicholas C. Zakas",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/eslintrc",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/eslintrc/LICENSE"
+  },
+  "@eslint/js@9.15.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/eslint/eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/js",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/js/LICENSE"
+  },
+  "@eslint/object-schema@2.1.4": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/eslint/rewrite",
+    "publisher": "Nicholas C. Zakas",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/object-schema",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/object-schema/LICENSE"
+  },
+  "@eslint/plugin-kit@0.2.3": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/eslint/rewrite",
+    "publisher": "Nicholas C. Zakas",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/plugin-kit",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@eslint/plugin-kit/LICENSE"
+  },
+  "@next/eslint-plugin-next@15.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vercel/next.js",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@next/eslint-plugin-next",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@next/eslint-plugin-next/README.md"
+  },
+  "@react-three/drei@10.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pmndrs/drei",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@react-three/drei",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@react-three/drei/LICENSE"
+  },
+  "@react-three/fiber@9.0.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pmndrs/react-three-fiber",
+    "publisher": "Paul Henschel",
+    "url": "https://github.com/drcmda",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@react-three/fiber",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@react-three/fiber/readme.md"
+  },
+  "@rushstack/eslint-patch@1.10.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/microsoft/rushstack",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@rushstack/eslint-patch",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@rushstack/eslint-patch/LICENSE"
+  },
+  "@svgr/webpack@8.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/gregberge/svgr/tree/main/packages/webpack",
+    "publisher": "Greg Bergé",
+    "email": "berge.greg@gmail.com",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@svgr/webpack",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@svgr/webpack/LICENSE"
+  },
+  "@types/node@20.17.8": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/node",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/node/LICENSE"
+  },
+  "@types/react-dom@18.3.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/react-dom",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/react-dom/LICENSE"
+  },
+  "@types/react@18.3.12": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/react",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/react/LICENSE"
+  },
+  "@types/three@0.173.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/three",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@types/three/LICENSE"
+  },
+  "@typescript-eslint/parser@8.16.0": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/parser",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/parser/LICENSE"
+  },
+  "@typescript-eslint/scope-manager@8.16.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/scope-manager",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/scope-manager/LICENSE"
+  },
+  "@typescript-eslint/type-utils@8.16.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/type-utils",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/type-utils/LICENSE"
+  },
+  "@typescript-eslint/types@8.16.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/types",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/types/LICENSE"
+  },
+  "@typescript-eslint/typescript-estree@8.16.0": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/typescript-estree",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/typescript-estree/LICENSE"
+  },
+  "@typescript-eslint/utils@8.16.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/utils",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/utils/LICENSE"
+  },
+  "@typescript-eslint/visitor-keys@8.16.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/typescript-eslint/typescript-eslint",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/visitor-keys",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/@typescript-eslint/visitor-keys/LICENSE"
+  },
+  "chart.js@4.4.9": {
+    "licenses": "MIT",
+    "repository": "https://github.com/chartjs/Chart.js",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/chart.js",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/chart.js/LICENSE.md"
+  },
+  "eslint-config-next@15.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vercel/next.js",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-config-next"
+  },
+  "eslint-config-prettier@9.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/prettier/eslint-config-prettier",
+    "publisher": "Simon Lydell",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-config-prettier",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-config-prettier/LICENSE"
+  },
+  "eslint-import-resolver-node@0.3.9": {
+    "licenses": "MIT",
+    "repository": "https://github.com/import-js/eslint-plugin-import",
+    "publisher": "Ben Mosher",
+    "url": "me@benmosher.com",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-import-resolver-node",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-import-resolver-node/LICENSE"
+  },
+  "eslint-plugin-jsx-a11y@6.10.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsx-eslint/eslint-plugin-jsx-a11y",
+    "publisher": "Ethan Cohen",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-jsx-a11y",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-jsx-a11y/LICENSE.md"
+  },
+  "eslint-plugin-react-hooks@5.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-react-hooks",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-react-hooks/LICENSE"
+  },
+  "eslint-plugin-react@7.37.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsx-eslint/eslint-plugin-react",
+    "publisher": "Yannick Croissant",
+    "email": "yannick.croissant+npm@gmail.com",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-react",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-plugin-react/LICENSE"
+  },
+  "eslint-scope@8.2.0": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/eslint/js",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-scope",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-scope/LICENSE"
+  },
+  "eslint-visitor-keys@4.2.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/eslint/js",
+    "publisher": "Toru Nagashima",
+    "url": "https://github.com/mysticatea",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-visitor-keys",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint-visitor-keys/LICENSE"
+  },
+  "eslint@9.15.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/eslint/eslint",
+    "publisher": "Nicholas C. Zakas",
+    "email": "nicholas+npm@nczconsulting.com",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/eslint/LICENSE"
+  },
+  "keen-slider@6.8.6": {
+    "licenses": "MIT",
+    "repository": "https://github.com/rcbyr/keen-slider",
+    "publisher": "Eric Beyer",
+    "email": "contact@ericbeyer.de",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/keen-slider",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/keen-slider/LICENSE"
+  },
+  "momenty@0.0.1": {
+    "licenses": "UNLICENSED",
+    "private": true,
+    "path": "/Users/hyejun/Desktop/momenty-front",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/README.md"
+  },
+  "next@15.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vercel/next.js",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/next",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/next/license.md"
+  },
+  "postcss@8.4.49": {
+    "licenses": "MIT",
+    "repository": "https://github.com/postcss/postcss",
+    "publisher": "Andrey Sitnik",
+    "email": "andrey@sitnik.ru",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/postcss",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/postcss/LICENSE"
+  },
+  "prettier@3.4.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/prettier/prettier",
+    "publisher": "James Long",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/prettier",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/prettier/LICENSE"
+  },
+  "react-chartjs-2@5.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/reactchartjs/react-chartjs-2",
+    "publisher": "Jeremy Ayerst",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/react-chartjs-2",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/react-chartjs-2/LICENSE"
+  },
+  "react-dom@18.3.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/react-dom",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/react-dom/LICENSE"
+  },
+  "react-hook-form@7.54.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/react-hook-form/react-hook-form",
+    "email": "bluebill1049@hotmail.com",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/react-hook-form",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/react-hook-form/LICENSE"
+  },
+  "react@18.3.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/react",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/react/LICENSE"
+  },
+  "tailwind-scrollbar-hide@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/reslear/tailwind-scrollbar-hide",
+    "publisher": "reslear",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/tailwind-scrollbar-hide",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/tailwind-scrollbar-hide/LICENSE"
+  },
+  "tailwindcss@3.4.15": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tailwindlabs/tailwindcss",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/tailwindcss",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/tailwindcss/LICENSE"
+  },
+  "three@0.173.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mrdoob/three.js",
+    "publisher": "mrdoob",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/three",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/three/LICENSE"
+  },
+  "typescript@5.7.2": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/microsoft/TypeScript",
+    "publisher": "Microsoft Corp.",
+    "path": "/Users/hyejun/Desktop/momenty-front/node_modules/typescript",
+    "licenseFile": "/Users/hyejun/Desktop/momenty-front/node_modules/typescript/LICENSE.txt"
+  }
+}
+

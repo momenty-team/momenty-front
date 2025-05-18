@@ -1,6 +1,6 @@
 import UserIcon from '@/assets/svg/user/user.svg';
-import UsersIcon from '@/assets/svg/user/users.svg';
-import PlusUserIcon from '@/assets/svg/user/plus-user.svg';
+// import UsersIcon from '@/assets/svg/user/users.svg';
+// import PlusUserIcon from '@/assets/svg/user/plus-user.svg';
 import YellowBellIcon from '@/assets/svg/user/yellow-bell.svg';
 import NoticeIcon from '@/assets/svg/user/notice.svg';
 import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
@@ -19,9 +19,7 @@ const MENU = [
   {
     title: '일반',
     items: [
-      { title: '친구 추가', path: '/user/info1', icon: <UsersIcon /> },
-      { title: '친구 관리', path: '/user/info2', icon: <PlusUserIcon /> },
-      { title: '알람 설정', path: '/user/info3', icon: <YellowBellIcon /> },
+      { title: '알람 설정', path: '/user/notification', icon: <YellowBellIcon /> },
       { title: '계정 공개 범위', path: '/user/info4', icon: <UserIcon /> },
     ],
   },
@@ -29,7 +27,7 @@ const MENU = [
     title: '기타',
     items: [
       { title: '공지사항', path: '/user/notice', icon: <NoticeIcon /> },
-      { title: '모먼티 약관 확인', path: '/user/info6', icon: <MomentyIIcon /> },
+      { title: '모먼티 약관 확인', path: '/user/term', icon: <MomentyIIcon /> },
       { title: '오픈소스 라이선스', path: '/user/open-source', icon: <PaperIcon /> },
       { title: '개인정보 처리 방침', path: '/user/info8', icon: <LockerIcon /> },
       { title: '문의하기', path: '/user/info9', icon: <HeadsetIcon /> },

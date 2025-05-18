@@ -69,6 +69,18 @@ function NumberInfo({ recordsId }: NumberLogProps) {
     return Math.max(...trends.data.map((data) => data.value));
   };
 
+  if (!numberTrends) {
+    return <div />;
+  }
+
+  if (numberTrends && numberTrends.total_count === 0) {
+    return (
+      <div className="flex flex-col gap-4 px-5 py-4 h-full items-center justify-center">
+        <span className="text-label-1-r text-indigo-300">최근 7일 동안 기록이 없어요.😭</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4 px-5 py-4 h-full">
       <div className="text-label-1-r text-indigo-300">
