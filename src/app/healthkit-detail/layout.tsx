@@ -13,3 +13,7 @@ function LogDetailLayout({ children }: { children: React.ReactNode }) {
 }
 
 export default LogDetailLayout;
+export const metadata = {
+  title: 'Log Detail',
+  description: 'Log Detail',
+};

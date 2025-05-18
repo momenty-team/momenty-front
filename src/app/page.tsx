@@ -132,6 +132,16 @@ function Home() {
             { label: '심박 변이도', value: healthKitData?.heartRateVariabilitySamples, unit: 'ms', fixed: 2 },
             { label: '안정 심박수', value: healthKitData?.restingHeartRateSamples, unit: 'bpm' },
           ]}
+          onClick={() =>
+            postMessageToWebView({
+              bottomSheet: {
+                name: 'healthkit-detail',
+                state: 'open',
+                webviewRoute: `/healthkit-detail/heart-rate`,
+                snapIndex: 1,
+              },
+            })
+          }
         />
         <HealthKitSummaryButton
           icon={<NoiseIcon width={26} height={26} />}
@@ -140,6 +150,16 @@ function Home() {
             { label: '주변환경 소음', value: healthKitData?.environmentalAudioExposure, unit: 'dB', fixed: 1 },
             { label: '이어폰 소음 노출', value: healthKitData?.headphoneAudioExposure, unit: 'dB', fixed: 1 },
           ]}
+          onClick={() =>
+            postMessageToWebView({
+              bottomSheet: {
+                name: 'healthkit-detail',
+                state: 'open',
+                webviewRoute: `/healthkit-detail/noise`,
+                snapIndex: 1,
+              },
+            })
+          }
         />
         <HealthKitSummaryButton
           icon={<SleepIcon width={26} height={26} />}

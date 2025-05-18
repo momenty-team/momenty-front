@@ -1,10 +1,10 @@
 'use client';
 
-import { BarChart } from '@/common/components/Chart';
+import { BarChart, LineChart } from '@/common/components/Chart';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { BridgeData } from '@/types';
+import { calculateAverageValue, formatKoreanDate, getMinMaxValue } from '@/utils/healthKit';
 import { useState } from 'react';
-import { formatKoreanDate, calculateAverageValue } from '@/utils/healthKit';
 
 function getWeekdayFromISOString(isoString: string): string {
   const date = new Date(isoString);
@@ -14,10 +14,11 @@ function getWeekdayFromISOString(isoString: string): string {
   return weekdays[date.getDay()];
 }
 
-function HealthKitActivityDetailPage() {
+function HealthKitHeartRateDetailPage() {
   const [data, setData] = useState<BridgeData['healthKitData'] | null>(null);
   const [snapIndex, setSnapIndex] = useState(0);
-  const startDates = data?.distanceWalkingRunning;
+
+  const startDates = data?.heartRateSamples;
   const startDay = startDates?.[0].startDate ?? null;
   const endDay = startDates?.[startDates.length - 1].startDate ?? null;
 
@@ -27,31 +28,31 @@ function HealthKitActivityDetailPage() {
     borderWidth: 1,
   };
 
-  const distanceWalkingRunningLabels =
-    data?.distanceWalkingRunning?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
-  const distanceWalkingRunningDatasets = [
+  const heartRateLabels = data?.heartRateSamples?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
+  const heartRateDatasets = [
     {
-      label: '걷기 + 달리기 거리',
-      data: data?.distanceWalkingRunning?.map(({ value }) => Number(value.toFixed(0))) || [],
+      label: '심박수',
+      data: data?.heartRateSamples?.map(({ min, max }) => [min || 0, max || 0]) || [],
       ...commonDatasetOptions,
     },
   ];
 
-  const activeEnergyBurnedLabels =
-    data?.activeEnergyBurned?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
-  const activeEnergyBurnedDatasets = [
+  const heartRateVariabilityLabels =
+    data?.heartRateVariabilitySamples?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
+  const heartRateVariabilityDatasets = [
     {
-      label: '활동 에너지',
-      data: data?.activeEnergyBurned?.map(({ value }) => Number(value.toFixed(0))) || [],
+      label: '심박수 변이도',
+      data: data?.heartRateVariabilitySamples?.map(({ value }) => value) || [],
       ...commonDatasetOptions,
     },
   ];
 
-  const stepCountLabels = data?.stepCount?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
-  const stepCountDatasets = [
+  const restingHeartRateLabels =
+    data?.restingHeartRateSamples?.map(({ startDate }) => getWeekdayFromISOString(startDate)) || [];
+  const restingHeartRateDatasets = [
     {
-      label: '걸음 수',
-      data: data?.stepCount?.map(({ value }) => Number(value.toFixed(0))) || [],
+      label: '안정 심박수',
+      data: data?.restingHeartRateSamples?.map(({ value }) => value) || [],
       ...commonDatasetOptions,
     },
   ];
@@ -73,7 +74,7 @@ function HealthKitActivityDetailPage() {
   return (
     <>
       <header className="fixed w-full flex flex-col items-center bg-white top-0 h-[48px] pb-2">
-        <div className="text-indigo-700 text-body-3-sb">활동</div>
+        <div className="text-indigo-700 text-body-3-sb">심박수</div>
         <span className="text-body-4-m text-indigo-300">
           {formatKoreanDate(startDay ?? '')} ~ {formatKoreanDate(endDay ?? '')}
         </span>
@@ -87,46 +88,47 @@ function HealthKitActivityDetailPage() {
       >
         <div>
           <div className="flex flex-col px-5 pb-2 mt-4">
-            <span className="text-label-1-m text-indigo-300">평균 활동 에너지</span>
+            <span className="text-label-1-m text-indigo-300">심박수 범위</span>
             <span className="text-body-4-sb">
               <strong className="text-subtitle-2-sb">
-                {calculateAverageValue(data?.activeEnergyBurned ?? [])?.toFixed(1)}{' '}
+                {getMinMaxValue(data?.heartRateSamples ?? [])?.min.toFixed(0)} ~{' '}
+                {getMinMaxValue(data?.heartRateSamples ?? [])?.max.toFixed(0)}{' '}
               </strong>
-              kcal
+              BPM
             </span>
           </div>
           <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-            <BarChart data={{ labels: activeEnergyBurnedLabels, datasets: activeEnergyBurnedDatasets }} />
+            <BarChart data={{ labels: heartRateLabels, datasets: heartRateDatasets }} />
           </div>
         </div>
 
         <div>
           <div className="flex flex-col px-5 pb-2">
-            <span className="text-label-1-m text-indigo-300">평균 이동거리</span>
+            <span className="text-label-1-m text-indigo-300">평균 심박 변이도</span>
             <span className="text-body-4-sb">
               <strong className="text-subtitle-2-sb">
-                {calculateAverageValue(data?.distanceWalkingRunning ?? [])?.toFixed(1)}{' '}
+                {calculateAverageValue(data?.heartRateSamples ?? [])?.toFixed(1)}{' '}
               </strong>
-              m
+              밀리초
             </span>
           </div>
           <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-            <BarChart data={{ labels: distanceWalkingRunningLabels, datasets: distanceWalkingRunningDatasets }} />
+            <LineChart data={{ labels: heartRateVariabilityLabels, datasets: heartRateVariabilityDatasets }} />
           </div>
         </div>
 
         <div>
           <div className="flex flex-col px-5 pb-2">
-            <span className="text-label-1-m text-indigo-300">평균 걸음수</span>
+            <span className="text-label-1-m text-indigo-300">평균 안정 심박수</span>
             <span className="text-body-4-sb">
               <strong className="text-subtitle-2-sb">
-                {calculateAverageValue(data?.stepCount ?? [])?.toFixed(0)}{' '}
+                {calculateAverageValue(data?.restingHeartRateSamples ?? [])?.toFixed(1)}{' '}
               </strong>
-              걸음
+              BPM
             </span>
           </div>
           <div className="flex flex-col items-center justify-center h-[calc(100vh/9*5-100px)] px-5">
-            <BarChart data={{ labels: stepCountLabels, datasets: stepCountDatasets }} />
+            <LineChart data={{ labels: restingHeartRateLabels, datasets: restingHeartRateDatasets }} />
           </div>
         </div>
       </section>
@@ -134,4 +136,4 @@ function HealthKitActivityDetailPage() {
   );
 }
 
-export default HealthKitActivityDetailPage;
+export default HealthKitHeartRateDetailPage;
