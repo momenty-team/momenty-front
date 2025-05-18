@@ -1,38 +1,27 @@
+import { parseSimpleMarkdown } from '@/utils';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface WritingInfoProps {
-  MOCK_DATA: {
-    startDate: string;
-    endDate: string;
-    data: {
-      date: string;
-      week: string;
-      value: number;
-    }[];
-    maxValue: number;
-  };
   recordsId: string;
 }
 
 const WEEK_DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-interface DayCounts {
-  monday: number;
-  tuesday: number;
-  wednesday: number;
-  thursday: number;
-  friday: number;
-  saturday: number;
-  sunday: number;
+interface DetailData {
+  date: string;
+  week: string;
+  count: number;
 }
 interface WritingTrends {
-  day_counts: DayCounts;
+  start_date: string;
+  end_date: string;
+  data: DetailData[];
   total_count: number;
   average_count: number;
 }
 
-function WritingInfo({ MOCK_DATA, recordsId }: WritingInfoProps) {
+function WritingInfo({ recordsId }: WritingInfoProps) {
   const searchParams = useSearchParams();
   const year = searchParams.get('year');
   const month = searchParams.get('month');
@@ -43,6 +32,12 @@ function WritingInfo({ MOCK_DATA, recordsId }: WritingInfoProps) {
   const changeIndexHeight = (value: number, maxValue: number) => {
     const height = (value / maxValue) * 100;
     return height;
+  };
+
+  const getMaxCount = (trends: WritingTrends | null): number => {
+    if (trends?.data.length === 0) return 0;
+    if (!trends) return 0;
+    return Math.max(...trends.data.map((data) => data.count));
   };
 
   const fetchWritingTrends = async () => {
@@ -70,31 +65,30 @@ function WritingInfo({ MOCK_DATA, recordsId }: WritingInfoProps) {
   useEffect(() => {
     fetchWritingTrends();
     getSummary();
-    console.log('WritingTrends');
   }, [recordsId, year, month, day]);
 
   return (
     <div className="flex flex-col gap-4 px-5 py-4 h-full">
       <div className="text-label-1-r text-indigo-300">
-        {MOCK_DATA.startDate} ~ {MOCK_DATA.endDate}
+        {writingTrends?.start_date} ~ {writingTrends?.end_date}
       </div>
 
       <div className="w-full h-64 min-h-64 flex flex-col justify-between gap-2">
         <div className="flex items-center justify-between w-full flex-1">
           <div className="flex flex-1 items-end justify-around w-full h-full">
-            {MOCK_DATA.data.map((data) => (
+            {writingTrends?.data.map((data) => (
               <div
                 key={data.date}
                 className="flex w-5 bg-blue-400 rounded-t-[4px]"
                 style={{
-                  height: `${changeIndexHeight(data.value, MOCK_DATA.maxValue)}%`,
+                  height: `${changeIndexHeight(data.count, getMaxCount(writingTrends))}%`,
                 }}
               />
             ))}
           </div>
           <div className="flex flex-col justify-between h-full w-8">
-            <span className="text-caption-3-m text-indigo-100">{MOCK_DATA.maxValue}</span>{' '}
-            <span className="text-caption-3-m text-indigo-100">{MOCK_DATA.maxValue / 2}</span>
+            <span className="text-caption-3-m text-indigo-100">{getMaxCount(writingTrends)}</span>{' '}
+            <span className="text-caption-3-m text-indigo-100">{getMaxCount(writingTrends) / 2}</span>
             <span className="text-caption-3-m text-indigo-100">0</span>
           </div>
         </div>
@@ -108,13 +102,23 @@ function WritingInfo({ MOCK_DATA, recordsId }: WritingInfoProps) {
         </div>
       </div>
       <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px]">
-        <span className="text-body-3-m">지난 7일동안 평균 기록 횟수는</span>
-        <span className="text-body-3-m">3개 입니다.</span>
+        <span className="text-body-3-m">지난 7일동안 총 기록 횟수는 {writingTrends?.total_count}개 입니다.</span>
+      </div>
+      <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px]">
+        <span className="text-body-3-m">평균 기록 횟수</span>
+        <span className="text-label-1-r text-indigo-300">
+          지난 7일동안 하루 평균 기록 횟수는 {writingTrends?.average_count}번 입니다.
+        </span>
       </div>
       <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px] gap-1">
         <span className="text-body-3-m text-black">이번 주 요약</span>
         <ul className="list-disc list-inside text-black">
-          <li className="text-label-1-r text-indigo-300">{summaryData ?? '데이터가 없습니다.'}</li>
+          <li
+            className="text-label-1-r text-indigo-300"
+            dangerouslySetInnerHTML={{
+              __html: parseSimpleMarkdown(summaryData ?? '데이터가 없습니다.'),
+            }}
+          />
         </ul>
       </div>
     </div>
