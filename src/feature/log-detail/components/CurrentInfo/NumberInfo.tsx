@@ -1,3 +1,7 @@
+import { parseSimpleMarkdown } from '@/utils';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 interface NumberLogProps {
   MOCK_DATA: {
     startDate: string;
@@ -9,11 +13,35 @@ interface NumberLogProps {
     }[];
     maxValue: number;
   };
+  recordsId: string;
 }
 
 const WEEK_DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-function NumberInfo({ MOCK_DATA }: NumberLogProps) {
+function NumberInfo({ MOCK_DATA, recordsId }: NumberLogProps) {
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
+
+  const [summaryData, setSummaryData] = useState<string | null>(null);
+
+  const getSummary = async () => {
+    try {
+      const response = await fetch(`/api/records/${recordsId}/trends/summary?year=${year}&month=${month}&day=${day}`);
+      const data = await response.json();
+      if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
+      setSummaryData(data.summary);
+    } catch (error) {
+      console.error('Error fetching summary:', error);
+    }
+  };
+
+  useEffect(() => {
+    getSummary();
+    console.log('WritingTrends');
+  }, [recordsId, year, month, day]);
+
   const changeIndexHeight = (value: number, maxValue: number) => {
     const height = (value / maxValue) * 100;
     return height;
@@ -64,6 +92,17 @@ function NumberInfo({ MOCK_DATA }: NumberLogProps) {
             <span className="text-body-3-m text-blue-400">{data.value} 걸음</span>
           </div>
         ))}
+      </div>
+      <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px] gap-1">
+        <span className="text-body-3-m text-black">이번 주 요약</span>
+        <ul className="list-disc list-inside text-black">
+          <li
+            className="text-label-1-r text-indigo-300"
+            dangerouslySetInnerHTML={{
+              __html: parseSimpleMarkdown(summaryData ?? '데이터가 없습니다.'),
+            }}
+          />
+        </ul>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import CircleIcon from '@/assets/svg/log-detail/circle.svg';
 import CloseIcon from '@/assets/svg/log-detail/close.svg';
 import { getCurrentTimeHHMM } from '@/utils';
 import { postMessageToWebView } from '@/utils/webview';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 interface BooleanLogAdderProps {
@@ -14,11 +14,15 @@ interface BooleanLogAdderProps {
 function BooleanLogAdder({ id, title, moveTodayLog }: BooleanLogAdderProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
 
   const handleBooleanClick = async (value: 'O' | 'X') => {
     try {
       setLoading(true);
-      await fetch(`/api/records/${id}/details`, {
+      await fetch(`/api/records/${id}/details?year=${year}&month=${month}&day=${day}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

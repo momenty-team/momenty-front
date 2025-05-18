@@ -1,3 +1,6 @@
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 interface WritingInfoProps {
   MOCK_DATA: {
     startDate: string;
@@ -9,15 +12,66 @@ interface WritingInfoProps {
     }[];
     maxValue: number;
   };
+  recordsId: string;
 }
 
 const WEEK_DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-function WritingInfo({ MOCK_DATA }: WritingInfoProps) {
+interface DayCounts {
+  monday: number;
+  tuesday: number;
+  wednesday: number;
+  thursday: number;
+  friday: number;
+  saturday: number;
+  sunday: number;
+}
+interface WritingTrends {
+  day_counts: DayCounts;
+  total_count: number;
+  average_count: number;
+}
+
+function WritingInfo({ MOCK_DATA, recordsId }: WritingInfoProps) {
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
+
+  const [writingTrends, setWritingTrends] = useState<WritingTrends | null>(null);
+  const [summaryData, setSummaryData] = useState<string | null>(null);
   const changeIndexHeight = (value: number, maxValue: number) => {
     const height = (value / maxValue) * 100;
     return height;
   };
+
+  const fetchWritingTrends = async () => {
+    try {
+      const response = await fetch(`/api/records/${recordsId}/trends/texts?year=${year}&month=${month}&day=${day}`);
+      const data = await response.json();
+      if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
+      setWritingTrends(data);
+    } catch (error) {
+      console.error('Error fetching writing trends:', error);
+    }
+  };
+
+  const getSummary = async () => {
+    try {
+      const response = await fetch(`/api/records/${recordsId}/trends/summary?year=${year}&month=${month}&day=${day}`);
+      const data = await response.json();
+      if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
+      setSummaryData(data.summary);
+    } catch (error) {
+      console.error('Error fetching summary:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWritingTrends();
+    getSummary();
+    console.log('WritingTrends');
+  }, [recordsId, year, month, day]);
 
   return (
     <div className="flex flex-col gap-4 px-5 py-4 h-full">
@@ -60,9 +114,7 @@ function WritingInfo({ MOCK_DATA }: WritingInfoProps) {
       <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px] gap-1">
         <span className="text-body-3-m text-black">이번 주 요약</span>
         <ul className="list-disc list-inside text-black">
-          <li className="text-label-1-r text-indigo-300">총 작성일 : 5일</li>
-          <li className="text-label-1-r text-indigo-300">가장 많이 쓴 단어 : 휴식, 행복, 스트레스</li>
-          <li className="text-label-1-r text-indigo-300">평균 글 길이 : 145글자</li>
+          <li className="text-label-1-r text-indigo-300">{summaryData ?? '데이터가 없습니다.'}</li>
         </ul>
       </div>
     </div>

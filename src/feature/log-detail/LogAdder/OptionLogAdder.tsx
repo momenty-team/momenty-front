@@ -2,7 +2,7 @@ import { getCurrentTimeHHMM } from '@/utils';
 import { postMessageToWebView } from '@/utils/webview';
 import { useState } from 'react';
 import type { Option } from '@/types/apis/records';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface OptionLogAdderProps {
   id: string;
@@ -13,6 +13,10 @@ interface OptionLogAdderProps {
 
 function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
   const [loading, setLoading] = useState(false);
   const [checkedOptionIdList, setCheckedOptionIdList] = useState<string[]>([]);
   const handleAddLog: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -22,7 +26,7 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
     try {
       setLoading(true);
 
-      await fetch(`/api/records/${id}/details`, {
+      await fetch(`/api/records/${id}/details?year=${year}&month=${month}&day=${day}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -8,6 +8,7 @@ import OptionInfo from './OptionInfo';
 interface TodayLogProps {
   option: LogRecord['method'];
   changeSnapIndex: (index: number) => void;
+  id: string;
 }
 
 const NUMBER_MOCK_DATA = {
@@ -54,7 +55,7 @@ const OPTION_MOCK_DATA = {
   ],
 };
 
-function CurrentInfo({ changeSnapIndex, option }: TodayLogProps) {
+function CurrentInfo({ changeSnapIndex, option, id }: TodayLogProps) {
   useAppMessage(
     ({ bottomSheet }) => {
       if (!bottomSheet) return;
@@ -71,19 +72,19 @@ function CurrentInfo({ changeSnapIndex, option }: TodayLogProps) {
   );
 
   if (option === 'TEXT_TYPE') {
-    return <WritingInfo MOCK_DATA={NUMBER_MOCK_DATA} />;
+    return <WritingInfo MOCK_DATA={NUMBER_MOCK_DATA} recordsId={id} />;
   }
 
   if (option === 'BOOLEAN_TYPE') {
-    return <BooleanInfo MOCK_DATA={BOOLEAN_MOCK_DATA} />;
+    return <BooleanInfo MOCK_DATA={BOOLEAN_MOCK_DATA} recordsId={id} />;
   }
 
   if (option === 'OPTION_TYPE') {
-    return <OptionInfo MOCK_DATA={OPTION_MOCK_DATA} />;
+    return <OptionInfo MOCK_DATA={OPTION_MOCK_DATA} recordsId={id} />;
   }
 
   if (option === 'NUMBER_TYPE') {
-    return <NumberInfo MOCK_DATA={NUMBER_MOCK_DATA} />;
+    return <NumberInfo MOCK_DATA={NUMBER_MOCK_DATA} recordsId={id} />;
   }
 }
 

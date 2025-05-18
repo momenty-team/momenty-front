@@ -1,14 +1,22 @@
 import LogSetting from '@/feature/log-setting/LogSetting';
 import { RecordDetailsResponse } from '@/types/apis/records';
 import { cookies } from 'next/headers';
+import { useSearchParams } from 'next/navigation';
 
 async function LogSettingPage({ params }: { params: { id: string } }) {
   const routeParams = await params;
+  const searchParams = useSearchParams();
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  const day = searchParams.get('day');
   const cookieHeader = (await cookies()).toString();
-  const detailsResponse = await fetch(`https://api.momenty.co.kr/records/${routeParams.id}/details`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-  });
+  const detailsResponse = await fetch(
+    `https://api.momenty.co.kr/records/${routeParams.id}/details?year=${year}&month=${month}&day=${day}`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+    }
+  );
 
   if (!detailsResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
