@@ -11,21 +11,6 @@ interface TodayLogProps {
   id: string;
 }
 
-const NUMBER_MOCK_DATA = {
-  startDate: '2025-04-01',
-  endDate: '2025-04-20',
-  data: [
-    { date: '2025-04-01', week: '월', value: 10 },
-    { date: '2025-04-02', week: '화', value: 55 },
-    { date: '2025-04-03', week: '수', value: 20 },
-    { date: '2025-04-04', week: '목', value: 15 },
-    { date: '2025-04-05', week: '금', value: 30 },
-    { date: '2025-04-06', week: '토', value: 85 },
-    { date: '2025-04-07', week: '일', value: 40 },
-  ],
-  maxValue: 85,
-};
-
 function CurrentInfo({ changeSnapIndex, option, id }: TodayLogProps) {
   useAppMessage(
     ({ bottomSheet }) => {

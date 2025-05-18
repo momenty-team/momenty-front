@@ -54,7 +54,6 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
       setIsLoading(false);
     }
   };
-  ``;
 
   return (
     <div className="flex flex-col gap-4 px-6 py-6 h-[100vh] items-center justify-between pb-[42px]">

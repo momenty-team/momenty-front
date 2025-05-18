@@ -22,7 +22,7 @@ function HealthKitSleepDetailPage() {
   //   {
   //     label: '수면 분석',
   //     data: data?.sleepAnalysis?.map(({ value }) => value) || [],
-  //     backgroundColor: '#69B1FF',
+  //     backgroundColor: '#69B1FF',ㄴ
   //     borderColor: '#69B1FF',
   //     borderWidth: 1,
   //   },
@@ -34,3 +34,5 @@ function HealthKitSleepDetailPage() {
     </div>
   );
 }
+
+export default HealthKitSleepDetailPage;
