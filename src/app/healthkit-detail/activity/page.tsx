@@ -32,7 +32,7 @@ function HealthKitActivityDetailPage() {
   const distanceWalkingRunningDatasets = [
     {
       label: '걷기 + 달리기 거리',
-      data: data?.distanceWalkingRunning?.map(({ value }) => Number(value.toFixed(0))) || [],
+      data: data?.distanceWalkingRunning?.map(({ value }) => Number(value?.toFixed(0))) || [],
       ...commonDatasetOptions,
     },
   ];
@@ -42,7 +42,7 @@ function HealthKitActivityDetailPage() {
   const activeEnergyBurnedDatasets = [
     {
       label: '활동 에너지',
-      data: data?.activeEnergyBurned?.map(({ value }) => Number(value.toFixed(0))) || [],
+      data: data?.activeEnergyBurned?.map(({ value }) => Number(value?.toFixed(0))) || [],
       ...commonDatasetOptions,
     },
   ];
@@ -51,7 +51,7 @@ function HealthKitActivityDetailPage() {
   const stepCountDatasets = [
     {
       label: '걸음 수',
-      data: data?.stepCount?.map(({ value }) => Number(value.toFixed(0))) || [],
+      data: data?.stepCount?.map(({ value }) => Number(value?.toFixed(0))) || [],
       ...commonDatasetOptions,
     },
   ];

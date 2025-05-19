@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CustomControls from './customControl';
 
-const CAT_STATE = ['Health', 'Stress', 'Soso', 'Base', 'Peaceful', 'Rest', 'Energy'];
+export const CAT_STATE = ['Health', 'Stress', 'Soso', 'Base', 'Peaceful', 'Rest', 'Energy'];
 
 interface AnimationProps {
   animations: THREE.AnimationClip[];

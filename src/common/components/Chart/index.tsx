@@ -24,20 +24,6 @@ export const options = {
     title: {
       display: false,
     },
-    tooltip: {
-      callbacks: {
-        label: function (context: any) {
-          const datasetLabel = context.dataset.label || '';
-          const value = context.dataset.data[context.dataIndex];
-
-          // 안전하게 배열 데이터 접근
-          if (Array.isArray(value)) {
-            return `${datasetLabel}: [${value[0]}, ${value[1]}]`;
-          }
-          return `${datasetLabel}: ${value}`;
-        },
-      },
-    },
   },
   scales: {
     y: {
@@ -114,7 +100,7 @@ interface BarChartProps {
     labels: string[];
     datasets: {
       label: string;
-      data: number[][] | number[];
+      data: number[][] | number[] | (number | null)[];
       backgroundColor: string;
       borderColor: string;
       borderWidth: number;

@@ -1,15 +1,21 @@
-import LogSetting from '@/feature/log-setting/LogSetting';
-import { RecordDetailsResponse } from '@/types/apis/records';
 import { cookies } from 'next/headers';
-import { useSearchParams } from 'next/navigation';
+import LogSetting from '@/feature/log-setting/LogSetting';
+import type { RecordDetailsResponse } from '@/types/apis/records';
 
-async function LogSettingPage({ params }: { params: { id: string } }) {
+interface LogSettingPageProps {
+  params: Promise<{ id: string }>;
+  searchParams: {
+    year: string;
+    month: string;
+    day: string;
+  };
+}
+
+async function LogSettingPage({ params, searchParams }: LogSettingPageProps) {
   const routeParams = await params;
-  const searchParams = useSearchParams();
-  const year = searchParams.get('year');
-  const month = searchParams.get('month');
-  const day = searchParams.get('day');
+  const { year, month, day } = await searchParams;
   const cookieHeader = (await cookies()).toString();
+  await console.log(searchParams.year, searchParams.month, searchParams.day);
   const detailsResponse = await fetch(
     `https://api.momenty.co.kr/records/${routeParams.id}/details?year=${year}&month=${month}&day=${day}`,
     {
