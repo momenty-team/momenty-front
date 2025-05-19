@@ -18,6 +18,7 @@ import NumberIcon from '@/assets/svg/number.svg';
 import useAppMessage from '@/common/hooks/useAppMessage';
 import { useSearchParams } from 'next/navigation';
 import HealthKitSummaryButton from '@/common/components/HealthKitSummaryButton';
+import type { BridgeData } from '@/types';
 
 const ModelViewer = dynamic(() => import('@/common/components/CatModelViewer'), {
   ssr: false,
@@ -36,7 +37,7 @@ function Home() {
   const day = searchParams.get('day');
 
   const [record, setRecord] = useState<RecordItem[]>([]);
-  const [healthKitData, setHealthKitData] = useState<any>(null);
+  const [healthKitData, setHealthKitData] = useState<BridgeData['healthKitSummaryData'] | null>(null);
 
   const routeCalendar = () => {
     postMessageToWebView({ route: '/calendar' });
@@ -60,9 +61,9 @@ function Home() {
     fetchRecords();
   }, []);
 
-  useAppMessage(({ viewState, healthKitData }) => {
-    if (healthKitData) {
-      setHealthKitData(healthKitData);
+  useAppMessage(({ viewState, healthKitSummaryData }) => {
+    if (healthKitSummaryData) {
+      setHealthKitData(healthKitSummaryData);
     }
     if (viewState === 'focus') {
       const fetchRecords = async () => {

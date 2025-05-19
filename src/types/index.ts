@@ -3,7 +3,7 @@ export type BridgeRoute = string;
 export interface CustomHealthValue {
   startDate: string;
   endDate: string;
-  value: number;
+  value: number | null;
   min?: number;
   max?: number;
 }
@@ -18,6 +18,7 @@ type HapticType =
   | 'ImpactHeavy'
   | 'ImpactRigid'
   | 'ImpactSoft';
+
 export interface BridgeData {
   route?: BridgeRoute;
   bottomSheet?: {
@@ -51,5 +52,16 @@ export interface BridgeData {
     sleepSamples?: CustomHealthValue[];
     environmentalAudioExposure?: CustomHealthValue[];
     headphoneAudioExposure?: CustomHealthValue[];
+  };
+  healthKitSummaryData?: {
+    activeEnergyBurned?: number;
+    distanceWalkingRunning?: number;
+    stepCount?: number;
+    heartRateSamples?: number;
+    heartRateVariabilitySamples?: number;
+    restingHeartRateSamples?: number;
+    sleepSamples?: number;
+    environmentalAudioExposure?: number;
+    headphoneAudioExposure?: number;
   };
 }

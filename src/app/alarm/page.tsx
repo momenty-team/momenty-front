@@ -18,7 +18,7 @@ interface UserNotificationHistories {
 
 async function Alarm() {
   const cookieHeader = (await cookies()).toString();
-  const response = await fetch('https://api.momenty.co.kr/notification/user/history', {
+  const response = await fetch('https://api.momenty.co.kr/notifications/user/history', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
   });

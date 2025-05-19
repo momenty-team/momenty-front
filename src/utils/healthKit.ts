@@ -21,7 +21,7 @@ export function calculateAverageValue(data: CustomHealthValue[]): number | null 
 
   if (validValues.length === 0) return null;
 
-  const sum = validValues.reduce((acc, val) => acc + val, 0);
+  const sum = validValues.reduce((acc, val) => acc || 0 + (val || 0), 0)!;
   const avg = sum / validValues.length;
 
   return avg;

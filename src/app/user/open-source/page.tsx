@@ -1,6 +1,17 @@
 import licenses from '../../../../licenses.json';
 
-const OPEN_SOURCE_LIST = Object.entries(licenses).map(([pkg, info]: any) => {
+export interface LicenseInfo {
+  licenses: string;
+  repository?: string;
+  publisher?: string;
+  path: string;
+  licenseFile?: string;
+  email?: string;
+  url?: string;
+  private?: boolean;
+}
+
+const OPEN_SOURCE_LIST = Object.entries(licenses).map(([pkg, info]: [string, LicenseInfo]) => {
   const id = pkg;
   const title = `${pkg} (${info.licenses})`;
   const link = info.repository ?? '링크 없음';

@@ -2,11 +2,12 @@
 
 import { useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
 const CustomControls = () => {
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const { camera } = useThree();
 
   const isInteracting = useRef(false);
