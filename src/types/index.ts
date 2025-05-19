@@ -18,6 +18,7 @@ type HapticType =
   | 'ImpactHeavy'
   | 'ImpactRigid'
   | 'ImpactSoft';
+
 export interface BridgeData {
   route?: BridgeRoute;
   bottomSheet?: {
