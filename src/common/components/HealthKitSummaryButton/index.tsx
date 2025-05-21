@@ -5,7 +5,7 @@ interface SummaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   title: string;
   items: {
     label: string;
-    value: number | null | undefined;
+    value: string | number | null | undefined;
     unit: string;
     fixed?: number;
   }[];
@@ -28,7 +28,9 @@ function HealthKitSummaryButton({ icon, title, items, ...props }: SummaryButtonP
             <span className="flex text-blue-700 text-caption-1-r">{label}</span>
             <div className="flex flex-row items-center gap-1">
               <div className="text-subtitle-3-b text-indigo-700">
-                {typeof value === 'number' ? value.toFixed(fixed) : '-'}
+                {typeof value === 'number' && value.toFixed(fixed)}
+                {typeof value === 'string' && value}
+                {value === null && '-'}
               </div>
               <div className="text-body-2-r text-indigo-700">{unit}</div>
             </div>

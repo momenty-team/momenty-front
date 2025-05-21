@@ -20,7 +20,7 @@ const MENU = [
     title: '일반',
     items: [
       { title: '알람 설정', path: '/user/notification', icon: <YellowBellIcon /> },
-      { title: '계정 공개 범위', path: '/user/info4', icon: <UserIcon /> },
+      { title: '계정 공개 범위', path: '/user/privacy', icon: <UserIcon /> },
     ],
   },
   {

@@ -165,7 +165,17 @@ function Home() {
         <HealthKitSummaryButton
           icon={<SleepIcon width={26} height={26} />}
           title="수면"
-          items={[{ label: '수면 분석', value: healthKitData?.sleepSamples, unit: 'ms' }]}
+          items={[{ label: '수면 분석', value: healthKitData?.sleepSamples, unit: '' }]}
+          onClick={() =>
+            postMessageToWebView({
+              bottomSheet: {
+                name: 'healthkit-detail',
+                state: 'open',
+                webviewRoute: `/healthkit-detail/sleep`,
+                snapIndex: 1,
+              },
+            })
+          }
         />
         <div className="grid grid-cols-1 gap-5">
           {record?.map(({ id, title, method }) => (

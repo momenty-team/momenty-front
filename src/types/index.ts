@@ -8,6 +8,12 @@ export interface CustomHealthValue {
   max?: number;
 }
 
+export interface CustomHealthSleepValue {
+  startDate: string;
+  endDate: string;
+  value: 'AWAKE' | 'REM' | 'CORE' | 'DEEP' | 'INBED';
+}
+
 type HapticType =
   | 'selection'
   | 'noticeSuccess'
@@ -49,7 +55,7 @@ export interface BridgeData {
     heartRateSamples?: CustomHealthValue[];
     heartRateVariabilitySamples?: CustomHealthValue[];
     restingHeartRateSamples?: CustomHealthValue[];
-    sleepSamples?: CustomHealthValue[];
+    sleepSamples?: CustomHealthSleepValue[];
     environmentalAudioExposure?: CustomHealthValue[];
     headphoneAudioExposure?: CustomHealthValue[];
   };
@@ -60,7 +66,7 @@ export interface BridgeData {
     heartRateSamples?: number;
     heartRateVariabilitySamples?: number;
     restingHeartRateSamples?: number;
-    sleepSamples?: number;
+    sleepSamples?: string;
     environmentalAudioExposure?: number;
     headphoneAudioExposure?: number;
   };
