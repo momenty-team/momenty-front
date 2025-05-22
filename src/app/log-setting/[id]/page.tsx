@@ -13,16 +13,11 @@ interface LogSettingPageProps {
 
 async function LogSettingPage({ params, searchParams }: LogSettingPageProps) {
   const routeParams = await params;
-  const { year, month, day } = await searchParams;
   const cookieHeader = (await cookies()).toString();
-  await console.log(searchParams.year, searchParams.month, searchParams.day);
-  const detailsResponse = await fetch(
-    `https://api.momenty.co.kr/records/${routeParams.id}/details?year=${year}&month=${month}&day=${day}`,
-    {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-    }
-  );
+  const detailsResponse = await fetch(`https://api.momenty.co.kr/records/${routeParams.id}/details`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
+  });
 
   if (!detailsResponse.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
