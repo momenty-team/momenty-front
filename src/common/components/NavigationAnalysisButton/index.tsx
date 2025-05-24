@@ -6,11 +6,12 @@ import { useState } from 'react';
 
 interface NavigationMenuButtonProps {
   title: string;
+  text: string;
   icon?: JSX.Element;
   path: string;
 }
 
-function NavigationAnalysisButton({ title, icon, path }: NavigationMenuButtonProps) {
+function NavigationAnalysisButton({ title, icon, text, path }: NavigationMenuButtonProps) {
   const [activeButtonPath, setActiveButtonPath] = useState<string | null>(null);
 
   const activeTouchedButtonPath = (path: string) => {
@@ -46,7 +47,7 @@ function NavigationAnalysisButton({ title, icon, path }: NavigationMenuButtonPro
           <div className="w-[52px] h-[52px] bg-indigo-5 rounded-[4px] flex items-center justify-center">{icon}</div>
           <div className="flex flex-col gap-1 text-left">
             <div className="text-body-3-m">{title}</div>
-            <div className="text-label-1-r text-indigo-300">{title}</div>
+            <div className="text-label-1-r text-indigo-300">{text}</div>
           </div>
         </div>
 
