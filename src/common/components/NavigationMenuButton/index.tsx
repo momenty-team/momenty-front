@@ -57,6 +57,27 @@ function NavigationMenuButton({ title, icon, path, isExternal = false }: Navigat
     );
   }
 
+  if (title === '버전 관리') {
+    return (
+      <button className="relative flex justify-center items-center ease-out origin-center group">
+        <div
+          className={`absolute bg-transparent w-[calc(100%+16px)] h-[calc(100%+12px)] transition-all duration-300 ease-out rounded-[6px]`}
+        ></div>
+
+        <div
+          className={`w-full flex items-center justify-between transition-transform duration-200 ease-out origin-center relative`}
+        >
+          <div className="flex items-center gap-4 ">
+            <div className="w-8 h-8 bg-indigo-5 rounded-[4px] flex items-center justify-center">{icon}</div>
+            <div className="text-body-2-sb">{title}</div>
+          </div>
+
+          <div className="text-label-1-r text-indigo-200 mr-2">v1.0.0</div>
+        </div>
+      </button>
+    );
+  }
+
   return (
     <button
       className="relative flex justify-center items-center ease-out origin-center group"

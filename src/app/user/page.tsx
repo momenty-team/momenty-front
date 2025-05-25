@@ -7,6 +7,7 @@ import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
 import PaperIcon from '@/assets/svg/user/paper.svg';
 import LockerIcon from '@/assets/svg/user/locker.svg';
 import HeadsetIcon from '@/assets/svg/user/headset.svg';
+import PatchIcon from '@/assets/svg/user/patch.svg';
 import NavigationMenuButton from '@/common/components/NavigationMenuButton';
 import AlarmButton from '@/feature/user/AlarmButton';
 import { cookies } from 'next/headers';
@@ -36,7 +37,7 @@ const MENU = [
         icon: <HeadsetIcon />,
         isExternal: true,
       },
-      { title: '버전 관리', path: '/user/info-qq', icon: <UserIcon /> },
+      { title: '버전 관리', path: '/user/info-qq', icon: <PatchIcon /> },
     ],
   },
 ];
@@ -75,7 +76,7 @@ async function User() {
         <AlarmButton />
       </header>
 
-      <div className="flex flex-col gap-6 mx-6">
+      <div className="flex flex-col gap-6 mx-6 mb-4">
         <div className="py-3 flex gap-4 items-center">
           <div className="w-16 h-16 bg-[#f3f5f9] rounded-[12px]" />
           <div className="flex flex-col gap-0.5">
