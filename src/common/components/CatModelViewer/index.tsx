@@ -6,7 +6,23 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CustomControls from './customControl';
 
-export const CAT_STATE = ['Health', 'Stress', 'Soso', 'Base', 'Peaceful', 'Rest', 'Energy'];
+export const CAT_STATE = [
+  'Health',
+  'Stress',
+  'Soso',
+  'Base',
+  'Peaceful',
+  'Rest',
+  'Energy',
+  'Good rest',
+  'Stretching',
+  'Rest',
+  'Little tired',
+  'Tired',
+  'Lazy',
+  'Lethargy',
+  'Energy',
+];
 
 interface AnimationProps {
   animations: THREE.AnimationClip[];
@@ -18,8 +34,8 @@ const Animation = ({ animations, group, actionRef }: AnimationProps) => {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (actions && actions['Peaceful']) {
-      actionRef.current = actions['Peaceful'];
+    if (actions && actions['Energy']) {
+      actionRef.current = actions['Energy'];
       actionRef.current.timeScale = 1.6;
       actionRef.current.setLoop(THREE.LoopRepeat, Infinity);
       actionRef.current.clampWhenFinished = true;
