@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CustomControls from './customControl';
 import { useSearchParams } from 'next/navigation';
-import { randomInt } from 'crypto';
 
 export const CAT_STATE = [
   'Health',

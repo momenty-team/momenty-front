@@ -80,10 +80,10 @@ function Home() {
   return (
     <main className={`relative flex flex-col item-center gap-0 w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
       <div className="sticky flex flex-col top-0 left-0 w-full h-50 z-10 bg-indigo-5">
-        <button className="absolute top-4 left-4 text-subtitle-3-sb" onClick={routeCalendar}>
+        <button className="absolute text-subtitle-3-sb p-4 z-10" onClick={routeCalendar}>
           {month}월 {day}일
         </button>
-        <button onClick={routeAlarm} className="absolute top-4 right-4">
+        <button onClick={routeAlarm} className="absolute right-0 p-4">
           <BellIcon width={26} height={26} />
         </button>
 
