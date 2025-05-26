@@ -69,7 +69,7 @@ const CustomControls = ({ cameraPosition, targetPosition }: CustomControlsProps)
       enableZoom={false}
       enablePan={false}
       maxPolarAngle={Math.PI / 2}
-      minPolarAngle={0.3}
+      minPolarAngle={Math.PI / 2}
     />
   );
 };
