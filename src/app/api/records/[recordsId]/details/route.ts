@@ -2,10 +2,10 @@ import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
 
-export async function GET(_: NextRequest, { params }: { params: { recordsId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { recordsId: string } }) {
   const { recordsId } = await params;
   const cookieHeader = (await cookies()).toString();
-  const searchParams = _.nextUrl.searchParams;
+  const searchParams = req.nextUrl.searchParams;
 
   const year = searchParams.get('year');
   const month = searchParams.get('month');

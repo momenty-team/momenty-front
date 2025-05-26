@@ -45,7 +45,9 @@ async function LogDetailPage({ params, searchParams }: LogDetailPageProps) {
       <>
         <header className="fixed w-full flex flex-col items-center pb-5 bg-white top-0">
           <div className="text-indigo-700 text-body-3-sb">{title}</div>
-          <div className="text-indigo-100 text-caption-3-sb">오늘 남긴 기록이 아직 없어요.</div>
+          <div className="text-indigo-100 text-caption-3-sb">
+            {records.length > 0 ? `오늘 ${records.length}번 기록을 남겼어요.` : '오늘 남긴 기록이 아직 없어요.'}
+          </div>
           <LogSettingButton id={routeParams.id} />
         </header>
 
@@ -71,7 +73,9 @@ async function LogDetailPage({ params, searchParams }: LogDetailPageProps) {
       <>
         <header className="fixed w-full flex flex-col items-center pb-5 bg-white top-0">
           <div className="text-indigo-700 text-body-3-sb">{title}</div>
-          <div className="text-indigo-100 text-caption-3-sb">오늘 남긴 기록이 아직 없어요.</div>
+          <div className="text-indigo-100 text-caption-3-sb">
+            {records.length > 0 ? `오늘 ${records.length}번 기록을 남겼어요.` : '오늘 남긴 기록이 아직 없어요.'}
+          </div>
           <LogSettingButton id={routeParams.id} />
         </header>
 
@@ -84,7 +88,9 @@ async function LogDetailPage({ params, searchParams }: LogDetailPageProps) {
     <>
       <header className="fixed w-full flex flex-col items-center pb-5 bg-white top-0">
         <div className="text-indigo-700 text-body-3-sb">{title}</div>
-        <div className="text-indigo-100 text-caption-3-sb">오늘 남긴 기록이 아직 없어요.</div>
+        <div className="text-indigo-100 text-caption-3-sb">
+          {records.length > 0 ? `오늘 ${records.length}번 기록을 남겼어요.` : '오늘 남긴 기록이 아직 없어요.'}
+        </div>
         <LogSettingButton id={routeParams.id} />
       </header>
 

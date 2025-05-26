@@ -78,21 +78,22 @@ function Home() {
   }, []);
 
   return (
-    <main className={`w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
-      <header className="flex justify-between items-center px-4 py-2">
-        <button className="text-subtitle-3-sb" onClick={routeCalendar}>
+    <main className={`relative flex flex-col item-center gap-0 w-full bg-indigo-5 pb-6 ${suitFont.className}`}>
+      <div className="sticky flex flex-col top-0 left-0 w-full h-50 z-10 bg-indigo-5">
+        <button className="absolute top-4 left-4 text-subtitle-3-sb" onClick={routeCalendar}>
           {month}월 {day}일
         </button>
-        <button onClick={routeAlarm}>
+        <button onClick={routeAlarm} className="absolute top-4 right-4">
           <BellIcon width={26} height={26} />
         </button>
-      </header>
 
-      <div className="h-60 bg-indigo-50 mb-10 mx-4 mt-2 rounded-[12px]">
-        <ModelViewer />
+        <div className="h-50 mx-4 rounded-[12px]">
+          <ModelViewer healthKitData={JSON.stringify(healthKitData)} />
+        </div>
+        <div className={'absolute bottom-[-20px] h-5 w-[100vw] bg-gradient-to-t from-white/0 to-[#F4F6F9]'} />
       </div>
 
-      <section className="flex flex-col gap-5 mx-4">
+      <section className="flex flex-col gap-5 mx-4 mt-4">
         <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" onClick={routeAddLog}>
           <div className="flex flex-row items-center w-full justify-between">
             <div className="flex flex-row items-center justify-center gap-2">

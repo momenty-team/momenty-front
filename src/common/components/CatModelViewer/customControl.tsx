@@ -6,13 +6,20 @@ import { OrbitControls } from '@react-three/drei';
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
-const CustomControls = () => {
+interface CustomControlsProps {
+  targetPosition: [number, number, number];
+  cameraPosition: [number, number, number];
+}
+
+const CustomControls = ({ cameraPosition, targetPosition }: CustomControlsProps) => {
   const controlsRef = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const { camera } = useThree();
 
   const isInteracting = useRef(false);
-  const initialTarget = useRef<THREE.Vector3>(new THREE.Vector3(0.4, 1.2, 0));
-  const cameraStartPosition = new THREE.Vector3(1, 1.4, 0.5);
+  const [cameraX, cameraY, cameraZ] = cameraPosition;
+  const [targetX, targetY, targetZ] = targetPosition;
+  const initialTarget = useRef<THREE.Vector3>(new THREE.Vector3(targetX, targetY, targetZ));
+  const cameraStartPosition = new THREE.Vector3(cameraX, cameraY, cameraZ);
   const initialQuaternion = useRef(
     new THREE.Quaternion().setFromRotationMatrix(
       new THREE.Matrix4().lookAt(cameraStartPosition, initialTarget.current, new THREE.Vector3(0, 1, 0))
@@ -58,7 +65,7 @@ const CustomControls = () => {
   return (
     <OrbitControls
       ref={controlsRef}
-      target={[0, 1.2, 0]}
+      target={[0, 1, 0]}
       enableZoom={false}
       enablePan={false}
       maxPolarAngle={Math.PI / 2}
