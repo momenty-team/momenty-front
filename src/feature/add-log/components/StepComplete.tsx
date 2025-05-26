@@ -4,6 +4,8 @@ import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
 import { postMessageToWebView } from '@/utils/webview';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import Lottie from 'lottie-react';
+import animationData from '@/assets/lottie/check.json';
 
 function StepComplete() {
   const { getValues } = useFormContext();
@@ -44,6 +46,9 @@ function StepComplete() {
         <br />
         기록할 수 있어요.
       </h1>
+      <div className="flex justify-center items-center mb-20">
+        <Lottie animationData={animationData} loop={false} autoplay={true} />
+      </div>
       <button
         onClick={handleSubmit}
         className={
