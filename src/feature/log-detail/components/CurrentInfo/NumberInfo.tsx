@@ -9,7 +9,7 @@ interface NumberLogProps {
 interface NumberData {
   date: string;
   week: string;
-  value: number;
+  value: string;
 }
 
 interface NumberTrends {
@@ -18,6 +18,11 @@ interface NumberTrends {
   data: NumberData[];
   total_count: number;
   average_count: number;
+}
+
+function extractNumber(value: string): number {
+  const match = value.match(/\d+(\.\d+)?/);
+  return match ? Number(match[0]) : NaN;
 }
 
 const WEEK_DAYS = ['일', '월', '화', '수', '목', '금', '토'];
@@ -66,7 +71,7 @@ function NumberInfo({ recordsId }: NumberLogProps) {
   const getMaxCount = (trends: NumberTrends | null): number => {
     if (trends?.data.length === 0) return 0;
     if (!trends) return 0;
-    return Math.max(...trends.data.map((data) => data.value));
+    return Math.max(...trends.data.map((data) => extractNumber(data.value)));
   };
 
   if (!numberTrends) {
@@ -95,7 +100,7 @@ function NumberInfo({ recordsId }: NumberLogProps) {
                 key={data.date}
                 className="flex w-5 bg-blue-400 rounded-t-[4px]"
                 style={{
-                  height: `${changeIndexHeight(data.value, getMaxCount(numberTrends))}%`,
+                  height: `${changeIndexHeight(extractNumber(data.value), getMaxCount(numberTrends))}%`,
                 }}
               />
             ))}

@@ -7,7 +7,6 @@ function BridgeConnection() {
   const route = useRouter();
 
   useAppMessage(({ route: routePath }) => {
-    alert(routePath);
     if (routePath) {
       route.push(routePath);
     }

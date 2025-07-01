@@ -13,7 +13,7 @@ function Calendar() {
   const year = searchParams.get('year') || new Date().getFullYear();
   const month = searchParams.get('month') || new Date().getMonth() + 1;
   const day = searchParams.get('day') || new Date().getDate();
-  const analysis = searchParams.get('analysis') || 'false';
+  const routeFrom = searchParams.get('from') || '';
 
   const { isCurrentMonth, isSelectedDay, isSunday, getMonthDateList, isFuture } = dateUtils(
     Number(year),
@@ -24,8 +24,8 @@ function Calendar() {
     const selectedYear = date.getFullYear();
     const selectedMonth = date.getMonth() + 1;
     const selectedDay = date.getDate();
-
-    if (analysis === 'false') {
+    // alert(`${routeFrom}`);
+    if (routeFrom === 'analysis') {
       postMessageToWebView({
         date: {
           year: selectedYear,
@@ -43,7 +43,6 @@ function Calendar() {
         month: selectedMonth,
         day: selectedDay,
       },
-      route: '/analysis/week-feedback',
     });
   };
 

@@ -77,7 +77,7 @@ async function User() {
       </header>
 
       <div className="flex flex-col gap-6 mx-6 mb-4">
-        <div className="py-3 flex gap-4 items-center">
+        {/* <div className="py-3 flex gap-4 items-center">
           <div className="w-16 h-16 bg-[#f3f5f9] rounded-[12px]" />
           <div className="flex flex-col gap-0.5">
             <div className="text-[#010a15] text-subtitle-3-sb">{nickname}</div>
@@ -86,7 +86,7 @@ async function User() {
               <div className="text-[#010a15] text-body-3-r">팔로워 {follower_count || '00'}</div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {MENU.map(({ title, items }) => (
           <section key={title} className="flex flex-col gap-3">

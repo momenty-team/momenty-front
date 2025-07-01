@@ -26,7 +26,7 @@ const MENU = [
   {
     title: '지난 날 피드백 받기',
     text: `달력을 통해 지난 날의 피드백을 받아요.`,
-    path: '/calendar?analysis=true',
+    path: '/calendar?from=analysis',
     icon: <CalendarIcon width={52} height={52} />,
   },
 ];

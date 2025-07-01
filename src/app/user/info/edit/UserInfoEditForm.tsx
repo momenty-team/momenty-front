@@ -156,19 +156,19 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
     <>
       <form className="flex flex-col w-full gap-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-1 px-[22.5px] w-full justify-center items-center">
-          <img
+          {/* <img
             src={watch('profile_image_url') || '/default-profile.png'}
             alt="프로필 사진 미리보기"
             className="w-16 h-16 rounded-[16px] object-cover bg-gray-200"
             onClick={handleImageClick}
-          />
-          <input
+          /> */}
+          {/* <input
             type="file"
             accept="image/*"
             onChange={handleProfileImageChange}
             ref={fileInputRef}
             className="hidden"
-          />
+          /> */}
         </div>
 
         <div className="flex flex-col gap-1 align-center px-[22.5px]">

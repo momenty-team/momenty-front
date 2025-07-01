@@ -63,7 +63,7 @@ function NumberLogAdder({
     <>
       <div
         className={`flex flex-col overflow-hidden transition-all duration-[0.4s] ease-out
-          ${!isTextAreaFocus && snapIndex <= 0 ? 'h-full' : 'h-[calc(100vh-436px)]'}`}
+          ${!isTextAreaFocus && snapIndex <= 0 ? 'h-full' : 'h-[calc(100vh-236px)]'}`}
       >
         <div className="flex flex-col h-full">
           <div className="flex mx-5 gap-[2px] flex-none mt-5">
@@ -73,7 +73,7 @@ function NumberLogAdder({
 
           <div
             className={`flex w-full h-full items-end justify-end transition-all duration-[0.4s] ease-out
-                ${isTextAreaFocus && 'translate-y-[52px] delay-[0.2s]'}`}
+                ${isTextAreaFocus && 'translate-y-[32px] delay-[0.2s]'}`}
           >
             <div className="relative w-full max-w-[calc(100%-123px)]  h-[50px] flex items-center ml-5 mr-2 text-display-3-eb whitespace-nowrap">
               <div className="min-w-full flex items-center overflow-x-scroll scrollbar-hide justify-end">
