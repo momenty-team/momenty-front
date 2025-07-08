@@ -155,26 +155,10 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
   return (
     <>
       <form className="flex flex-col w-full gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-1 px-[22.5px] w-full justify-center items-center">
-          {/* <img
-            src={watch('profile_image_url') || '/default-profile.png'}
-            alt="프로필 사진 미리보기"
-            className="w-16 h-16 rounded-[16px] object-cover bg-gray-200"
-            onClick={handleImageClick}
-          /> */}
-          {/* <input
-            type="file"
-            accept="image/*"
-            onChange={handleProfileImageChange}
-            ref={fileInputRef}
-            className="hidden"
-          /> */}
-        </div>
-
         <div className="flex flex-col gap-1 align-center px-[22.5px]">
           <label className="text-body-3-m text-indigo-300">이름</label>
           <input
-            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"
+            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px] text-body-3-sb text-indigo-600"
             disabled
             {...register('name')}
           />
@@ -182,14 +166,14 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
         <div className="flex flex-col gap-1 align-center px-[22.5px]">
           <label className="text-body-3-m text-indigo-300">닉네임</label>
           <input
-            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"
+            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px] text-body-3-sb text-indigo-600"
             {...register('nickname')}
           />
         </div>
         <div className="flex flex-col gap-1 align-center px-[22.5px]">
           <label className="text-body-3-m text-indigo-300">생년월일</label>
           <input
-            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"
+            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px] text-body-3-sb text-indigo-600"
             {...register('birth_date', {
               required: '생년월일은 필수 항목입니다.',
               pattern: {
@@ -205,7 +189,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
         <div className="flex flex-col gap-1 align-center px-[22.5px]">
           <label className="text-body-3-m text-indigo-300">이메일 주소</label>
           <input
-            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px]"
+            className="flex justify-between h-[41px] align-center px-2 py-2 bg-indigo-5 rounded-[8px] text-body-3-sb text-indigo-600"
             disabled
             {...register('email')}
           />
@@ -216,7 +200,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
             <button
               type="button"
               onClick={() => handleGenderClick('MALE')}
-              className={`flex-1 py-4 rounded-lg ${
+              className={`flex-1 py-4 rounded-[8px] text-body-2-sb ${
                 selectedGender === 'MALE' ? 'bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-600'
               }`}
             >
@@ -225,7 +209,7 @@ function UserInfoEditForm({ userInfo }: UserInfoEditFormProps) {
             <button
               type="button"
               onClick={() => handleGenderClick('FEMALE')}
-              className={`flex-1 py-2 rounded-lg ${
+              className={`flex-1 py-2 rounded-[8px] text-body-2-sb ${
                 selectedGender === 'FEMALE' ? 'bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-600'
               }`}
             >

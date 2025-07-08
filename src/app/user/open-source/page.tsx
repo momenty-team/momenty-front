@@ -21,10 +21,10 @@ const OPEN_SOURCE_LIST = Object.entries(licenses).map(([pkg, info]: [string, Lic
 function OpenSourcePage() {
   return (
     <main className="w-full">
-      <span className="text-subtitle-2-sb p-4 pt-4 pb-1">오픈소스 라이선스</span>
+      <span className="text-subtitle-2-sb pl-4">오픈소스 라이선스</span>
       <div>
         {OPEN_SOURCE_LIST.map((notice) => (
-          <div key={notice.id} className="py-4 px-5 break-all">
+          <div key={notice.id} className="py-4 px-6 break-all">
             <div className="text-body-3-m text-indigo-300">{notice.title}</div>
             <div className="text-body-4-el text-[#59A7FC]">{notice.link}</div>
           </div>

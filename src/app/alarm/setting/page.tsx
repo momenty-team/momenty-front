@@ -3,7 +3,7 @@
 function Setting() {
   return (
     <>
-      <h1>알림 설정</h1>
+      <h1>알람 설정</h1>
     </>
   );
 }

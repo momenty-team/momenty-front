@@ -4,7 +4,7 @@ function TermPage() {
   return (
     <>
       <main className="w-full pb-12">
-        <span className="text-subtitle-2-sb p-4 pt-4 pb-1">모먼티 약관 확인</span>
+        <span className="text-subtitle-2-sb pl-4">모먼티 약관 확인</span>
         <div className="px-4">
           <p className="text-body-3-m mt-4 text-indigo-300">
             본 약관은 모먼티(Momenty)가 제공하는 서비스(이하 “서비스”)의 이용과 관련하여 회사와 회원 간의 권리, 의무 및

@@ -17,7 +17,7 @@ function DateBox({ date, isCurrentMonth, isToday, isSunday, onClick, isFuture }:
         onClick={() => onClick(date)}
         className={`flex justify-center items-center w-8 h-8 rounded-[3px]
           active:scale-[0.85] transition-all
-          ${isCurrentMonth ? 'bg-[#D9D9D9]' : 'bg-transparent'}
+          ${isCurrentMonth ? 'bg-indigo-25' : 'bg-transparent'}
           ${isSunday ? 'text-red-500' : 'text-black'}`}
         disabled={isFuture(date)}
       />

@@ -63,7 +63,7 @@ function Calendar() {
         <header className="flex justify-center gap-5">
           <MonthPicker year={Number(year)} month={Number(month)} setDate={setDate} />
         </header>
-        <ul className="px-6 grid grid-cols-7 gap-[20px] justify-items-center text-label-1-b">
+        <ul className="px-6 grid grid-cols-7 gap-[20px] justify-items-center text-label-1-b text-indigo-600">
           {DAYS.map((day) => (
             <li key={day}>{day}</li>
           ))}

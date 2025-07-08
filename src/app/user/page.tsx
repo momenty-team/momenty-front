@@ -1,6 +1,4 @@
 import UserIcon from '@/assets/svg/user/user.svg';
-// import UsersIcon from '@/assets/svg/user/users.svg';
-// import PlusUserIcon from '@/assets/svg/user/plus-user.svg';
 import YellowBellIcon from '@/assets/svg/user/yellow-bell.svg';
 import NoticeIcon from '@/assets/svg/user/notice.svg';
 import MomentyIIcon from '@/assets/svg/user/momenty-i.svg';
@@ -19,10 +17,7 @@ const MENU = [
   },
   {
     title: '일반',
-    items: [
-      { title: '알람 설정', path: '/user/notification', icon: <YellowBellIcon /> },
-      { title: '계정 공개 범위', path: '/user/privacy', icon: <UserIcon /> },
-    ],
+    items: [{ title: '알람 설정', path: '/user/notification', icon: <YellowBellIcon /> }],
   },
   {
     title: '기타',
@@ -42,22 +37,6 @@ const MENU = [
   },
 ];
 
-interface UsersMeResponse {
-  id: number;
-  name?: string;
-  nickname: string;
-  birth_date: string;
-  email?: string;
-  profile_image_url: string;
-  gender: string;
-  is_public: boolean;
-  follower_count?: number;
-  following_count?: number;
-  created_at: string;
-  updated_at: string;
-  is_deleted: boolean;
-}
-
 async function User() {
   const cookieHeader = (await cookies()).toString();
   const response = await fetch('https://api.momenty.co.kr/users/me', {
@@ -68,8 +47,6 @@ async function User() {
 
   if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
 
-  const { nickname, follower_count, following_count }: UsersMeResponse = await response.json();
-
   return (
     <>
       <header className="width-full flex flex-row-reverse py-[12px] px-[12px]">
@@ -77,17 +54,6 @@ async function User() {
       </header>
 
       <div className="flex flex-col gap-6 mx-6 mb-4">
-        {/* <div className="py-3 flex gap-4 items-center">
-          <div className="w-16 h-16 bg-[#f3f5f9] rounded-[12px]" />
-          <div className="flex flex-col gap-0.5">
-            <div className="text-[#010a15] text-subtitle-3-sb">{nickname}</div>
-            <div className="flex items-center gap-3">
-              <div className="text-[#010a15] text-body-3-r">팔로잉 {following_count || '00'}</div>
-              <div className="text-[#010a15] text-body-3-r">팔로워 {follower_count || '00'}</div>
-            </div>
-          </div>
-        </div> */}
-
         {MENU.map(({ title, items }) => (
           <section key={title} className="flex flex-col gap-3">
             <h3 className="text-body-1-sb">{title}</h3>

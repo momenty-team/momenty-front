@@ -45,8 +45,11 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
           health_kit: '',
         }),
       });
+
       const data = await response.json();
+
       if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
+
       setFeedbackData(data);
     } catch (error) {
       console.error('Error fetching summary:', error);

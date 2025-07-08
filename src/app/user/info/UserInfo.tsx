@@ -33,7 +33,6 @@ async function UserInfo() {
   return (
     <>
       <main className={`flex flex-col items-center gap-5 mt-12 ${suitFont.className}`}>
-        {/* <div className="w-[72px] h-[72px] bg-indigo-50 rounded-[12px] my-[15px]" /> */}
         <section className="flex flex-col w-full">
           <div className="flex justify-between align-center px-8 py-2">
             <span className="text-body-1-m text-indigo-300">이름</span>

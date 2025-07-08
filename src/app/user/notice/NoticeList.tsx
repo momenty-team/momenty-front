@@ -26,7 +26,7 @@ async function NoticeList() {
   return (
     <div>
       {notices.map(({ id, title, created_at }) => (
-        <div key={id} className="py-4 px-5">
+        <div key={id} className="py-4 px-6">
           <div className="text-body-4-m">{title}</div>
           <div className="text-label-1-el text-indigo-200">{extractDate(created_at)}</div>
         </div>
