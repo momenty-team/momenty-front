@@ -46,7 +46,7 @@ function NavigationAnalysisButton({ title, icon, text, path }: NavigationMenuBut
         <div className="flex items-center gap-5">
           <div className="w-[52px] h-[52px] bg-indigo-5 rounded-[4px] flex items-center justify-center">{icon}</div>
           <div className="flex flex-col gap-1 text-left">
-            <div className="text-body-3-m">{title}</div>
+            <div className="text-body-3-m text-indigo-700">{title}</div>
             <div className="text-label-1-r text-indigo-300">{text}</div>
           </div>
         </div>

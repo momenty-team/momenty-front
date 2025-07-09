@@ -50,7 +50,7 @@ function BooleanLogAdder({ id, title, moveTodayLog }: BooleanLogAdderProps) {
         <div className="text-caption-2-sb text-indigo-100">에 {title} 순간을 남길게요.</div>
       </div>
 
-      <div className="flex gap-3 grow mx-5 py-6">
+      <div className="flex gap-3 grow mx-5 py-5">
         <button
           className="flex items-center justify-center rounded-[12px] bg-[#A5D0FE] w-full"
           onClick={() => handleBooleanClick('O')}

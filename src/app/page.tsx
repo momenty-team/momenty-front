@@ -87,14 +87,14 @@ function Home() {
           <BellIcon width={26} height={26} />
         </button>
 
-        <div className="h-50 mx-4 rounded-[12px]">
+        <div className="h-50 mx-4">
           <ModelViewer healthKitData={JSON.stringify(healthKitData)} />
         </div>
         <div className={'absolute bottom-[-20px] h-5 w-[100vw] bg-gradient-to-t from-white/0 to-[#F4F6F9]'} />
       </div>
 
-      <section className="flex flex-col gap-5 mx-4 mt-4">
-        <button className="flex flex-col p-5 gap-5 rounded-[20px] shadow-4 bg-white" onClick={routeAddLog}>
+      <section className="flex flex-col gap-3 mx-4 mt-4">
+        <button className="flex flex-col p-5 gap-5 rounded-[16px] shadow-6 bg-white" onClick={routeAddLog}>
           <div className="flex flex-row items-center w-full justify-between">
             <div className="flex flex-row items-center justify-center gap-2">
               <div className="flex items-center justify-center bg-indigo-5 rounded-[4px] w-[26px] h-[26px]">
@@ -178,11 +178,11 @@ function Home() {
             })
           }
         />
-        <div className="grid grid-cols-1 gap-5">
+        <div className="grid grid-cols-1 gap-3">
           {record?.map(({ id, title, method }) => (
             <button
               key={id}
-              className="flex flex-col justify-between p-5 rounded-[20px] shadow-4 bg-white gap-5"
+              className="flex flex-col justify-between p-5 rounded-[16px] shadow-6 bg-white"
               onClick={() =>
                 postMessageToWebView({
                   bottomSheet: {

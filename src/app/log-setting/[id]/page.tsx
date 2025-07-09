@@ -33,7 +33,7 @@ async function LogSettingPage({ params, searchParams }: LogSettingPageProps) {
 
     const { unit } = await unitResponse.json();
     return (
-      <div className="flex flex-col w-full h-[calc(100vh-48px)] pt-2 px-6">
+      <div className="flex flex-col w-full h-[calc(100vh-48px)] px-6">
         <div className="flex flex-col w-full">
           <h1 className="text-subtitle-3-sb mb-3">기록 설정</h1>
           <span className="text-body-3-m text-indigo-300">기록에 관한 전반적인 내용을 수정합니다.</span>
@@ -44,7 +44,7 @@ async function LogSettingPage({ params, searchParams }: LogSettingPageProps) {
   }
 
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-48px)] pt-2 px-6">
+    <div className="flex flex-col w-full h-[calc(100vh-48px)] px-6">
       <div className="flex flex-col w-full">
         <h1 className="text-subtitle-3-sb mb-3">기록 설정</h1>
         <span className="text-body-3-m text-indigo-300">기록에 관한 전반적인 내용을 수정합니다.</span>

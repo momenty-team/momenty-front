@@ -33,9 +33,9 @@ const MENU = [
 
 async function Analysis() {
   return (
-    <div className="flex flex-col gap-4 mx-6 mt-10">
+    <div className="flex flex-col gap-5 mx-6 mt-8">
       {MENU.map(({ title, path, icon, text }) => (
-        <section className="flex flex-col gap-3" key={title}>
+        <section className="flex flex-col" key={title}>
           <NavigationAnalysisButton key={title} title={title} text={text} icon={icon} path={path} />
         </section>
       ))}

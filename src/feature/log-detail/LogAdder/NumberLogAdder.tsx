@@ -76,7 +76,7 @@ function NumberLogAdder({
                 ${isTextAreaFocus && 'translate-y-[32px] delay-[0.2s]'}`}
           >
             <div className="relative w-full max-w-[calc(100%-123px)]  h-[50px] flex items-center ml-5 mr-2 text-display-3-eb whitespace-nowrap">
-              <div className="min-w-full flex items-center overflow-x-scroll scrollbar-hide justify-end">
+              <div className="min-w-full flex items-center overflow-x-scroll scrollbar-hide justify-end text-display-3-eb ">
                 {NumberPadValue}
               </div>
               <div className="absolute top-0 left-0 w-[45px] h-full bg-gradient-to-l from-white/0 to-white" />

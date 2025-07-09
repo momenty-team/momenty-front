@@ -90,10 +90,10 @@ function StepMethod({ onNext }: StepMethodProps) {
               <button
                 onTouchStart={() => handleClick(id)}
                 key={id}
-                className={`flex flex-col w-full px-4 py-3 gap-1 rounded-[20px] active:scale-[0.98] transition-all active:#C3CAD2 
+                className={`flex flex-col w-full p-4 gap-1 rounded-[16px] active:scale-[0.98] transition-all active:#C3CAD2 
                   ${selectedIndex === id ? 'bg-[#E6E9F0]' : 'bg-white'}`}
               >
-                <div className="flex flex-row items-center justify-between gap-1">
+                <div className="flex flex-row items-center justify-between gap-2">
                   <div className="flex w-[26px] h-[26px] bg-indigo-5 rounded-[8px] items-center justify-center">
                     {title === '글로 남기기' && <TextIcon />}
                     {title === 'O, X' && <BooleanIcon />}

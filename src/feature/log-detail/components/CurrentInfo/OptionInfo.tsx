@@ -95,7 +95,7 @@ function OptionInfo({ recordsId }: OptionInfoProps) {
                   <span
                     key={index}
                     title={value}
-                    className="flex text-caption-2-sb text-indigo-5 w-fit text-nowrap px-2 py-1 bg-blue-400 rounded-[4px]"
+                    className="flex text-caption-2-sb text-indigo-5 w-fit text-nowrap px-2 py-1 bg-blue-200 rounded-[4px]"
                   >
                     {value}
                   </span>
@@ -111,7 +111,7 @@ function OptionInfo({ recordsId }: OptionInfoProps) {
       <div className="flex flex-col px-4 py-3 w-full bg-indigo-5 rounded-[8px] gap-3">
         <span className="text-body-3-m text-black">많이 중복된 옵션</span>
         <div className="flex gap-2">
-          <div className="text-caption-2-sb text-indigo-5 flex px-2 py-1 bg-blue-400 rounded-[4px]">
+          <div className="text-caption-2-sb text-indigo-5 flex px-2 py-1 bg-blue-200 rounded-[4px]">
             {optionTrends?.most_frequent_option?.value}
           </div>
         </div>

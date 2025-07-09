@@ -51,9 +51,9 @@ export default async function FeedbackChartPage() {
   };
 
   return (
-    <div className="max-w-full h-[100vh-44px] mx-auto mb-8 px-4 mt-6">
-      <h1 className="text-subtitle-2-sb">주간 레벨 변화 차트</h1>
-      <div className="text-body-2-sb mb-6">평균 레벨: {averageLevel.toFixed(2)}</div>
+    <div className="max-w-full h-[100vh-44px] mx-auto mb-8 px-6">
+      <h1 className="text-subtitle-2-sb  mb-4">레벨 변화 차트</h1>
+      <div className="text-body-2-sb mb-4">평균 레벨: {averageLevel.toFixed(2)}</div>
       <div className="flex flex-col items-center justify-center h-[320px]">
         <div className="overflow-x-auto w-full">
           <div className="h-[280px]" style={{ width: `${chartData.labels.length * 36}px` }}>

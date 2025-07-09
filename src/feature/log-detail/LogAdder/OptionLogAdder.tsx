@@ -63,12 +63,11 @@ function OptionLogAdder({ id, title, moveTodayLog, options }: OptionLogAdderProp
         <div className="text-caption-2-sb text-blue-300">{getCurrentTimeHHMM()}</div>
         <div className="text-caption-2-sb text-indigo-100">에 {title} 순간을 남길게요.</div>
       </div>
-
       <div className="mx-5 mt-1.5 flex-none text-caption-3-sb text-indigo-100">
         해당하는 옵션을 탭해서 기록을 남겨주세요.
       </div>
 
-      <div className="flex gap-3 grow mx-5 mt-5 flex-wrap content-start">
+      <div className="flex gap-3 grow mx-5 mt-2 flex-wrap content-start">
         {options.map(({ id, option }) => (
           <label
             htmlFor={String(id)}
