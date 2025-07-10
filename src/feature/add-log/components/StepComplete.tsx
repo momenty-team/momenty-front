@@ -1,27 +1,25 @@
 'use client';
 
-import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
-import { postMessageToWebView } from '@/utils/webview';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import Lottie from 'lottie-react';
+import { postMessageToWebView } from '@/utils/webview';
+import ButtonLoadingIndicator from '@/common/components/ButtonLoadingIndicator';
 import animationData from '@/assets/lottie/check.json';
 
 function StepComplete() {
-  const { getValues } = useFormContext();
-  const formData = getValues();
   const [loading, setLoading] = useState(false);
+  const { getValues } = useFormContext();
 
   const handleSubmit = async () => {
     setLoading(true);
-    const formData = getValues();
 
     const recordDataForm = {
-      title: formData.title,
-      is_public: formData.is_public ?? true,
-      method: formData.method,
-      option: formData?.option || [],
-      unit: formData?.unit || '',
+      title: getValues('title'),
+      is_public: getValues('is_public') ?? true,
+      method: getValues('method'),
+      option: getValues('option') || [],
+      unit: getValues('unit') || '',
     };
 
     try {
@@ -42,7 +40,7 @@ function StepComplete() {
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
       <h1 className="mb-6 text-subtitle-1-b">
-        이제 {formData.title}을(를)
+        이제 {getValues('title')}을(를)
         <br />
         기록할 수 있어요.
       </h1>

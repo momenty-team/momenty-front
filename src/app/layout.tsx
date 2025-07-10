@@ -9,8 +9,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'My App',
-  description: '모바일 기기에 최적화된 웹사이트',
+  title: 'Momenty',
+  description: '당신의 순간을 기록하고 공유하는 공간',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

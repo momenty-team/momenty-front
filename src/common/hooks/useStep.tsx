@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useFunnel<T extends string>(initialStep: T) {
+function useStep<T extends string>(initialStep: T) {
   const [currentStep, setCurrentStep] = useState<T>(initialStep);
 
   const nextStep = (next: T) => setCurrentStep(next);
@@ -12,4 +12,4 @@ function useFunnel<T extends string>(initialStep: T) {
   return { currentStep, nextStep, Step };
 }
 
-export default useFunnel;
+export default useStep;

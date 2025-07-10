@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import type { Step } from '@/types';
 
 const UNIT = [
   { id: 0, name: 'k' },
@@ -24,26 +27,27 @@ const UNIT = [
   { id: 19, name: '층' },
   { id: 20, name: '단계' },
   { id: 21, name: '기타' },
-];
+] as const;
 
 interface StepUnitProps {
-  onNext: (value: string) => void;
+  onNext: (value: Step) => void;
 }
 
 function StepUnit({ onNext }: StepUnitProps) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
   const { setValue } = useFormContext();
-  const handleClick = (index: number) => {
-    setSelectedIndex(index);
 
+  const handleClick = (index: number) => {
+    setSelectedUnitId(index);
     const selectedUnit = UNIT[index];
+
     if (selectedUnit.name !== '기타') {
       setValue('unit', selectedUnit.name);
     }
   };
 
-  const nextStep = (value: string) => {
-    if (value === '기타') {
+  const nextStep = (unit: (typeof UNIT)[number]['name']) => {
+    if (unit === '기타') {
       return '단위입력';
     }
 
@@ -62,24 +66,24 @@ function StepUnit({ onNext }: StepUnitProps) {
           </span>
         </div>
         <div className="flex gap-2 w-full flex-wrap mb-4">
-          {UNIT.map((unit) => (
+          {UNIT.map(({ id, name }) => (
             <button
-              key={unit.id}
-              onTouchStart={() => handleClick(unit.id)}
+              key={id}
+              onTouchStart={() => handleClick(id)}
               className={`flex text-indigo-5 text-body-3-sb rounded-[20px] px-6 py-2 
-                ${selectedIndex === unit.id ? 'bg-indigo-500' : 'bg-indigo-100'}`}
+                ${selectedUnitId === id ? 'bg-indigo-500' : 'bg-indigo-100'}`}
             >
-              {unit.name}
+              {name}
             </button>
           ))}
         </div>
       </div>
       <button
-        onClick={() => onNext(nextStep(UNIT[selectedIndex!].name))}
+        onClick={() => onNext(nextStep(UNIT[selectedUnitId!].name))}
         className={
           'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
         }
-        disabled={!selectedIndex}
+        disabled={!selectedUnitId}
       >
         다음으로
       </button>

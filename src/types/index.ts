@@ -25,6 +25,8 @@ type HapticType =
   | 'ImpactRigid'
   | 'ImpactSoft';
 
+export type Step = '기록주제' | '기록방식' | '기록생성' | '기록완료' | '옵션선택' | '단위선택' | '단위입력';
+
 export interface BridgeData {
   route?: BridgeRoute;
   bottomSheet?: {
@@ -36,7 +38,7 @@ export interface BridgeData {
   haptic?: HapticType;
   history?: {
     route?: string;
-    funnel?: string;
+    step?: Step;
   };
   viewState?: 'focus' | 'focusOut';
   toast?: {
@@ -50,7 +52,7 @@ export interface BridgeData {
   };
   externalLink?: {
     url: string;
-  }
+  };
   healthKitData?: {
     activeEnergyBurned?: CustomHealthValue[];
     distanceWalkingRunning?: CustomHealthValue[];

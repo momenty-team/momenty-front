@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import CloseIcon from '@/assets/svg/close.svg';
 import { useFormContext } from 'react-hook-form';
+import CloseIcon from '@/assets/svg/close.svg';
 import CommonModal from '@/common/components/Modal';
 
 interface StepOptionProps {
@@ -10,27 +10,31 @@ interface StepOptionProps {
 }
 
 function Option({ onNext }: StepOptionProps) {
-  const { setValue, getValues } = useFormContext();
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [tagToDelete, setTagToDelete] = useState<string | null>(null);
+  const [optionToDelete, setOptionToDelete] = useState<string | null>(null);
   const [isComposing, setComposing] = useState(false);
 
-  const addTag = (value: string) => {
-    if (value && !getValues('option').includes(value)) {
-      setValue('option', [...getValues('option'), value]);
+  const { setValue, getValues } = useFormContext();
+  const currentOptions: string[] = getValues('option');
+
+  const addOption = (option: string) => {
+    if (option && !currentOptions.includes(option)) {
+      setValue('option', [...currentOptions, option]);
     }
 
     setInputValue('');
   };
 
-  const removeTag = (value: string) => {
-    const prevTags: string[] = getValues('option');
-    const newTags = prevTags.filter((tagText) => tagText !== value);
-    setValue('option', newTags);
+  const removeOption = (option: string) => {
+    const newOptions = currentOptions.filter((o) => o !== option);
+    setValue('option', newOptions);
   };
 
-  // react hook form control써서 다음으로 넘어갔다가 다시 옵션 페이지로 들어왔을떄 값 안사라지게 할 수 있을듯
+  const openDeleteModal = (option: string) => {
+    setOptionToDelete(option);
+    setIsOpen(true);
+  };
 
   return (
     <div className="flex w-full h-[calc(100vh-48px)] flex-col justify-between bg-indigo-5 pt-2 px-6">
@@ -49,7 +53,7 @@ function Option({ onNext }: StepOptionProps) {
           onKeyUp={(e) => {
             if (e.key === 'Enter' && !isComposing) {
               e.preventDefault();
-              addTag(inputValue.trim());
+              addOption(inputValue.trim());
             }
           }}
           onCompositionStart={() => setComposing(true)}
@@ -57,21 +61,14 @@ function Option({ onNext }: StepOptionProps) {
           enterKeyHint="done"
           className="flex w-full h-14 border-b-[4px] border-indigo-200 bg-transparent rounded-none subtitle-3-sb"
         />
-
         <div className="flex max-h-[400px] gap-4 w-full overflow-y-scroll flex-wrap mb-4">
-          {(getValues('option') as string[]).map((value) => (
+          {currentOptions.map((option) => (
             <div
-              key={value}
+              key={option}
               className="flex gap-1 w-fit items-center justify-center bg-indigo-500 text-white py-2 pl-3 pr-2 text-body-3-sb rounded-[8px]"
             >
-              <span className="flex text-body-3-sb">{value}</span>
-              <button
-                className="flex w-4 h-4 items-center justify-center"
-                onClick={() => {
-                  setTagToDelete(value);
-                  setIsOpen(true);
-                }}
-              >
+              <span className="flex text-body-3-sb">{option}</span>
+              <button className="flex w-4 h-4 items-center justify-center" onClick={() => openDeleteModal(option)}>
                 <CloseIcon width={20} height={20} className="flex [&>path]:stroke-white" />
               </button>
             </div>
@@ -79,25 +76,9 @@ function Option({ onNext }: StepOptionProps) {
         </div>
       </div>
 
-      {isOpen && tagToDelete && (
-        <CommonModal
-          onClose={() => setIsOpen(false)}
-          onDelete={() => {
-            removeTag(tagToDelete);
-            setIsOpen(false);
-            setTagToDelete(null);
-          }}
-        >
-          <div className="flex flex-col">
-            <span className="text-subtitle-3-b">옵션을 삭제하면</span>
-            <span className="text-subtitle-3-b">해당 옵션과 관련된 데이터가 삭제돼요.</span>
-          </div>
-        </CommonModal>
-      )}
-
       <div className="flex gap-3">
         <button
-          onClick={() => addTag(inputValue.trim())}
+          onClick={() => addOption(inputValue.trim())}
           className={
             'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
           }
@@ -110,11 +91,27 @@ function Option({ onNext }: StepOptionProps) {
           className={
             'w-full flex justify-center items-center bg-indigo-700 text-indigo-5 py-[14px] text-body-1-b h-14 rounded-[8px] disabled:bg-indigo-50'
           }
-          disabled={getValues('option').length === 0}
+          disabled={currentOptions.length === 0}
         >
           다음으로
         </button>
       </div>
+
+      {isOpen && optionToDelete && (
+        <CommonModal
+          onClose={() => setIsOpen(false)}
+          onDelete={() => {
+            removeOption(optionToDelete);
+            setIsOpen(false);
+            setOptionToDelete(null);
+          }}
+        >
+          <div className="flex flex-col">
+            <span className="text-subtitle-3-b">옵션을 삭제하면</span>
+            <span className="text-subtitle-3-b">해당 옵션과 관련된 데이터가 삭제돼요.</span>
+          </div>
+        </CommonModal>
+      )}
     </div>
   );
 }
