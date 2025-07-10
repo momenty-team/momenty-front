@@ -1,3 +1,4 @@
+import { suitFont } from '@/styles/font';
 import CalendarIcon from '@/assets/svg/calendar.svg';
 import LevelCollectorIcon from '@/assets/svg/level-collector.svg';
 import FutureAdviceFeedbackIcon from '@/assets/svg/future-advice-feedback.svg';
@@ -33,13 +34,15 @@ const MENU = [
 
 async function Analysis() {
   return (
-    <div className="flex flex-col gap-5 mx-6 mt-8">
-      {MENU.map(({ title, path, icon, text }) => (
-        <section className="flex flex-col" key={title}>
-          <NavigationAnalysisButton key={title} title={title} text={text} icon={icon} path={path} />
-        </section>
-      ))}
-    </div>
+    <main className={`${suitFont.className}`}>
+      <div className="flex flex-col gap-5 mx-6 mt-8">
+        {MENU.map(({ title, path, icon, text }) => (
+          <section className="flex flex-col" key={title}>
+            <NavigationAnalysisButton key={title} title={title} text={text} icon={icon} path={path} />
+          </section>
+        ))}
+      </div>
+    </main>
   );
 }
 

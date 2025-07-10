@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import useMutation from '@/common/hooks/useMutation';
+import { useState } from 'react';
 
 interface FeedbackData {
   title: string;
@@ -17,45 +18,28 @@ interface WeekFeedbackProps {
 function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
   const [feedbackData, setFeedbackData] = useState<FeedbackData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingDots, setLoadingDots] = useState('');
-
-  useEffect(() => {
-    let dotsCount = 0;
-    let intervalId: NodeJS.Timeout;
-
-    if (isLoading) {
-      intervalId = setInterval(() => {
-        dotsCount = (dotsCount + 1) % 4;
-        setLoadingDots('.'.repeat(dotsCount === 0 ? 3 : dotsCount));
-      }, 300);
-    }
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [isLoading]);
+  const postFeedback = useMutation<Record<string, string>, FeedbackData>({
+    onSuccess: (data) => {
+      setFeedbackData(data?.response || null);
+      setIsLoading(false);
+    },
+    onFailure: (error) => {
+      setFeedbackData(null);
+      setIsLoading(false);
+      console.error('피드백 요청 실패:', error);
+    },
+  });
 
   const getFeedback = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`/api/records/feedback?year=${year}&month=${month}&day=${day}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          health_kit: '',
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
-
-      setFeedbackData(data);
-    } catch (error) {
-      console.error('Error fetching summary:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await postFeedback({
+      url: `/api/records/feedback?year=${year}&month=${month}&day=${day}`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      bodyData: {
+        health_kit: '',
+      },
+    });
   };
 
   return (
@@ -67,7 +51,6 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
           {feedbackData ? (
             <div className="flex flex-col gap-2">
               <h2 className="text-subtitle-3-sb">{feedbackData.title}</h2>
-              {/* <p className="text-body-2-m">{feedbackData.level}</p> */}
               <p className="text-body-2-r">{feedbackData.feedback}</p>
             </div>
           ) : (
@@ -82,7 +65,7 @@ function WeekFeedback({ year, month, day }: WeekFeedbackProps) {
         disabled={isLoading}
       >
         <span className={`${isLoading ? 'text-indigo-300' : 'text-indigo-5'} text-body-1-sb`}>
-          {isLoading ? `AI 피드백 생성중${loadingDots}` : 'AI 피드백 받기'}
+          {isLoading ? `AI 피드백 생성중...` : 'AI 피드백 받기'}
         </span>
       </button>
     </div>

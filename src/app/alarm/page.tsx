@@ -1,6 +1,7 @@
-import { formatRelativeTime } from '@/utils/index';
-import { cookies } from 'next/headers';
+import { suitFont } from '@/styles/font';
+import { formatRelativeTime } from '@/utils';
 import BridgeConnection from '@/feature/alarm/BridgeConnection';
+import { UserClient } from '@/utils/client';
 
 interface NotificationList {
   id: number;
@@ -17,18 +18,12 @@ interface UserNotificationHistories {
 }
 
 async function Alarm() {
-  const cookieHeader = (await cookies()).toString();
-  const response = await fetch('https://api.momenty.co.kr/notifications/user/history', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', Cookie: cookieHeader },
-  });
-
-  if (!response.ok) throw new Error('데이터를 가져오지 못했습니다.');
-
-  const { user_notification_histories: notificationList }: UserNotificationHistories = await response.json();
+  const { user_notification_histories: notificationList }: UserNotificationHistories = await UserClient.get(
+    'https://api.momenty.co.kr/notifications/user/history'
+  );
 
   return (
-    <>
+    <main className={`${suitFont.className}`}>
       {notificationList.map(({ id, title, content, created_at }) => (
         <div key={id} className="flex gap-3 px-4 py-3 bg-indigo-5 w-full">
           <div className="min-w-4 h-4 bg-indigo-700 rounded-[2px]" />
@@ -42,7 +37,7 @@ async function Alarm() {
         </div>
       ))}
       <BridgeConnection />
-    </>
+    </main>
   );
 }
 
