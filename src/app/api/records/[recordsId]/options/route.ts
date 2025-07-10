@@ -1,16 +1,16 @@
-import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { revalidateTag } from 'next/cache';
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
 
-export async function GET(_: NextRequest, { params }: { params: { recordsId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { recordsId: string } }) {
   const { recordsId } = await params;
   const cookieHeader = (await cookies()).toString();
-  
+
   const res = await fetch(`https://api.momenty.co.kr/records/${recordsId}/options`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     next: {
       tags: ['recordsDetails'],
@@ -30,7 +30,7 @@ export async function POST(req: Request, { params }: { params: { recordsId: stri
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify({
       options: body.options,

@@ -1,4 +1,4 @@
-import {  revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify({
       title: body.title,
@@ -30,7 +30,7 @@ export async function GET() {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     next: {
       tags: ['records'],

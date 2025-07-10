@@ -8,7 +8,7 @@ export async function PUT(req: Request) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify(body),
   });

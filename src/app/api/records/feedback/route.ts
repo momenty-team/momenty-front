@@ -1,7 +1,7 @@
-import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
 
-export async function POST(req: NextRequest)  {
+export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const cookieHeader = (await cookies()).toString();
   const body = await req.json();
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest)  {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify({
       health_kit: body.health_kit,

@@ -8,7 +8,7 @@ export async function GET() {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
   });
 
@@ -23,7 +23,7 @@ export async function PUT(req: Request) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify({
       notification_type_id: body.notification_type_id,

@@ -11,17 +11,20 @@ export async function GET(req: NextRequest, { params }: { params: { recordsId: s
   const month = searchParams.get('month');
   const day = searchParams.get('day');
 
-  const res = await fetch(`https://api.momenty.co.kr/records/${recordsId}/details?year=${year}&month=${month}&day=${day}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
-    },
-    next: {
-      tags: ['recordsDetails'],
-    },
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `https://api.momenty.co.kr/records/${recordsId}/details?year=${year}&month=${month}&day=${day}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: cookieHeader || '',
+      },
+      next: {
+        tags: ['recordsDetails'],
+      },
+      cache: 'no-store',
+    }
+  );
 
   return res;
 }
@@ -36,18 +39,21 @@ export async function POST(req: NextRequest, { params }: { params: { recordsId: 
   const month = searchParams.get('month');
   const day = searchParams.get('day');
 
-  const res = await fetch(`https://api.momenty.co.kr/records/${recordsId}/details?year=${year}&month=${month}&day=${day}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
-    },
-    body: JSON.stringify({
-      content: body.content,
-      option_ids: body.option_ids,
-      is_public: body.is_public,
-    }),
-  });
+  const res = await fetch(
+    `https://api.momenty.co.kr/records/${recordsId}/details?year=${year}&month=${month}&day=${day}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: cookieHeader || '',
+      },
+      body: JSON.stringify({
+        content: body.content,
+        option_ids: body.option_ids,
+        is_public: body.is_public,
+      }),
+    }
+  );
 
   revalidateTag('recordsDetails');
   return res;

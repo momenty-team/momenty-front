@@ -15,14 +15,11 @@ export async function POST(req: NextRequest) {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
     body: JSON.stringify({
-      health_kit: body.healthKitData || null, 
+      health_kit: body.healthKitData || null,
     }),
-    next: {
-      tags: ['charactersStatus'],
-    },
     cache: 'no-store',
   });
 

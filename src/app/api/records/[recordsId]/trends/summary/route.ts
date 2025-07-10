@@ -1,11 +1,11 @@
-import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
 
 interface GetWritingTrends {
   params: { recordsId: string };
 }
 
-export async function GET(req: NextRequest, { params }: GetWritingTrends)  {
+export async function GET(req: NextRequest, { params }: GetWritingTrends) {
   const { recordsId } = await params;
   const searchParams = req.nextUrl.searchParams;
   const cookieHeader = (await cookies()).toString();
@@ -18,16 +18,19 @@ export async function GET(req: NextRequest, { params }: GetWritingTrends)  {
     return new Response(JSON.stringify({ message: '날짜가 필요합니다.' }), { status: 400 });
   }
 
-  const res = await fetch(`https://api.momenty.co.kr/records/${recordsId}/trends/summary?year=${year}&month=${month}&day=${day}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
-    },
-    next: {
-      tags: ['recordsDetails'],
-    },
-  });
+  const res = await fetch(
+    `https://api.momenty.co.kr/records/${recordsId}/trends/summary?year=${year}&month=${month}&day=${day}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: cookieHeader || '',
+      },
+      next: {
+        tags: ['recordsDetails'],
+      },
+    }
+  );
 
   return res;
 }

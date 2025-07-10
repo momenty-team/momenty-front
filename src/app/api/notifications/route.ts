@@ -8,7 +8,7 @@ export async function GET() {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': cookieHeader || '',
+      Cookie: cookieHeader || '',
     },
   });
 
